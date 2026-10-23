@@ -1,4 +1,5 @@
 import {configuredProviders} from './service-adapter.js';
+import {providerDiscovery} from './service-discovery.js';
 import {localCandidateProvider,parseLocalCandidateProfile,queueCandidateProvider,parseQueueCandidateProfile} from './service-candidate-provider.js';
 import type {ServiceWallet} from './service-wallet.js';
 import type {BrowserSealerModule} from './service-sealer.js';
@@ -13,9 +14,16 @@ document.querySelector('#service-mode')!.textContent='Candidate · setup pending
 // Intentionally closed until Castalia supplies the embedded consent facade.
 // Never fall back to an extension identity or a second signer in this journey.
 const wallet=():ServiceWallet|undefined=>undefined;
-function notice(title:string,detail:string,action:string){root.innerHTML=`<section class="service-panel"><h1>${e(title)}</h1><p>${e(detail)}</p><p class="form-note">Disposable candidate acceptance only. No production provider is configured. Wallet setup requires your explicit review.</p><div class="service-actions"><a class="workspace-quiet" href="wallet.html">Open local Wallet</a><button class="workspace-quiet" id="candidate-continue" type="button">${e(action)}</button></div><p class="form-note">The embedded Wallet supports local encrypted custody and recovery. Its provider-consent adapter is not connected yet.</p></section>`;root.setAttribute('aria-busy','false');}
+function notice(title:string,detail:string,action:string){root.innerHTML=`<section class="service-panel"><h1>${e(title)}</h1><p>${e(detail)}</p><p class="form-note">Connection review only. No brand material is sent from this screen. Wallet setup requires your explicit review.</p><div class="service-actions"><a class="workspace-quiet" href="wallet.html">Open local Wallet</a><button class="workspace-quiet" id="candidate-continue" type="button">${e(action)}</button></div><p class="form-note">The embedded Wallet supports local encrypted custody and recovery. Its provider-consent adapter is not connected yet.</p></section>`;root.setAttribute('aria-busy','false');}
 async function start(){
- if(location.origin!=='http://127.0.0.1:4337'&&location.protocol!=='https:')throw Error('Use the reviewed HTTPS caller or exactly http://127.0.0.1:4337.');
+ const discovery=providerDiscovery({currentOrigin:()=>location.origin});
+ if(!discovery.provider)throw Error(discovery.detail);
+ const published=await discovery.provider.catalog();
+ if(published.services.every(service=>service.availability!=='available')){
+  notice('Provider catalog is in preview','The reviewed Zenith catalog was verified. Its services cannot accept requests yet. No execution process or communication channel is published. '+discovery.detail,'Check catalog again');
+  document.querySelector('#service-mode')!.textContent='Live discovery · submission pending';
+  document.querySelector('#candidate-continue')!.addEventListener('click',()=>location.reload(),{once:true});return;
+ }
  const response=await fetch('tests/local-provider-profile.json',{credentials:'omit',redirect:'error'});
  if(!response.ok)throw Error('The reviewed public provider profile has not been staged. Finite test membership and receiver authority are still required.');
  const raw=await response.json(),queue=typeof raw?.baseUrl==='string'&&raw.baseUrl.startsWith('https:');
@@ -42,4 +50,4 @@ async function start(){
   }catch(error){notice('Candidate not connected',error instanceof Error?error.message:'Connection unavailable. No service request submitted.','Try connection again');document.querySelector('#candidate-continue')!.addEventListener('click',()=>location.reload(),{once:true});}
  });
 }
-void start().catch(error=>{notice('Candidate setup is pending',error instanceof Error?error.message:'The candidate is unavailable.','Check setup again');document.documentElement.dataset.candidateConfig='unavailable';document.querySelector('#candidate-continue')!.addEventListener('click',()=>location.reload(),{once:true});});
+void start().catch(error=>{notice('Provider connection is unavailable here',error instanceof Error?error.message:'The candidate is unavailable.','Check setup again');document.documentElement.dataset.candidateConfig='unavailable';document.querySelector('#candidate-continue')!.addEventListener('click',()=>location.reload(),{once:true});});
