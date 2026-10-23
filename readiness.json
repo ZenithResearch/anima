@@ -5,13 +5,13 @@
       "name": "Local Wallet custody",
       "status": "Implemented; manual recovery review required",
       "target": "wallet.html",
-      "remaining": "Provider consent facade and security qualification remain separate."
+      "remaining": "Producer draft PR 3 and owner consent review; encrypted custody/recovery remains unchanged."
     },
     {
       "name": "Provider submission",
       "status": "Not integrated",
       "target": "service.html",
-      "remaining": "Reviewed deployment, embedded Wallet consent and receiver acceptance are required."
+      "remaining": "Active available catalog, reviewed projection endpoint and exact browser origin, producer release review, owner consent and real receiver acceptance."
     },
     {
       "name": "Business questions",

@@ -1,3 +1,5 @@
+import type {PresentationTrustConfig,CredentialPresentationRequestV2,CredentialPresentationV2,PresentationDisclosure} from './vendor/wallet-credential-presentation.js';
+import type {ZenithMembershipCredentialV3} from './vendor/service-client.js';
 // Anima host adapter. Encryption, recovery validation and the persisted snapshot
 // are owned by Castalia's pinned Rust RecoverySession, not by this interface.
 export interface RecoveryCore { invoke(request:string):string; }
@@ -6,6 +8,8 @@ export interface WalletSnapshotStore {
  compareAndSwap(expected:string|null,next:string):Promise<void>;
 }
 export type LocalWalletState={configured:boolean;unlocked:boolean;revision:number;public_key:string|null;backup_verified:boolean;backup_eligible:boolean;membership_active:boolean};
+export type PresentationPreview={token:string;summary:{disclosure:PresentationDisclosure;holder_public_key:string;caller:{kind:string;id:string};audience:string;issuer:string;key_id:string;request_digest_sha256:string;policy_digest_sha256:string;expires_at:number;confirm_by:number}};
+export type PresentationIdentity={public_key:string;membership:ZenithMembershipCredentialV3};
 export type WalletPreview={publicKey:string;restoring:boolean};
 type Prepared={token:string;expected_revision:number;public_key:string};
 export class EmbeddedWalletHost {
@@ -51,6 +55,27 @@ export class EmbeddedWalletHost {
   this.pending=this.call<Prepared>({operation:'verify_backup',file,password});
   return this.confirm();
  }
+ // These are host-only ports. The worker supplies reviewed policy, never a
+ // discovery result or page-provided issuer key. UI consent precedes each call.
+ async approveMembershipTrust(trust:unknown){
+  await this.assertCurrent();this.pending=null;
+  this.pending=this.call<Prepared>({operation:'prepare_trust',trust});return this.confirm();
+ }
+ async membershipRequest(){await this.assertCurrent();return this.call<unknown>({operation:'membership_request'});}
+ async activateMembership(proof:unknown){
+  await this.assertCurrent();this.pending=null;
+  this.pending=this.call<Prepared>({operation:'activate_membership',proof,scoped:false});return this.confirm();
+ }
+ async presentationIdentity(){await this.assertCurrent();return this.call<PresentationIdentity>({operation:'presentation_identity'});}
+ async approvePresentationTrust(config:PresentationTrustConfig){await this.assertCurrent();return this.call<LocalWalletState>({operation:'approve_presentation_trust',config});}
+ async prepareCredentialPresentation(request:CredentialPresentationRequestV2){
+  await this.assertCurrent();return this.call<PresentationPreview>({operation:'prepare_credential_presentation',request:JSON.stringify(request),now:Math.floor(Date.now()/1000)});
+ }
+ async approveCredentialPresentation(token:string){
+  await this.assertCurrent();const result=this.call<{presentation:string}>({operation:'approve_credential_presentation',token,now:Math.floor(Date.now()/1000)});
+  return JSON.parse(result.presentation) as CredentialPresentationV2;
+ }
+ cancelCredentialPresentation(){return this.call<LocalWalletState>({operation:'cancel_credential_presentation'});}
  private async assertCurrent(){if(await this.store.load()!==this.stored){this.lock();throw Error('Wallet storage changed in another tab. Reload before continuing.');}}
 }
 

@@ -1,5 +1,5 @@
 {
-  "status": "Embedded local custody candidate; supported embedded Service consent and live acceptance pending",
+  "status": "Source-built embedded same-session consent candidate; manual UI consent and live acceptance pending",
   "wallet": {
     "repository": "ZenithResearch/castalia-wallet",
     "commit": "d6f5b6ddc0f7cb7a892c65bc9d51a7973b498ef9",
@@ -45,8 +45,8 @@
     "realConsent": "not exercised",
     "productionSubmission": "disabled",
     "embeddedLocalCustody": "Implemented candidate; standalone create/restore, recovery download and verification require browser regression review.",
-    "consentGate": "Producer-supported embedded Service consent adapter sharing the existing RecoverySession is required. No extension fallback or second signer.",
-    "sealerRuntime": "Not included or configured; see SEALER-SOURCE.json."
+    "consentGate": "Closed same-RecoverySession candidate implemented at Wallet PR 3; user approval, producer release review and live receiver acceptance remain required.",
+    "sealerRuntime": "Included source-qualified secS MIT runtime; see SEALER-SOURCE.json."
   },
   "embedded": {
     "source": "wallet-sdk/SOURCE.json",
@@ -54,8 +54,8 @@
     "worker": "src/embedded-wallet-worker.ts",
     "host": "src/embedded-wallet-host.ts",
     "format": "castalia.wallet-local.v1",
-    "scope": "User-reviewed local create/restore, unlock/lock, encrypted recovery export and exact-identity backup verification. No membership, enrollment, authenticated session or provider authority is inferred.",
+    "scope": "Local custody/recovery plus explicitly reviewed membership, receiver policy and one-shot v2 presentation through the same worker/session. No extension or second signer.",
     "compatibility": "Additive origin-local store; existing drafts, references, extension custody and older Castalia web storage are untouched. Portable .castalia-recovery format is produced and validated by shared Rust.",
-    "missing": "Producer-supported credential_presentation_v2 facade sharing RecoverySession custody, backup verification, approved trust and epoch. No speculative second signer."
+    "missing": "Producer draft PR review, exact-artifact user consent and active provider release/projection handoff."
   }
 }

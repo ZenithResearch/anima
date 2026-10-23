@@ -12,3 +12,13 @@
 .wallet-page #wallet-notice{min-height:var(--anima-semantic-space-group);color:var(--anima-semantic-color-text-secondary)}
 .wallet-page [aria-busy=true]{cursor:progress}
 @media(max-width:480px){.wallet-page .workspace-header{gap:var(--anima-semantic-space-inline);flex-wrap:wrap}.wallet-page .service-panel{padding:var(--anima-semantic-space-control)}.wallet-page .service-actions>*{flex:1 1 auto}}
+
+.service-page dialog.wallet-connection{color:var(--anima-semantic-color-text-primary);background:var(--anima-semantic-color-surface-raised);width:min(42rem,calc(100vw - 2rem));max-height:calc(100dvh - 2rem);overflow:auto;box-sizing:border-box;margin:auto;padding:clamp(1rem,4vw,2rem)}
+.wallet-connection::backdrop{background:color-mix(in srgb,var(--anima-semantic-color-surface-canvas) 80%,transparent)}
+.wallet-connection form{display:grid;gap:var(--anima-semantic-space-control)}
+.wallet-connection dl{display:grid;grid-template-columns:minmax(5rem,.382fr) minmax(0,1fr);gap:.65rem 1rem}
+.wallet-connection dd{margin:0;overflow-wrap:anywhere}
+.wallet-connection .service-actions{display:flex;flex-wrap:wrap;gap:var(--anima-semantic-space-control)}
+@media(max-width:480px){.wallet-connection dl{grid-template-columns:1fr}.wallet-connection dt{margin-top:.5rem}.wallet-connection .service-actions>*{flex:1}}
+
+@media(forced-colors:active){.wallet-connection{background:Canvas;color:CanvasText;border:1px solid ButtonText}.wallet-connection::backdrop{background:Canvas;opacity:.85}}

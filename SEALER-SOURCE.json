@@ -1,5 +1,5 @@
 {
-  "status": "Source declaration pinned; runtime not included or configured; live delivery disabled",
+  "status": "Source-qualified MIT runtime included; no provider enabled",
   "package": "@zenithresearch/secs-provider-intake-sealer",
   "version": "0.1.0",
   "producerCommit": "a6cda6d99a8f8674c1264dd4258ddf16f9a048fc",
@@ -15,12 +15,12 @@
     "browser/intake-sealer/package.json": "14f1b77991e450139658741ac4603b5fac775788",
     "scripts/test-browser-intake-sealer.mjs": "1ef3e138f0efd4ed704b5d4b732ed693cbac61fa"
   },
-  "qualification": "Pinned producer interface and explicit fixture adapter composition only in this repository. Historical external candidate checks do not qualify this extraction or install an encryption runtime.",
+  "qualification": "Exact source build reproduced the previously built WASM hash and passed the producer request/reference vectors and negative cases. Not a released or security-certified package; no live delivery qualification.",
   "originalReferences": "Source catalog v4 and endpoint contract now exist in Service Management 0.9.0. Anima implements bundle preparation/persistence/independent retry with explicit fixtures. Runtime release, authorization and active endpoints remain unqualified; no live original-file send, chunking or plaintext fallback.",
   "compatibility": "Additive injected module port; no change to stored drafts, reviewed requests, wallet custody or canonical service contracts.",
   "consumerValidation": {
     "scope": "Exact producer declaration pin and typed request/reference ports. Fixture tests exercise failure-closed loader and composition behavior; they do not qualify cryptography or live delivery.",
-    "runtimeIncluded": false,
+    "runtimeIncluded": true,
     "liveDelivery": "disabled"
   },
   "sourceHistory": [
@@ -51,7 +51,47 @@
   "producerReportedReferenceVectorSha256": "bb7e6b159d244cffee2f15005cd880d53aa05acf3780bfdc03548cf27253157c",
   "runtimeIntegration": {
     "module": "integrations/reviewed-sealer.js",
-    "status": "Intentionally absent until a supported producer runtime, its provenance and redistribution terms are reviewed.",
-    "policy": "No plaintext fallback, locally invented cryptography, or automatic download of an unreviewed runtime."
+    "status": "Included explicit opt-in loader with exact pinned licensed artifacts; not automatically registered as a provider.",
+    "policy": "No plaintext fallback, locally invented cryptography, or automatic download of an unreviewed runtime.",
+    "license": "integrations/secs/LICENSE (producer MIT)",
+    "producerBuild": "wasm-pack 0.14.0 / rustc 1.96.0 / producer scripts/build-browser-intake-sealer.sh; Cargo.lock unchanged",
+    "artifacts": [
+      {
+        "name": "integrations/secs/index.js",
+        "sha256": "e05f93b8f4d6b63051f95b8c1aa5861034970b75825df4d7bcc95827d64e8191"
+      },
+      {
+        "name": "integrations/secs/index.d.ts",
+        "sha256": "c596e8e3776c10681fc2b85cb356735b6f7747be3eec6f1db6dfb9a7a9cef35b"
+      },
+      {
+        "name": "integrations/secs/libsec_core.js",
+        "sha256": "41b727f40e3bbfa713468f2d9f31ae160226cfceb5c440a3795308068367aac1"
+      },
+      {
+        "name": "integrations/secs/libsec_core.d.ts",
+        "sha256": "f8dcbd87fa18289bd657ee0eb507e0f965bededee09cfc5ba058d07078ca5bce"
+      },
+      {
+        "name": "integrations/secs/libsec_core_bg.wasm",
+        "sha256": "f565ef42d3dd28511cbcbfd1bce2c2cd35a4b2e1b653a48c9866c8e05b4038df"
+      },
+      {
+        "name": "integrations/secs/package.json",
+        "sha256": "141db27d8928832390c685b6ef7845db453730ce5e4ce5e786747bc3bb3f6c62"
+      },
+      {
+        "name": "integrations/secs/README.md",
+        "sha256": "41ac01e8c76574b73a7a741310a9c6b03cdb737b3a38088df6eaf06f9ae00672"
+      },
+      {
+        "name": "integrations/secs/SHA256SUMS",
+        "sha256": "e5bd85304b79a879dae75c488d17a4a66dfbfd1d685909e51020fc7edc70c586"
+      },
+      {
+        "name": "integrations/secs/LICENSE",
+        "sha256": "697fe1dafccdf093fc093a8fc3e321f642500d33b757c1796b0ca0648f6adbc2"
+      }
+    ]
   }
 }

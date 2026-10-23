@@ -37,13 +37,13 @@ function numericLoopback(value:string):string{
 function httpsAddress(value:string):string{
  const url=new URL(safeProviderURL(value,value));if(url.protocol!=='https:'||url.search)throw Error('Queue candidate operations require reviewed HTTPS addresses without query parameters.');return url.origin;
 }
-type CandidateInput={profile:LocalCandidateProfile;currentOrigin:()=>string;wallet:()=>ServiceWallet|undefined;loadSealer:()=>Promise<BrowserSealerModule>;fetch?:typeof fetch};
+type CandidateInput={profile:LocalCandidateProfile;currentOrigin:()=>string;wallet:()=>ServiceWallet|undefined;loadSealer:()=>Promise<BrowserSealerModule>;fetch?:typeof fetch;purpose?:'disposable'|'reviewed-pilot'};
 export const localCandidateProvider=(input:CandidateInput)=>composeCandidate(input,false);
 export const queueCandidateProvider=(input:CandidateInput)=>composeCandidate(input,true);
 function composeCandidate(input:CandidateInput,queue:boolean){
  const profile=(queue?parseQueueCandidateProfile:parseLocalCandidateProfile)(input.profile),addressOrigin=queue?httpsAddress:numericLoopback,readOrigins=Object.freeze([...new Set([addressOrigin(profile.baseUrl),addressOrigin(profile.responseBaseUrl)])]),origins=new Set([...readOrigins,...addresses(profile).map(addressOrigin)]);
- let connected=false;
- const guard=()=>{if(input.currentOrigin()!==profile.origin||!connected)throw new ServiceClientError('forbidden','Connect the disposable candidate Wallet first.');};
+ const pilot=input.purpose==='reviewed-pilot';let connected=false;
+ const guard=()=>{if(input.currentOrigin()!==profile.origin||!connected)throw new ServiceClientError('forbidden','Connect the reviewed embedded Wallet first.');};
  const network=boundedProviderFetch(input.fetch??globalThis.fetch.bind(globalThis),(value)=>{if(!origins.has(addressOrigin(value)))throw new ServiceClientError('forbidden','The address is outside this reviewed candidate.');});
  // SDK 0.9.0 reserves responseBaseUrl for production HTTPS. The local harness
  // uses its supported status(absoluteURL,id) API with the published fixed route;
@@ -54,7 +54,7 @@ function composeCandidate(input:CandidateInput,queue:boolean){
   return queue?client.statusForRequest(id):client.status(profile.responseBaseUrl.replace(/\/$/,'')+'/v1/client/requests/'+encodeURIComponent(id),id);
  };
  const readURL=(url:string)=>new URL(url,profile.responseBaseUrl.replace(/\/$/,'')+'/').href;
- const authorization=serviceWalletAuthorization({wallet:input.wallet,client,requester:profile.catalog.requester,callerOrigin:profile.origin,currentOrigin:input.currentOrigin,member:profile.member,assertContext:guard,disclosure:operation=>({title:queue?'Anima Queue candidate':'Anima local candidate',statements:[queue?'Disposable HTTPS Queue acceptance; not a production request.':'Disposable loopback acceptance only; not a production request.','Operation: '+operation,'Review the exact material in Anima before approving.','Transport retention does not mean Service admission or completion.']})});
+ const authorization=serviceWalletAuthorization({wallet:input.wallet,client,requester:profile.catalog.requester,callerOrigin:profile.origin,currentOrigin:input.currentOrigin,member:profile.member,assertContext:guard,disclosure:operation=>({title:pilot?'Anima service request':queue?'Anima Queue candidate':'Anima local candidate',statements:[pilot?'A real service request to the reviewed Zenith provider.':queue?'Disposable HTTPS Queue acceptance; not a production request.':'Disposable loopback acceptance only; not a production request.','Operation: '+operation,'Review the exact material in Anima before approving.','Transport retention does not mean Service admission or completion.']})});
  const encrypted=walletEncryptedBundlePort(client,authorization,candidateIntakeSealer(input.loadSealer));
  const unavailable=async():Promise<never>=>{throw new ServiceClientError('forbidden','This candidate accepts only reviewed encrypted bundles.');};
  const provider:ProviderAdapter={mode:'candidate',endpoint:profile.baseUrl,readOrigins,encrypted,access:()=>({...unavailableAccess(),identity:connected?'ready':'unavailable',binding:connected?profile.member.publicKey+':'+profile.member.membershipId:null}),
@@ -63,10 +63,10 @@ function composeCandidate(input:CandidateInput,queue:boolean){
  (queue?registerQueueCandidateProvider:registerCandidateProvider)(provider,profile.origin);
  return {provider,async connect(){
   connected=false;if(input.currentOrigin()!==profile.origin)throw Error('Open the exact local candidate page origin.');
-  const wallet=input.wallet();if(!wallet||(await wallet.getStatus()).state!=='ready')throw Error('Install and unlock the disposable candidate Wallet.');
+  const wallet=input.wallet();if(!wallet||(await wallet.getStatus()).state!=='ready')throw Error('Unlock the embedded Wallet.');
   if(!(await wallet.getCapabilities()).includes('credential_presentation_v2'))throw Error('Use the pinned credential-capable Wallet candidate.');
   const membership=await wallet.getMembership();
-  if(membership.ownerPublicKey!==profile.member.publicKey||membership.membershipId!==profile.member.membershipId)throw Error('This Wallet is not the reviewed disposable test identity. No request was sent.');
+  if(membership.ownerPublicKey!==profile.member.publicKey||membership.membershipId!==profile.member.membershipId)throw Error('The connected Wallet identity changed. Reconnect before submitting. No request was sent.');
   connected=true;
   // Presence only: do not declare membership, session or workspace rights verified.
  },disconnect(){connected=false;}};

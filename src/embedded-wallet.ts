@@ -1,3 +1,4 @@
+import {connectEmbeddedWallet} from './embedded-wallet-connection.js';
 import {createEmbeddedWalletClient} from './embedded-wallet-client.js';
 import type {LocalWalletState,WalletPreview} from './embedded-wallet-host.js';
 import {escape as e} from './page.js';
@@ -50,3 +51,9 @@ root.addEventListener('submit',event=>{
 window.addEventListener('pagehide',()=>client.destroy(),{once:true});
 window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
 void act(async()=>{state=await client.state();},'Local Wallet candidate. No provider connected.');
+
+document.querySelector('#review-wallet-connection')?.addEventListener('click',async()=>{
+ const connected=await connectEmbeddedWallet(client);
+ document.querySelector('#wallet-provider-state')!.textContent=connected?'Membership verified; receiver policy approved for this session. No service request sent.':'Provider not connected. Local Wallet unchanged.';
+ if(connected){state=await client.state();render();}
+});

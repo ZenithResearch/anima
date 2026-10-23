@@ -11,4 +11,4 @@ async function render(name,output,values={}){
 await render('workspace','workspace.html');
 await render('environment','environment.html');
 await render('service','service.html',{candidateMeta:'',pageTitle:'Anima — Service request',entryScript:'runtime/service-review.js'});
-await render('service','service-candidate.html',{candidateMeta:'<meta name="anima-local-candidate" content="1">',pageTitle:'Anima — Local submission candidate',entryScript:'runtime/service-candidate.js'});
+await render('service','service-candidate.html',{candidateMeta:'<meta name="anima-local-candidate" content="1"><meta name="anima-provider-pilot" content="1">',pageTitle:'Anima — Local submission candidate',entryScript:'runtime/service-candidate.js'});
