@@ -78,6 +78,7 @@
         "component.field.hover-background",
         "component.field.hover-border",
         "semantic.detail.field-focus-offset",
+        "semantic.detail.field-focus-width",
         "semantic.space.label-gap",
         "component.field.compact-height",
         "component.field.compact-label-gap"

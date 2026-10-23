@@ -28,3 +28,9 @@ This review applies Brad Frost's atomic-design framework as an analytical lens. 
 ## Evidence required
 
 `atomic.json` defines component contracts and quality policy. Component specimens expose states; they are not proof that every page is qualified. Check 320px reflow, long labels, 200% text zoom, visible keyboard focus, dialog focus return, reduced motion, forced colors, screen-reader behavior, real touch, and contrast over the moving background. Keep failures and untested cases visible in readiness notes.
+
+## Field focus refinement
+
+Text inputs, selects and textareas use `semantic.detail.field-focus-width` and `field-focus-offset` to align a single 1px focus edge with the existing border. Character questions, shared brand questions and workspace controls share this treatment; action buttons retain their separate keyboard focus indicators. Invalid fields keep their error colour. Intake scroll padding keeps focused controls below the sticky navigation. Disabled workspace actions do not gain an enabled hover treatment.
+
+Checked character controls by keyboard at desktop, 390px and 320px; the responsive review includes a Character questions entry. Checked the shared brand-question field treatment and dialog focus return. The build and 192 automated checks pass; this scoped review does not establish full accessibility qualification.
