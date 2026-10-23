@@ -76,7 +76,7 @@ profile remains ignored/excluded; it is not used to activate the live connection
 | Embedded UI consent | Implemented; owner has not approved membership or a brief |
 | Available service | Blocked by authoritative `availability: preview` |
 | Read/progress projection | Provider handoff and operator approval pending |
-| Standalone origin | 4340 remains unapproved; only 4337 is currently pinned |
+| Standalone origin | New repo now serves approved 4337 with legacy path aliases; 4340 remains unapproved |
 | Real request and provider admission | Not attempted; no successful sending is claimed |
 
 Reviewed app deployment fields (do not substitute intake for the response base):
@@ -91,8 +91,8 @@ Reviewed app deployment fields (do not substitute intake for the response base):
 ```
 
 A changed catalog/origin requires updating both discovery and the compiled worker
-policy in a reviewed source change; discovery and browser storage cannot install new trust. Keep
-the existing 4337 draft/Wallet store until a controlled origin handoff is agreed.
+policy in a reviewed source change; discovery and browser storage cannot install new trust. The same-origin server handoff preserves the existing 4337 draft/Wallet store;
+no browser data or recovery file was read or moved.
 
 Current candidate qualification: 192 Anima checks pass, including real pinned-WASM
 membership and one-shot presentation tests, sealer vectors/artifact hashes,
@@ -109,3 +109,21 @@ overflow; Escape returned focus to the initiating action. Populated consent was 
 disclosure heading so the dialog opens at the beginning rather than scrolling
 straight to its action buttons. Physical-device and assistive-technology review
 remain distinct checks.
+
+## Same-origin standalone handoff
+
+The native Anima server now runs at the existing approved 4337 origin. Root and
+legacy Anima paths return byte-identical pages, worker modules and pinned WASM
+with correct MIME types. Existing nested bookmarks do not redirect, and browser
+storage keeps its original origin. The original source tree is unchanged; only
+the local preview listener was replaced. A private local rollback record is kept
+outside the repository.
+
+The browser at the new root successfully verified the exact live public catalog
+and displayed its preview gate. The provider chat confirmed ownership of the
+unfinished Queue pull/admission composition, immutable process pin, catalog
+promotion, public read-only projection, finite native authority activation and
+cross-member read-denial checks. Its configured projection currently returns 404
+and remains unconfigured in Anima. Real sending waits for its explicit ready
+handoff and the owner's embedded Wallet consent. No private projection address
+or operator authority plan is published here.

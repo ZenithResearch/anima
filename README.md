@@ -16,7 +16,7 @@ npm test
 npm run dev
 ```
 
-Open `http://127.0.0.1:4340/`. The development server serves `dist/`, binds to numeric loopback, and leaves live integrations disabled (Pinterest status reports setup required). Build again after source changes. Set `PORT` to use a different local port.
+Open `http://127.0.0.1:4337/`. The development server serves `dist/`, binds to numeric loopback, and leaves live integrations disabled (Pinterest status reports setup required). Build again after source changes. Set `PORT` to use a different local port; other origins remain unapproved for the provider pilot. Legacy `/brands/packages/anima/production/` bookmarks resolve to these same files without redirecting or moving browser storage.
 
 Useful routes:
 

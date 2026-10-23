@@ -13,7 +13,7 @@ This repository extracts the accepted Anima production client from an earlier sh
 ## Deliberate differences
 
 - Standalone routes replace nested sandbox paths. The root now opens Anima.
-- A repository-local build produces `dist/`; the static development server defaults to `http://127.0.0.1:4340/`.
+- A repository-local build produces `dist/`; the static development server defaults to `http://127.0.0.1:4337/`.
 - Public examples describe a generic practice rather than private strategy material.
 - Public contact copy uses Anima's address rather than the earlier brand's address.
 - Historical review pages, screenshots, internal coordination notes, private local profiles, and locally staged unreleased QA packages are excluded.
@@ -27,7 +27,7 @@ Preserve the original origin until explicit export/import and recovery paths are
 
 ## Connection boundary
 
-The earlier pilot selected `http://127.0.0.1:4337` as an exact browser origin. The new development origin at port 4340 is not implicitly authorized by that selection. A live profile must match the browser origin exactly. HTTPS is the production default; numeric-loopback HTTP is allowed only by an explicitly supported local pilot profile.
+The pilot retains `http://127.0.0.1:4337` as its exact browser origin. The standalone repository now serves that same origin and preserves the old Anima path prefix as an alias. No draft, original file, identity, or recovery material is copied. Port 4340 remains an unapproved optional preview. A live profile must match the browser origin exactly. HTTPS is the production default; numeric-loopback HTTP is allowed only by an explicitly supported local pilot profile.
 
 Keep three configuration surfaces separate: browser origin, durable encrypted intake gateway, and response projection. No endpoint, cloud account, deployment, or provider authority is installed by this migration.
 
