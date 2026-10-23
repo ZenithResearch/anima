@@ -7,3 +7,4 @@ provider-contract/** -text -whitespace
 src/vendor/** -text -whitespace
 wallet-sdk/** -text -whitespace
 workspace/domain.mjs -text -whitespace
+integrations/secs/** -text -whitespace
