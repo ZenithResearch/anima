@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anima — disposable outbox qualification</title>
+<style>body{font:16px/1.6 system-ui;background:#201525;color:#eee;margin:32px;max-width:75ch}button{font:inherit;padding:10px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<h1>Disposable outbox qualification</h1><p>Actual IndexedDB; example markers, no encryption, credentials or network submission. Separate qualification database; owner drafts remain untouched.</p><button id="run">Run storage checks</button><pre id="result" role="status">Not run</pre>
+<script type="module">
+import {FixtureProvider,exampleOriginal} from '../runtime/service-fixture.js';
+import {prepareServiceReview,canonical} from '../runtime/service-review-model.js';
+import {encryptedOutboxStore,prepareEncryptedOutbox,sendEncryptedOutboxPart} from '../runtime/service-encrypted-outbox.js';
+import {sha256} from '../workspace/brief-delivery.mjs';
+const result=document.querySelector('#result'),button=document.querySelector('#run');
+button.onclick=async()=>{button.disabled=true;const checks=[];const check=(value,text)=>{if(!value)throw Error(text);checks.push(text);result.textContent=checks.join('\n');};
+ try{
+ const provider=new FixtureProvider(),catalog=await provider.catalog(),bytes=new Uint8Array(await exampleOriginal.arrayBuffer()),hash=await sha256(bytes);
+ const brief={schema:'anima.brand-brief.v1',id:crypto.randomUUID(),createdAt:new Date().toISOString(),brand:{name:'Disposable'},answers:{feeling:'Quiet',people:'Artists',world:'A world',signature:'Arriving'},foundations:[],references:[{id:'test-original',kind:'file',name:'Example.png',type:'image/png',size:bytes.length,sha256:hash}]};
+ const review=await prepareServiceReview({draftId:crypto.randomUUID(),brief,catalog,serviceId:catalog.services[0].id,endpoint:provider.endpoint,values:{organization_name:'Example',brand_brief:'Disposable brief'}});review.authorityBinding=provider.access().binding;
+ const binding=review.authorityBinding,dbName='anima-encrypted-outbox-disposable-qualification',store=encryptedOutboxStore(false,dbName),reference={manifest:review.request.references[0],bytes};
+ let record=await prepareEncryptedOutbox(review,binding,provider.encrypted,reference,store);const exact=canonical(record.bundle);
+ const reopened=encryptedOutboxStore(false,dbName);record=await reopened.load(review,binding);
+ check(record.bundle.request.envelope instanceof Uint8Array&&record.bundle.reference.envelope instanceof Uint8Array,'PASS: both prepared byte arrays survive an independent IndexedDB connection');
+ check(canonical(record.bundle)===exact,'PASS: exact prepared bundle survives storage before any send');
+ record=await sendEncryptedOutboxPart(review,binding,'reference',provider.encrypted,reopened,()=>{});
+ check(record.reference.state==='retained'&&record.request.state==='prepared','PASS: original retention is separate from unsent request');
+ provider.scenario='unknown';try{await sendEncryptedOutboxPart(review,binding,'request',provider.encrypted,reopened,()=>{});}catch{}
+ record=await encryptedOutboxStore(false,dbName).load(review,binding);
+ check(record.request.state==='unknown'&&record.reference.state==='retained','PASS: unknown request and retained original survive reopening');
+ check(canonical(record.bundle)===exact,'PASS: failure recovery preserves both exact prepared values');
+ provider.scenario='waiting';record=await sendEncryptedOutboxPart(review,binding,'request',provider.encrypted,reopened,()=>{});
+ check(record.request.state==='retained'&&record.request.result.service_request_id===null,'PASS: retried request acknowledges transport only');
+ const stale=structuredClone(record);await reopened.save(record,review);let conflict=false;try{await reopened.save(stale,review);}catch{conflict=true;}
+ check(conflict,'PASS: stale concurrent revision cannot overwrite newer transport state');
+ record=await reopened.load(review,binding);const downgrade=structuredClone(record);downgrade.request={state:'unknown',result:null};let denied=false;try{await reopened.save(downgrade,review);}catch{denied=true;}
+ check(denied,'PASS: retained acknowledgement cannot be cleared to permit resend');
+ check(canonical((await reopened.load(review,binding)).bundle)===exact,'PASS: final IndexedDB bundle is unchanged');
+ result.textContent=checks.join('\n')+'\n9/9 passed. Nothing sent.';document.documentElement.dataset.result='passed';
+ }catch(error){result.textContent=checks.join('\n')+'\nFAIL: '+error.message;document.documentElement.dataset.result='failed';}finally{button.disabled=false;}
+};
+</script></html>

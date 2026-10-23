@@ -1,0 +1,881 @@
+{
+  "version": 1,
+  "method": "Brad Frost\u2019s atomic design: parts and whole refined concurrently. Tokens are foundations beneath atoms, not a sixth UI stage.",
+  "reference": "https://atomicdesign.bradfrost.com/chapter-2/",
+  "tokenSource": "tokens.json",
+  "css": "tokens.css",
+  "qualityPolicy": {
+    "implementation": [
+      "Native semantics and accessible names",
+      "Explicit state contract",
+      "Semantic tokens for functional styling",
+      "Abort/disconnect cleanup where applicable",
+      "No duplicate state where HTML already owns it"
+    ],
+    "qualification": [
+      "Keyboard, focus visibility and dialog focus return",
+      "Opaque control surfaces: text 4.5:1; functional boundaries/marks 3:1",
+      "At least 44px control hit targets as Anima policy",
+      "320px reflow, long labels, 200% text zoom",
+      "Reduced motion and forced colours",
+      "Screen-reader pass; real touch and browser/device coverage",
+      "Full-page flow and moving-background contrast review"
+    ],
+    "rule": "An implemented state is not automatically a qualified component. Promote only with recorded evidence; no blanket production-ready label."
+  },
+  "components": [
+    {
+      "id": "action",
+      "layer": "Atom",
+      "name": "Liquid capsule / lens action / lifting link",
+      "target": "components.html#actions",
+      "tokens": [
+        "component.action.foreground",
+        "component.action.border",
+        "component.action.height",
+        "component.action.inset-block",
+        "component.action.inset-inline",
+        "component.action.content-gap",
+        "component.liquid-action.radius",
+        "component.liquid-action.background",
+        "component.liquid-action.foreground",
+        "component.liquid-action.border",
+        "component.liquid-action.lens-size"
+      ],
+      "uses": [],
+      "states": [
+        "Default",
+        "Hover",
+        "Focus visible",
+        "Pressed",
+        "Disabled",
+        "Reduced motion",
+        "Wrapped labels with intrinsic height and curved-edge clearance",
+        "Stable capsule curvature across widths",
+        "Shared glass action with readable label, independent orb and growing height",
+        "Orb capsule reserved for standalone invitations; paired navigation uses lifting links",
+        "Recovered silver tab and folded-corner variants; shape comparison in component library",
+        "Intent selects a family; prominence and native behavior remain independent",
+        "Enter / work / invite usage examples with explicit placement migration register"
+      ],
+      "source": "src/surface.ts + interactions.css + atoms.css",
+      "status": "Refining",
+      "evidence": "hero-shape-review.json",
+      "remaining": "Apply recorded placement mapping deliberately, including peer hero entries and routine form progression. See quality policy; device, assistive technology and full-page qualification remain.",
+      "usagePolicy": "ACTION-USAGE.json"
+    },
+    {
+      "id": "field",
+      "layer": "Atom",
+      "name": "Text / email / URL / textarea / select",
+      "target": "components.html#fields",
+      "tokens": [
+        "component.field.background",
+        "component.field.foreground",
+        "component.field.border",
+        "component.field.error",
+        "component.field.height",
+        "component.field.hover-background",
+        "component.field.hover-border",
+        "semantic.detail.field-focus-offset",
+        "semantic.space.label-gap",
+        "component.field.compact-height",
+        "component.field.compact-label-gap"
+      ],
+      "uses": [],
+      "states": [
+        "Empty",
+        "Hover",
+        "Filled",
+        "Required",
+        "Invalid",
+        "Readonly",
+        "Disabled",
+        "Autofill",
+        "Focus visible",
+        "Compact density / 44px control"
+      ],
+      "source": "atoms.css + templates/introductions.html",
+      "status": "Refining",
+      "evidence": "interaction-review.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "orb",
+      "layer": "Atom",
+      "name": "Pearl choices / orb switch",
+      "target": "components.html#orbs",
+      "tokens": [
+        "component.orb.size",
+        "component.orb.selected-mark",
+        "component.switch.target"
+      ],
+      "uses": [],
+      "states": [
+        "Unchecked",
+        "Checked",
+        "Focus visible",
+        "Disabled",
+        "Reduced motion",
+        "Forced colours"
+      ],
+      "source": "src/orbs.ts + interactions.css + atoms.css",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "thought",
+      "layer": "Molecule",
+      "name": "Thought entry + local response",
+      "target": "components.html#contact-molecule",
+      "tokens": [],
+      "uses": [
+        "field",
+        "action"
+      ],
+      "states": [
+        "Required",
+        "Valid",
+        "Local response",
+        "Long content"
+      ],
+      "source": "templates/interaction-specimens.html + src/specimens.ts",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "invitation",
+      "layer": "Molecule",
+      "name": "Invitation + native dialog",
+      "target": "components.html#contact-molecule",
+      "tokens": [],
+      "uses": [
+        "action"
+      ],
+      "states": [
+        "Open",
+        "Escape",
+        "Focus return"
+      ],
+      "source": "src/modal.ts + templates/interaction-specimens.html",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "hero-message",
+      "layer": "Molecule",
+      "name": "Hero copy + upper CTA pair + independent lower navigation",
+      "target": "index.html#encounter",
+      "tokens": [
+        "component.hero.copy-gap",
+        "component.hero.action-gap",
+        "component.hero.life-focus-y",
+        "component.hero.life-focus-narrow-y",
+        "component.hero.primary-width",
+        "component.hero.base-gap"
+      ],
+      "uses": [
+        "action"
+      ],
+      "states": [
+        "Two actual upper CTAs beside the message: recovered silver tab and folded depth shape",
+        "One orb in the upper pair; plain arrow on its companion",
+        "Bottom orientation, navigation and secondary roster route retained",
+        "Short landscape places upper actions alongside the copy",
+        "Intrinsic content heights; no clipping or art spacer rows"
+      ],
+      "source": "src/page.ts + production.css + src/water-life-layout.ts",
+      "status": "Shape trials for review",
+      "evidence": "hero-shape-review.json",
+      "remaining": "Owner visual review; physical-device and assistive-technology qualification."
+    },
+    {
+      "id": "section-heading",
+      "layer": "Molecule",
+      "name": "Section heading + eyebrow",
+      "target": "index.html#about",
+      "tokens": [
+        "component.section.eyebrow-gap",
+        "component.section.copy-gap",
+        "component.section.paragraph-gap",
+        "component.section.group-gap"
+      ],
+      "uses": [],
+      "states": [
+        "Single stacked heading group",
+        "Wide: prose aligns with headline",
+        "Narrow: prose follows at a consistent gap",
+        "Full-section absolute water life behind content"
+      ],
+      "source": "src/page.ts / SectionHeading + production.css",
+      "status": "Refining; lower-page spacing pass",
+      "evidence": "section-spacing-review.json",
+      "remaining": "Owner art-direction and physical-device qualification."
+    },
+    {
+      "id": "introduction",
+      "layer": "Organism",
+      "name": "Creative / talent / business introduction",
+      "target": "index.html#introduction",
+      "tokens": [],
+      "uses": [
+        "action",
+        "field",
+        "orb"
+      ],
+      "states": [
+        "Role switch",
+        "Validation",
+        "Local receipt",
+        "Private talent preference",
+        "24 independent media and performance interests",
+        "Expandable groups with selection counts and recap"
+      ],
+      "source": "templates/introductions.html + src/opportunities.ts",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "process",
+      "layer": "Organism",
+      "name": "Business / creative process",
+      "target": "components.html#organisms",
+      "tokens": [],
+      "uses": [
+        "action"
+      ],
+      "states": [
+        "Role switch",
+        "Step selection",
+        "Keyboard",
+        "Reconnect"
+      ],
+      "source": "src/process.ts + core/src/lib.rs",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "Owner review and reconciliation of BOTH business and creative process content; UI functionality is not operating-process approval."
+    },
+    {
+      "id": "brief",
+      "layer": "Organism",
+      "name": "Brief / review / explicit draft tools",
+      "target": "index.html#capture",
+      "tokens": [],
+      "uses": [
+        "field",
+        "action"
+      ],
+      "states": [
+        "Invalid",
+        "Review",
+        "Edit",
+        "Save",
+        "Restore",
+        "Export",
+        "Clear"
+      ],
+      "source": "templates/project-brief.html + water/landing.mjs",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "intake-panel",
+      "layer": "Organism",
+      "name": "Expandable intake workspace",
+      "target": "index.html#introduction",
+      "tokens": [
+        "semantic.color.surface.canvas",
+        "semantic.color.border.control",
+        "semantic.color.text.primary"
+      ],
+      "uses": [
+        "introduction",
+        "brief",
+        "action",
+        "back-navigation"
+      ],
+      "states": [
+        "Closed",
+        "Open",
+        "Escape / focus return",
+        "Edit / review history",
+        "Retained unsent inputs",
+        "Narrow / long form"
+      ],
+      "source": "src/intake-panels.ts + src/page.ts + production.css",
+      "status": "Browser exercised",
+      "evidence": "verification.json",
+      "remaining": "Physical devices, spoken assistive technology and actual membership/profile/request integration."
+    },
+    {
+      "id": "character",
+      "layer": "Organism",
+      "name": "Named character drafts / practice, talent and audience",
+      "target": "index.html#character",
+      "tokens": [],
+      "uses": [
+        "field",
+        "action"
+      ],
+      "states": [
+        "Several independent named characters in one tab",
+        "Profiles linked to each character; same profile reusable",
+        "Talent presence and legacy creator / ICP worksheets",
+        "Edit, optional metrics, boundaries and permission",
+        "Copy/export with additive optional character metadata",
+        "Explicit roster or contact handoff; selected character retained",
+        "Result opens the appropriate reflection example",
+        "Drafts are in memory; no account or automatic matching"
+      ],
+      "source": "src/character.ts + src/character-model.ts + src/character-workspace.ts + templates/character.html",
+      "status": "Browser exercised; persistence and discovery pending",
+      "evidence": "character-reflection-review.json",
+      "remaining": "Creator worksheet adaptation and evidence-aware onboarding content need owner review; no account/matching backend."
+    },
+    {
+      "id": "network-template",
+      "layer": "Template",
+      "name": "Creative-network page structure",
+      "target": "foundations.html#template",
+      "tokens": [
+        "semantic.layout.phi",
+        "semantic.layout.major",
+        "semantic.layout.minor",
+        "semantic.layout.focal-third",
+        "component.page.header-height",
+        "component.page.hero-inset",
+        "component.page.hero-bottom",
+        "component.page.section-min",
+        "component.page.section-max",
+        "component.page.strip-height",
+        "component.hero.copy-gap",
+        "component.hero.action-gap",
+        "component.hero.life-focus-y",
+        "component.hero.life-focus-narrow-y",
+        "component.section.eyebrow-gap",
+        "component.section.copy-gap",
+        "component.section.paragraph-gap",
+        "component.section.group-gap"
+      ],
+      "uses": [
+        "hero-message",
+        "intake-panel",
+        "process",
+        "character",
+        "section-heading",
+        "section-invitation",
+        "character-reflection",
+        "talent-entry"
+      ],
+      "states": [
+        "Wide",
+        "Narrow",
+        "Long copy",
+        "Empty/invalid fields",
+        "All three animals overlap text without reserved rows",
+        "Golden-section columns; thirds-based life focal point",
+        "Viewport-filling opening with two primary routes and secondary roster link at its base; content can grow for large text",
+        "Message and actions grouped; proportional breathing room around them",
+        "Shared lower-page heading, prose and invitation spacing",
+        "Two-pass 61.8/38.2 composition with content-safe inner tracks",
+        "Aquatic movement domains cross section seams without spacer rows"
+      ],
+      "source": "src/page.ts + production.css + src/water-life-layout.ts",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "landing",
+      "layer": "Page",
+      "name": "Anima / real copy and working local flows",
+      "target": "index.html",
+      "tokens": [],
+      "uses": [
+        "network-template"
+      ],
+      "states": [
+        "Creative journey",
+        "Talent journey",
+        "Business journey",
+        "Still water"
+      ],
+      "source": "src/copy.ts + src/page.ts",
+      "status": "Refining",
+      "evidence": "verification.json",
+      "remaining": "See quality policy; device, assistive technology and full-page qualification remain."
+    },
+    {
+      "id": "trail-picker",
+      "layer": "Molecule",
+      "name": "Trail glow gestures / contextual menu",
+      "target": "index.html#network",
+      "tokens": [
+        "semantic.color.surface.canvas",
+        "semantic.color.text.primary",
+        "semantic.color.text.secondary",
+        "semantic.color.border.control",
+        "semantic.color.focus.ring"
+      ],
+      "uses": [],
+      "states": [
+        "No persistent selector",
+        "Double-click water cycle",
+        "Context menu",
+        "Selected color",
+        "Keyboard arrows / Home / End / Enter",
+        "Escape / outside / user-scroll dismissal",
+        "Focus return",
+        "Preference persistence",
+        "Unavailable renderer",
+        "Reduced motion",
+        "Forced colours"
+      ],
+      "source": "src/trail-picker.ts + trail-picker.css + water/trail-colors.mjs + water/backdrop-shader.mjs",
+      "status": "Browser exercised; refining",
+      "evidence": "verification.json / trailGestures",
+      "remaining": "Native popover and menu-radio buttons composed directly. Physical touch and spoken assistive-technology qualification remain."
+    },
+    {
+      "id": "section-invitation",
+      "layer": "Molecule",
+      "name": "Section invitation / primary and quiet alternatives",
+      "target": "index.html#begin",
+      "tokens": [
+        "component.invitation.primary-width",
+        "component.invitation.alternative-gap",
+        "semantic.space.group"
+      ],
+      "uses": [
+        "action"
+      ],
+      "states": [
+        "One compact optical primary",
+        "Explicit secondary stack; no automatic CTA wrapping",
+        "Quiet arrows and waterline on hover or focus",
+        "Intrinsic label height; no stretched phone pill",
+        "Native character, talent and project workspace entries"
+      ],
+      "source": "src/page.ts / InvitationActions + production.css",
+      "status": "24 browser sizes reviewed; seven native routes exercised",
+      "evidence": "section-cta-review.json",
+      "remaining": "Owner visual review, physical-device and assistive-technology qualification."
+    },
+    {
+      "id": "talent-entry",
+      "layer": "Organism",
+      "name": "Talent character and private roster entry",
+      "target": "index.html#talent",
+      "tokens": [
+        "component.invitation.primary-width",
+        "component.section.group-gap"
+      ],
+      "uses": [
+        "section-heading",
+        "section-invitation",
+        "character"
+      ],
+      "states": [
+        "Character-first entry",
+        "Multiple characters and linked profile explanation",
+        "Direct private roster entry with representative context"
+      ],
+      "source": "src/page.ts / Talent + production.css",
+      "status": "Local candidate; review",
+      "evidence": "character-reflection-review.json",
+      "remaining": "Owner copy review and live roster / account integration."
+    },
+    {
+      "id": "character-reflection",
+      "layer": "Organism",
+      "name": "Character reflection / a view from either side",
+      "target": "index.html#reflection",
+      "tokens": [
+        "semantic.color.text.primary",
+        "semantic.color.text.secondary",
+        "semantic.layout.major"
+      ],
+      "uses": [
+        "section-heading",
+        "action"
+      ],
+      "states": [
+        "One illustrative relationship; one visible panel at a time",
+        "Distinct audience-fit and creative-intent readings",
+        "Expandable context, evidence, boundaries, terms and continuity",
+        "Keyboard tabs: arrows, Home / End, roving focus",
+        "Brand-first, audience, creative and talent journey links",
+        "Character result returns to the appropriate perspective"
+      ],
+      "source": "src/reflection.ts + src/page.ts / Reflection + production.css",
+      "status": "Illustrative; no live recommendations",
+      "evidence": "reflection-panel-review.json",
+      "remaining": "Permissioned profiles, source evidence, embeddings/role fit, constraints and reciprocal live discovery."
+    },
+    {
+      "id": "intent-entry",
+      "layer": "Organism",
+      "name": "Business / talent intent entry",
+      "target": "index.html#business-start",
+      "tokens": [
+        "semantic.layout.major",
+        "semantic.color.text.primary",
+        "semantic.color.surface.canvas"
+      ],
+      "uses": [
+        "action"
+      ],
+      "states": [
+        "Native modal entry",
+        "Audience / talent exercise selection",
+        "Return with draft retained",
+        "Alternative outline / roster route",
+        "320px scrolling",
+        "Close / Escape"
+      ],
+      "source": "src/entry-flows.ts + src/page.ts + src/intake-panels.ts",
+      "remaining": "Unified business/roster review, private persistence and owning adapters"
+    },
+    {
+      "id": "talent-work-links",
+      "layer": "Organism",
+      "name": "Talent work links / media, work types and characters",
+      "target": "index.html#introduction",
+      "tokens": [],
+      "uses": [
+        "field",
+        "action",
+        "character"
+      ],
+      "states": [
+        "Repeatable links",
+        "Multiple work-type and character associations",
+        "Existing and quick-created character references",
+        "URL and association validation",
+        "Removed-reference recovery",
+        "Remove and undo",
+        "Complete request review / copy / download",
+        "Private in-tab draft"
+      ],
+      "source": "src/talent-portfolio.ts + water/talent-portfolio.mjs + templates/introductions.html",
+      "status": "Refining",
+      "evidence": "talent-portfolio-review.json",
+      "remaining": "Backend account persistence, real assistive-technology and device qualification remain."
+    },
+    {
+      "id": "brand-package-flow",
+      "layer": "Organism",
+      "name": "Bento brand package entry and workspace",
+      "target": "index.html#business-start",
+      "tokens": [
+        "semantic.font.display",
+        "semantic.font.body",
+        "component.field.compact-height",
+        "component.field.compact-label-gap",
+        "semantic.color.surface.canvas"
+      ],
+      "uses": [
+        "action",
+        "field",
+        "intake-panel",
+        "brand-references"
+      ],
+      "states": [
+        "Five Bento question cards",
+        "Unrestricted Enter Workspace",
+        "Missing-card validation on Create your brand package",
+        "Card editor / return to grid",
+        "Shared Zenith account handoff not connected",
+        "Optional email validation",
+        "Editable workspace and original-input package preview",
+        "Explicit local save / download",
+        "Actual previous-panel Back"
+      ],
+      "source": "src/business-flow-view.ts + src/business-onboarding.ts + src/brand-package-model.ts",
+      "status": "Local design and behavior preview",
+      "remaining": "Use the actual shared Zenith web account ceremony; generation, request receipts, email and account-bound return remain unconnected."
+    },
+    {
+      "id": "back-navigation",
+      "layer": "Atom",
+      "name": "Previous page or modal",
+      "target": "index.html#business-start",
+      "tokens": [
+        "semantic.color.text.secondary",
+        "semantic.color.focus.ring",
+        "semantic.size.target"
+      ],
+      "uses": [],
+      "states": [
+        "Default",
+        "Hover",
+        "Keyboard focus",
+        "Actual previous route",
+        "Mobile menu return",
+        "Direct-link fallback"
+      ],
+      "source": "src/visuals.ts / arrowBack + src/intake-panels.ts + production.css",
+      "status": "Browser exercised",
+      "remaining": "Spoken assistive technology and physical-device qualification."
+    },
+    {
+      "id": "brand-references",
+      "layer": "Molecule",
+      "name": "Reference imports and local library",
+      "target": "components.html#reference-imports",
+      "tokens": [
+        "component.field.background",
+        "component.field.border",
+        "component.field.hover-background",
+        "component.field.compact-height",
+        "semantic.color.focus.ring"
+      ],
+      "uses": [
+        "field",
+        "action"
+      ],
+      "states": [
+        "Empty",
+        "File picker / drop",
+        "Website / Pinterest link",
+        "Unsafe or duplicate link",
+        "File too large / maximum count",
+        "Paged library",
+        "Remove / undo",
+        "Original download",
+        "Restored files",
+        "Account connections planned"
+      ],
+      "source": "src/brand-references.ts + src/brand-references-model.ts + reference-import.css",
+      "status": "Local import and browser persistence exercised",
+      "remaining": "Pinterest and other account connection adapters; no board contents fetched. Quota/private-browser/physical-device qualification."
+    },
+    {
+      "id": "marketing-workspace",
+      "layer": "Template / organism",
+      "name": "Minimal marketing dashboard",
+      "target": "workspace.html",
+      "tokens": [
+        "semantic.font.display",
+        "semantic.font.body",
+        "component.workspace.sidebar-width",
+        "component.workspace.sidebar-compact-width",
+        "component.workspace.essential-height",
+        "component.workspace.deliverable-height",
+        "component.workspace.section-gap",
+        "component.workspace.tile-padding"
+      ],
+      "uses": [
+        "action",
+        "field",
+        "back-navigation"
+      ],
+      "states": [
+        "Core identity empty / selected / invalid",
+        "Asset sidebar / collapsed library",
+        "Search and folder projection",
+        "Deliverable resource association",
+        "Local save / reload / original download",
+        "Inputs / brand foundations / outward deliverables",
+        "Missing identity / upload or shared brand questions",
+        "One global brief / partial / complete / validation",
+        "Reference import returns to the same brief",
+        "Invite teammates / unsent invitation draft",
+        "Find teammates / saved context, matching unavailable",
+        "Outward deliverables empty / actual linked assets",
+        "Shared identity lockup / workspace Home",
+        "Invite validation / deduplicated drafts / remove",
+        "Rolodex or brand / optional needs / nested editor return",
+        "Inline name / save / cancel / validation",
+        "Global brief first / per-foundation notes and references",
+        "Reusable boards/files across foundations / shared asset library",
+        "Pinterest setup-required / example picker / reusable connected-board metadata",
+        "Questions remain editable / brief review disabled until complete / concise shared brief review"
+      ],
+      "source": "src/workspace-marketing-model.ts + src/workspace-marketing-view.ts + src/brand-workspace.ts + workspace.css + src/workspace-brief-view.ts + src/brand-lockup.ts + brand-lockup.css + src/foundation-direction-view.ts",
+      "status": "Implemented locally; client review",
+      "remaining": "Shared Zenith account/storage and agreed private delivery remain separate integrations. Generation, production sequence and approvals belong to the owner\u2019s independent service.",
+      "evidence": "brief-handoff-review.json"
+    },
+    {
+      "id": "brand-lockup",
+      "layer": "Molecule",
+      "name": "Shared Anima identity",
+      "target": "workspace.html",
+      "tokens": [
+        "semantic.font.display",
+        "semantic.font.body",
+        "semantic.color.text.secondary"
+      ],
+      "uses": [
+        "action"
+      ],
+      "states": [
+        "Public home / workspace Home",
+        "Context label optional",
+        "Desktop / phone"
+      ],
+      "source": "src/brand-lockup.ts + brand-lockup.css",
+      "status": "Shared by landing and workspace; computed typography matched in browser",
+      "remaining": "Production Home routing follows the authenticated app boundary; current workspace remains a local preview.",
+      "evidence": "workspace-evening-review.json"
+    },
+    {
+      "id": "foundation-direction",
+      "layer": "Organism",
+      "name": "Foundation direction",
+      "target": "workspace.html",
+      "tokens": [
+        "semantic.font.display",
+        "semantic.font.body",
+        "semantic.color.surface.control",
+        "semantic.color.border.control",
+        "semantic.color.focus.ring"
+      ],
+      "uses": [
+        "field",
+        "action"
+      ],
+      "states": [
+        "Shared brief incomplete / complete",
+        "Notes + reusable reference associations",
+        "Native files / Pinterest or web links",
+        "Save / close / error / busy",
+        "Nested Pinterest picker / source reuse / focus return"
+      ],
+      "source": "src/foundation-direction-view.ts + src/workspace-marketing-model.ts + src/brand-workspace.ts + workspace.css",
+      "status": "Implemented locally; Pinterest adapter awaits configuration",
+      "remaining": "Registered Pinterest app and live authorization qualification; Zenith member ownership and processing adapters.",
+      "evidence": "foundation-direction-review.json"
+    },
+    {
+      "id": "pinterest-picker",
+      "layer": "Organism",
+      "name": "Pinterest board references",
+      "target": "workspace-demo.html",
+      "tokens": [
+        "semantic.font.display",
+        "semantic.font.body",
+        "semantic.color.surface.raised",
+        "semantic.color.border.control",
+        "semantic.color.focus.ring"
+      ],
+      "uses": [
+        "field",
+        "action"
+      ],
+      "states": [
+        "Setup required / connect / optional secret-board permission",
+        "Loaded boards / empty / search loaded pages / load more",
+        "Per-board destinations / brief incomplete / shared library only",
+        "Attach / permission recheck / deduplication / disconnect",
+        "Labeled disposable example boards / no real OAuth"
+      ],
+      "source": "src/pinterest-picker.ts + src/pinterest-model.ts + workspace/pinterest.mjs + integrations/pinterest-server.mjs",
+      "status": "Prepared and locally verified; live OAuth pending registered app",
+      "remaining": "Register/configure Pinterest app; qualify real account, pagination and consent. Replace local memory grant with authorized Zenith account/vault before public launch. No pins/images imported.",
+      "evidence": "pinterest-connection-review.json"
+    },
+    {
+      "id": "native-field",
+      "layer": "Atom",
+      "name": "Portable native field and compact field",
+      "target": "wallet.html",
+      "tokens": [
+        "component.field.background",
+        "component.field.foreground",
+        "component.field.border",
+        "component.field.hover-background",
+        "component.field.hover-border",
+        "component.field.compact-height",
+        "semantic.color.focus.ring",
+        "semantic.color.status.error"
+      ],
+      "uses": [],
+      "states": [
+        "Default / hover / focus visible",
+        "Readonly / disabled / invalid / autofill",
+        "Compact density / file picker / forced colors / reduced motion"
+      ],
+      "source": "atoms.css; src/embedded-wallet.ts",
+      "status": "Shared styles implemented; page qualification pending",
+      "remaining": "Real browser autofill, file-picker, touch and spoken screen-reader qualification; adopt explicit classes incrementally without changing stored data."
+    },
+    {
+      "id": "native-action",
+      "layer": "Atom",
+      "name": "Portable utility action",
+      "target": "wallet.html",
+      "tokens": [
+        "component.action.foreground",
+        "component.action.border",
+        "semantic.size.target",
+        "semantic.color.focus.ring"
+      ],
+      "uses": [],
+      "states": [
+        "Quiet / light emphasis",
+        "Pressed / disabled / hover / focus visible",
+        "Wrapped labels / reduced motion / forced colors"
+      ],
+      "source": "atoms.css; src/embedded-wallet.ts",
+      "status": "Shared styles implemented; page qualification pending",
+      "remaining": "Touch and screen-reader qualification with real Wallet create, restore and recovery states; optical invitation shapes remain separate accepted variants."
+    },
+    {
+      "id": "wallet-custody",
+      "layer": "Organism",
+      "name": "Local Wallet setup and recovery",
+      "target": "wallet.html",
+      "tokens": [
+        "semantic.font.display",
+        "semantic.font.body",
+        "semantic.color.text.primary",
+        "semantic.space.group"
+      ],
+      "uses": [
+        "native-field",
+        "native-action",
+        "brand-lockup"
+      ],
+      "states": [
+        "Empty / create / restore / identity review",
+        "Locked / unlocked / busy / failure",
+        "Export requested / backup unverified / backup verified"
+      ],
+      "source": "src/embedded-wallet.ts + wallet.css",
+      "status": "Local custody candidate; submission not connected",
+      "remaining": "Owner-managed backup and restore walkthrough; shared consent adapter and endpoint configuration remain separate. Local identity does not imply membership or service access."
+    },
+    {
+      "id": "service-review",
+      "layer": "Organism",
+      "name": "Reviewed service request and returned work",
+      "target": "service.html?preview=1",
+      "tokens": [
+        "semantic.font.display",
+        "semantic.font.body",
+        "semantic.color.focus.ring",
+        "semantic.color.surface.control"
+      ],
+      "uses": [
+        "field",
+        "action",
+        "brand-lockup"
+      ],
+      "states": [
+        "Explicit fixture / unconfigured provider / immutable review",
+        "Prepared / sending / unknown outcome / same-request retry",
+        "Transport receipt / admission / required decision / partial work / verified deliverable"
+      ],
+      "source": "src/service-review.ts + service.css",
+      "status": "Fixture and source-qualified adapter; live submission gated",
+      "remaining": "Qualified provider handoff and consent adapter; full real encrypted submission and artifact verification walkthrough. No local UI transition implies provider acceptance."
+    }
+  ]
+}

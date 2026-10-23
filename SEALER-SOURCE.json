@@ -1,0 +1,57 @@
+{
+  "status": "Source declaration pinned; runtime not included or configured; live delivery disabled",
+  "package": "@zenithresearch/secs-provider-intake-sealer",
+  "version": "0.1.0",
+  "producerCommit": "a6cda6d99a8f8674c1264dd4258ddf16f9a048fc",
+  "producerPR": "https://github.com/ZenithResearch/secS-magik/pull/302",
+  "declaration": {
+    "source": "browser/intake-sealer/index.d.ts",
+    "gitBlob": "9e75fbefb3d409a4dce44dae55beec6eec59ed03",
+    "sha256": "c596e8e3776c10681fc2b85cb356735b6f7747be3eec6f1db6dfb9a7a9cef35b",
+    "local": "src/vendor/secs-intake-sealer.d.ts"
+  },
+  "inspectedSources": {
+    "browser/intake-sealer/index.js": "e1a95deee9c043d798af33272cf3a89950f6b022",
+    "browser/intake-sealer/package.json": "14f1b77991e450139658741ac4603b5fac775788",
+    "scripts/test-browser-intake-sealer.mjs": "1ef3e138f0efd4ed704b5d4b732ed693cbac61fa"
+  },
+  "qualification": "Pinned producer interface and explicit fixture adapter composition only in this repository. Historical external candidate checks do not qualify this extraction or install an encryption runtime.",
+  "originalReferences": "Source catalog v4 and endpoint contract now exist in Service Management 0.9.0. Anima implements bundle preparation/persistence/independent retry with explicit fixtures. Runtime release, authorization and active endpoints remain unqualified; no live original-file send, chunking or plaintext fallback.",
+  "compatibility": "Additive injected module port; no change to stored drafts, reviewed requests, wallet custody or canonical service contracts.",
+  "consumerValidation": {
+    "scope": "Exact producer declaration pin and typed request/reference ports. Fixture tests exercise failure-closed loader and composition behavior; they do not qualify cryptography or live delivery.",
+    "runtimeIncluded": false,
+    "liveDelivery": "disabled"
+  },
+  "sourceHistory": [
+    {
+      "producerCommit": "31b8e10a097167ee9ff78d7a60bc3c015b121426",
+      "declaration": {
+        "source": "browser/intake-sealer/index.d.ts",
+        "gitBlob": "9e75fbefb3d409a4dce44dae55beec6eec59ed03",
+        "sha256": "c596e8e3776c10681fc2b85cb356735b6f7747be3eec6f1db6dfb9a7a9cef35b",
+        "local": "src/vendor/secs-intake-sealer.d.ts"
+      },
+      "producerReportedBuildDigests": {
+        "wasm": "deb6d41f7227b5e4e18cfe58f6655b696c93a4b0bdcd2b0097eea15961630bad",
+        "generatedJs": "b5a4f3fab7063cca970c8129d60d57a861f3769c70be00987c73aba22d5e7bb7",
+        "SHA256SUMS": "f61634069a94734c60cc131b11de039f82d2a0120a3786800b2684574616217e"
+      },
+      "consumerValidation": {
+        "strictTypeScript": "passed with noUncheckedIndexedAccess",
+        "nativeBuild": "passed",
+        "regressionTests": {
+          "passed": 131,
+          "failed": 0
+        },
+        "scope": "Historical source/interface checks before extraction; no runtime package or live delivery qualification is included here."
+      }
+    }
+  ],
+  "producerReportedReferenceVectorSha256": "bb7e6b159d244cffee2f15005cd880d53aa05acf3780bfdc03548cf27253157c",
+  "runtimeIntegration": {
+    "module": "integrations/reviewed-sealer.js",
+    "status": "Intentionally absent until a supported producer runtime, its provenance and redistribution terms are reviewed.",
+    "policy": "No plaintext fallback, locally invented cryptography, or automatic download of an unreviewed runtime."
+  }
+}

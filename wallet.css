@@ -1,0 +1,14 @@
+/* Wallet layout only: fields, actions and states use the shared native atoms. */
+.wallet-page #service-main{max-width:54rem;margin-inline:auto}
+.wallet-page .service-panel{margin-block:var(--anima-semantic-space-group)}
+.wallet-page h1{font-size:clamp(2rem,5vw,3.4rem)}
+.wallet-page h2{font-size:1.35rem}
+.wallet-page form{display:grid;gap:var(--anima-semantic-space-control);max-width:34rem;margin-block:var(--anima-semantic-space-group)}
+.wallet-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--anima-semantic-space-control)}
+.wallet-key{overflow-wrap:anywhere;font-size:var(--anima-semantic-type-caption)}
+.wallet-page .service-actions{flex-wrap:wrap}
+.wallet-page details{margin-top:var(--anima-semantic-space-group)}
+.wallet-page summary{cursor:pointer;min-height:var(--anima-semantic-size-target)}
+.wallet-page #wallet-notice{min-height:var(--anima-semantic-space-group);color:var(--anima-semantic-color-text-secondary)}
+.wallet-page [aria-busy=true]{cursor:progress}
+@media(max-width:480px){.wallet-page .workspace-header{gap:var(--anima-semantic-space-inline);flex-wrap:wrap}.wallet-page .service-panel{padding:var(--anima-semantic-space-control)}.wallet-page .service-actions>*{flex:1 1 auto}}

@@ -1,0 +1,466 @@
+{
+  "status": "Exact source-qualified 0.9.0: catalog v4 and encrypted request/reference bundles; live actions disabled.",
+  "source": "https://github.com/ZenithResearch/service-management/blob/838520dd679394157ae21517d654cde2124b6b0c/clients/typescript/src/index.ts",
+  "sha256": "bff9fbd3c82d22236de13ef5f77a0515c911b643cd05ad5c862051281f727f5b",
+  "version": "0.9.0",
+  "update": "Explicit source refresh after producer handoff; do not edit the vendored file.",
+  "fixtureSources": [
+    "forbidden.fixture.json",
+    "provider-catalog-v3.fixture.json",
+    "provider-catalog-v2.fixture.json",
+    "intake-pending.fixture.json",
+    "intake-request.fixture.json",
+    "provider-catalog.fixture.json",
+    "request-delivered.fixture.json",
+    "provider-catalog-v4.fixture.json"
+  ],
+  "producerCommit": "838520dd679394157ae21517d654cde2124b6b0c",
+  "gitBlob": "128b8688979a96ae223a93374ee69008d30ca147",
+  "contractBundle": "provider-contract/service.client.v4.schema.json",
+  "qualification": "No live provider or released browser runtime configured. Bundle composition uses explicit fixtures.",
+  "sourceFiles": {
+    "provider-contract/forbidden.fixture.json": {
+      "sha256": "cb4716842de6214cbeff3cf195ebc6fe36d6a76143718323c3d8f701039ea85d",
+      "gitBlob": "cadb9389515e5595236c8406063ba6fadfce416b"
+    },
+    "provider-contract/provider-catalog-v3.fixture.json": {
+      "sha256": "7bf7d8d2d9d8b94f7c052b771b123e59559fe7b8da7e1d25add4b388bd07eb66",
+      "gitBlob": "aa614dd27033b34c9a2288d4bbd8de9ca4d35886"
+    },
+    "provider-contract/provider-catalog-v2.fixture.json": {
+      "sha256": "9aa5c7630e0c7db745534b72e32e23e58c4e7356301caaba93e67c1b578975dc",
+      "gitBlob": "2033c4f608bd22bfdc340a613d874dbe8bb2cc0f"
+    },
+    "provider-contract/intake-pending.fixture.json": {
+      "sha256": "5db8ba5577f2b18bfcbbb8cebc836c89679193967ccd48877422a1fb2eb4638a",
+      "gitBlob": "56b639efa44702fdc6a92b2c1f46073c2ec75d32"
+    },
+    "provider-contract/README.md": {
+      "sha256": "c51ac6f0d5a48a094c3a7e8a835fa01bbfb9285a4317d800c01f72b87112b3c6",
+      "gitBlob": "09370d5303bfe635fb69ed1cf71e30a0455d4bba",
+      "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+    },
+    "provider-contract/intake-request.fixture.json": {
+      "sha256": "dbc6d1d0b062aab9dadcae44b7fb337eb8ed57964f54d513b7b9c46e0542ec33",
+      "gitBlob": "c3ae6a6d1f916aa1f6d426add3775d10de5ba4ac"
+    },
+    "provider-contract/service.client.v4.schema.json": {
+      "sha256": "72291fd95a214970729f21e779421312e739c1eef61f99f1a59e19fb884c40c9",
+      "gitBlob": "f9a541ed1adab03da74780f28a8d4ec8a03c0804",
+      "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+    },
+    "provider-contract/provider-catalog.fixture.json": {
+      "sha256": "f33ee46c48a65e0ce494b8e81ed72ae32de5244ee31a6626e11457d359565f7a",
+      "gitBlob": "c6508cb7011747386fcbf8a5408a83da6f630c41"
+    },
+    "provider-contract/request-delivered.fixture.json": {
+      "sha256": "145796e86295ee94bfff3aecba79027486428a9fc6d412081fc46a4f45fbe8b5",
+      "gitBlob": "d3b389d74e5d0c757f90eb655a4709631dfc6048"
+    },
+    "provider-contract/provider-catalog-v4.fixture.json": {
+      "sha256": "18037eccf81aefa978925cddc592c200e0c5e9154c8fbc3b781485a80f30da22",
+      "gitBlob": "129c3018db87e6e6856a1af2d600b05e64720497",
+      "commit": "a3d6031f9f4abf412523ed30fe2e1bbca0590f85"
+    },
+    "provider-contract/gateway.reference-object.v1.schema.json": {
+      "sha256": "993596e64994f116ef049f7543d895fab487cdacbb4c46f637879d04d3530832",
+      "gitBlob": "aa40f0c1b70ed892101004734bf3d5c6dd8d2e05",
+      "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+    },
+    "provider-contract/encrypted-reference-delivery.md": {
+      "sha256": "20c7ff890e29ea8f234b66cc7710a637fceaa176141acba680177b8eac657ec4",
+      "gitBlob": "a12dbb2fcd47ae71a471e3dbc094998fdbb19865",
+      "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+    },
+    "provider-contract/history/provider-catalog-v4.retention-604800.fixture.json": {
+      "sha256": "18037eccf81aefa978925cddc592c200e0c5e9154c8fbc3b781485a80f30da22",
+      "gitBlob": "129c3018db87e6e6856a1af2d600b05e64720497",
+      "commit": "9868e4e2b6eec0c7e98aa4674b997fe6bd8677d4"
+    },
+    "provider-contract/history/provider-catalog-v4.retention-86400.superseded.fixture.json": {
+      "sha256": "75e0c6e18f75307f189566a09cf08e3ae834f4b2649e91684ab74d3512c23888",
+      "gitBlob": "88a8d5cd4f1dead76145b33c1b30efc2268f12c2",
+      "commit": "360e8f40f69a015f1cf8e02f3e845eca4c1a8a88"
+    }
+  },
+  "fixtureCommit": "a3d6031f9f4abf412523ed30fe2e1bbca0590f85",
+  "producerCorrection": "Current v4 request/reference source profile restored to604800 seconds. Exact blob129c301 matches earlier qualified seven-day bytes. Intermediate24h source archived as superseded. SDK0.9.0 unchanged; generic decoders and saved state untouched. Current API and2026-04-01 vendor changelog confirm24h default/seven-day maximum.",
+  "sourceHistory": [
+    {
+      "version": "0.8.1",
+      "producerCommit": "1aa13909a65c9615eb5c91cc9f7bd1b986f5ee37",
+      "gitBlob": "b5d467899f4de2000e388738afc6feabeb58476d",
+      "sha256": "4d39046a29d58721669d5aae0aeca4dff8e0625090593fd38226fbddee49182f",
+      "sourceFiles": {
+        "provider-contract/forbidden.fixture.json": {
+          "sha256": "cb4716842de6214cbeff3cf195ebc6fe36d6a76143718323c3d8f701039ea85d",
+          "gitBlob": "cadb9389515e5595236c8406063ba6fadfce416b"
+        },
+        "provider-contract/provider-catalog-v3.fixture.json": {
+          "sha256": "7bf7d8d2d9d8b94f7c052b771b123e59559fe7b8da7e1d25add4b388bd07eb66",
+          "gitBlob": "aa614dd27033b34c9a2288d4bbd8de9ca4d35886"
+        },
+        "provider-contract/provider-catalog-v2.fixture.json": {
+          "sha256": "9aa5c7630e0c7db745534b72e32e23e58c4e7356301caaba93e67c1b578975dc",
+          "gitBlob": "2033c4f608bd22bfdc340a613d874dbe8bb2cc0f"
+        },
+        "provider-contract/intake-pending.fixture.json": {
+          "sha256": "5db8ba5577f2b18bfcbbb8cebc836c89679193967ccd48877422a1fb2eb4638a",
+          "gitBlob": "56b639efa44702fdc6a92b2c1f46073c2ec75d32"
+        },
+        "provider-contract/README.md": {
+          "sha256": "c51ac6f0d5a48a094c3a7e8a835fa01bbfb9285a4317d800c01f72b87112b3c6",
+          "gitBlob": "09370d5303bfe635fb69ed1cf71e30a0455d4bba",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/intake-request.fixture.json": {
+          "sha256": "dbc6d1d0b062aab9dadcae44b7fb337eb8ed57964f54d513b7b9c46e0542ec33",
+          "gitBlob": "c3ae6a6d1f916aa1f6d426add3775d10de5ba4ac"
+        },
+        "provider-contract/service.client.v4.schema.json": {
+          "sha256": "72291fd95a214970729f21e779421312e739c1eef61f99f1a59e19fb884c40c9",
+          "gitBlob": "f9a541ed1adab03da74780f28a8d4ec8a03c0804",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/provider-catalog.fixture.json": {
+          "sha256": "f33ee46c48a65e0ce494b8e81ed72ae32de5244ee31a6626e11457d359565f7a",
+          "gitBlob": "c6508cb7011747386fcbf8a5408a83da6f630c41"
+        },
+        "provider-contract/request-delivered.fixture.json": {
+          "sha256": "145796e86295ee94bfff3aecba79027486428a9fc6d412081fc46a4f45fbe8b5",
+          "gitBlob": "d3b389d74e5d0c757f90eb655a4709631dfc6048"
+        },
+        "provider-contract/provider-catalog-v4.fixture.json": {
+          "sha256": "b9e9f6e4c74278bfd2ea33feeaf33757b3c1330c68ac649509f1e0b3e35c6231",
+          "gitBlob": "15171e52d10717d00b98d81a1cca63bc19f1143a",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/gateway.reference-object.v1.schema.json": {
+          "sha256": "993596e64994f116ef049f7543d895fab487cdacbb4c46f637879d04d3530832",
+          "gitBlob": "aa40f0c1b70ed892101004734bf3d5c6dd8d2e05",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/encrypted-reference-delivery.md": {
+          "sha256": "58d20ffa38b1cb31ca9f4611ce6c508ec0ae390a84bac0c0bf141acac914aa3f",
+          "gitBlob": "f3d2733c506b10c498db905127c633c6ae891563",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        }
+      }
+    },
+    {
+      "version": "0.9.0",
+      "producerCommit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f",
+      "gitBlob": "128b8688979a96ae223a93374ee69008d30ca147",
+      "sha256": "bff9fbd3c82d22236de13ef5f77a0515c911b643cd05ad5c862051281f727f5b",
+      "sourceFiles": {
+        "provider-contract/forbidden.fixture.json": {
+          "sha256": "cb4716842de6214cbeff3cf195ebc6fe36d6a76143718323c3d8f701039ea85d",
+          "gitBlob": "cadb9389515e5595236c8406063ba6fadfce416b"
+        },
+        "provider-contract/provider-catalog-v3.fixture.json": {
+          "sha256": "7bf7d8d2d9d8b94f7c052b771b123e59559fe7b8da7e1d25add4b388bd07eb66",
+          "gitBlob": "aa614dd27033b34c9a2288d4bbd8de9ca4d35886"
+        },
+        "provider-contract/provider-catalog-v2.fixture.json": {
+          "sha256": "9aa5c7630e0c7db745534b72e32e23e58c4e7356301caaba93e67c1b578975dc",
+          "gitBlob": "2033c4f608bd22bfdc340a613d874dbe8bb2cc0f"
+        },
+        "provider-contract/intake-pending.fixture.json": {
+          "sha256": "5db8ba5577f2b18bfcbbb8cebc836c89679193967ccd48877422a1fb2eb4638a",
+          "gitBlob": "56b639efa44702fdc6a92b2c1f46073c2ec75d32"
+        },
+        "provider-contract/README.md": {
+          "sha256": "c51ac6f0d5a48a094c3a7e8a835fa01bbfb9285a4317d800c01f72b87112b3c6",
+          "gitBlob": "09370d5303bfe635fb69ed1cf71e30a0455d4bba",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/intake-request.fixture.json": {
+          "sha256": "dbc6d1d0b062aab9dadcae44b7fb337eb8ed57964f54d513b7b9c46e0542ec33",
+          "gitBlob": "c3ae6a6d1f916aa1f6d426add3775d10de5ba4ac"
+        },
+        "provider-contract/service.client.v4.schema.json": {
+          "sha256": "72291fd95a214970729f21e779421312e739c1eef61f99f1a59e19fb884c40c9",
+          "gitBlob": "f9a541ed1adab03da74780f28a8d4ec8a03c0804",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/provider-catalog.fixture.json": {
+          "sha256": "f33ee46c48a65e0ce494b8e81ed72ae32de5244ee31a6626e11457d359565f7a",
+          "gitBlob": "c6508cb7011747386fcbf8a5408a83da6f630c41"
+        },
+        "provider-contract/request-delivered.fixture.json": {
+          "sha256": "145796e86295ee94bfff3aecba79027486428a9fc6d412081fc46a4f45fbe8b5",
+          "gitBlob": "d3b389d74e5d0c757f90eb655a4709631dfc6048"
+        },
+        "provider-contract/provider-catalog-v4.fixture.json": {
+          "sha256": "18037eccf81aefa978925cddc592c200e0c5e9154c8fbc3b781485a80f30da22",
+          "gitBlob": "129c3018db87e6e6856a1af2d600b05e64720497",
+          "commit": "838520dd679394157ae21517d654cde2124b6b0c"
+        },
+        "provider-contract/gateway.reference-object.v1.schema.json": {
+          "sha256": "993596e64994f116ef049f7543d895fab487cdacbb4c46f637879d04d3530832",
+          "gitBlob": "aa40f0c1b70ed892101004734bf3d5c6dd8d2e05",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/encrypted-reference-delivery.md": {
+          "sha256": "20c7ff890e29ea8f234b66cc7710a637fceaa176141acba680177b8eac657ec4",
+          "gitBlob": "a12dbb2fcd47ae71a471e3dbc094998fdbb19865",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        }
+      }
+    },
+    {
+      "version": "0.9.0",
+      "producerCommit": "838520dd679394157ae21517d654cde2124b6b0c",
+      "fixtureCommit": "f5067616f244e87bceb4b66f60e370bbe58fea2e",
+      "gitBlob": "128b8688979a96ae223a93374ee69008d30ca147",
+      "sha256": "bff9fbd3c82d22236de13ef5f77a0515c911b643cd05ad5c862051281f727f5b",
+      "sourceFiles": {
+        "provider-contract/forbidden.fixture.json": {
+          "sha256": "cb4716842de6214cbeff3cf195ebc6fe36d6a76143718323c3d8f701039ea85d",
+          "gitBlob": "cadb9389515e5595236c8406063ba6fadfce416b"
+        },
+        "provider-contract/provider-catalog-v3.fixture.json": {
+          "sha256": "7bf7d8d2d9d8b94f7c052b771b123e59559fe7b8da7e1d25add4b388bd07eb66",
+          "gitBlob": "aa614dd27033b34c9a2288d4bbd8de9ca4d35886"
+        },
+        "provider-contract/provider-catalog-v2.fixture.json": {
+          "sha256": "9aa5c7630e0c7db745534b72e32e23e58c4e7356301caaba93e67c1b578975dc",
+          "gitBlob": "2033c4f608bd22bfdc340a613d874dbe8bb2cc0f"
+        },
+        "provider-contract/intake-pending.fixture.json": {
+          "sha256": "5db8ba5577f2b18bfcbbb8cebc836c89679193967ccd48877422a1fb2eb4638a",
+          "gitBlob": "56b639efa44702fdc6a92b2c1f46073c2ec75d32"
+        },
+        "provider-contract/README.md": {
+          "sha256": "c51ac6f0d5a48a094c3a7e8a835fa01bbfb9285a4317d800c01f72b87112b3c6",
+          "gitBlob": "09370d5303bfe635fb69ed1cf71e30a0455d4bba",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/intake-request.fixture.json": {
+          "sha256": "dbc6d1d0b062aab9dadcae44b7fb337eb8ed57964f54d513b7b9c46e0542ec33",
+          "gitBlob": "c3ae6a6d1f916aa1f6d426add3775d10de5ba4ac"
+        },
+        "provider-contract/service.client.v4.schema.json": {
+          "sha256": "72291fd95a214970729f21e779421312e739c1eef61f99f1a59e19fb884c40c9",
+          "gitBlob": "f9a541ed1adab03da74780f28a8d4ec8a03c0804",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/provider-catalog.fixture.json": {
+          "sha256": "f33ee46c48a65e0ce494b8e81ed72ae32de5244ee31a6626e11457d359565f7a",
+          "gitBlob": "c6508cb7011747386fcbf8a5408a83da6f630c41"
+        },
+        "provider-contract/request-delivered.fixture.json": {
+          "sha256": "145796e86295ee94bfff3aecba79027486428a9fc6d412081fc46a4f45fbe8b5",
+          "gitBlob": "d3b389d74e5d0c757f90eb655a4709631dfc6048"
+        },
+        "provider-contract/provider-catalog-v4.fixture.json": {
+          "sha256": "18037eccf81aefa978925cddc592c200e0c5e9154c8fbc3b781485a80f30da22",
+          "gitBlob": "129c3018db87e6e6856a1af2d600b05e64720497",
+          "commit": "838520dd679394157ae21517d654cde2124b6b0c"
+        },
+        "provider-contract/gateway.reference-object.v1.schema.json": {
+          "sha256": "993596e64994f116ef049f7543d895fab487cdacbb4c46f637879d04d3530832",
+          "gitBlob": "aa40f0c1b70ed892101004734bf3d5c6dd8d2e05",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/encrypted-reference-delivery.md": {
+          "sha256": "20c7ff890e29ea8f234b66cc7710a637fceaa176141acba680177b8eac657ec4",
+          "gitBlob": "a12dbb2fcd47ae71a471e3dbc094998fdbb19865",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        }
+      }
+    },
+    {
+      "version": "0.9.0",
+      "producerCommit": "838520dd679394157ae21517d654cde2124b6b0c",
+      "fixtureCommit": "a495ae3d4f3abbcf8c05116ec49fa5d9dfa5bf1c",
+      "gitBlob": "128b8688979a96ae223a93374ee69008d30ca147",
+      "sha256": "bff9fbd3c82d22236de13ef5f77a0515c911b643cd05ad5c862051281f727f5b",
+      "sourceFiles": {
+        "provider-contract/forbidden.fixture.json": {
+          "sha256": "cb4716842de6214cbeff3cf195ebc6fe36d6a76143718323c3d8f701039ea85d",
+          "gitBlob": "cadb9389515e5595236c8406063ba6fadfce416b"
+        },
+        "provider-contract/provider-catalog-v3.fixture.json": {
+          "sha256": "7bf7d8d2d9d8b94f7c052b771b123e59559fe7b8da7e1d25add4b388bd07eb66",
+          "gitBlob": "aa614dd27033b34c9a2288d4bbd8de9ca4d35886"
+        },
+        "provider-contract/provider-catalog-v2.fixture.json": {
+          "sha256": "9aa5c7630e0c7db745534b72e32e23e58c4e7356301caaba93e67c1b578975dc",
+          "gitBlob": "2033c4f608bd22bfdc340a613d874dbe8bb2cc0f"
+        },
+        "provider-contract/intake-pending.fixture.json": {
+          "sha256": "5db8ba5577f2b18bfcbbb8cebc836c89679193967ccd48877422a1fb2eb4638a",
+          "gitBlob": "56b639efa44702fdc6a92b2c1f46073c2ec75d32"
+        },
+        "provider-contract/README.md": {
+          "sha256": "c51ac6f0d5a48a094c3a7e8a835fa01bbfb9285a4317d800c01f72b87112b3c6",
+          "gitBlob": "09370d5303bfe635fb69ed1cf71e30a0455d4bba",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/intake-request.fixture.json": {
+          "sha256": "dbc6d1d0b062aab9dadcae44b7fb337eb8ed57964f54d513b7b9c46e0542ec33",
+          "gitBlob": "c3ae6a6d1f916aa1f6d426add3775d10de5ba4ac"
+        },
+        "provider-contract/service.client.v4.schema.json": {
+          "sha256": "72291fd95a214970729f21e779421312e739c1eef61f99f1a59e19fb884c40c9",
+          "gitBlob": "f9a541ed1adab03da74780f28a8d4ec8a03c0804",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/provider-catalog.fixture.json": {
+          "sha256": "f33ee46c48a65e0ce494b8e81ed72ae32de5244ee31a6626e11457d359565f7a",
+          "gitBlob": "c6508cb7011747386fcbf8a5408a83da6f630c41"
+        },
+        "provider-contract/request-delivered.fixture.json": {
+          "sha256": "145796e86295ee94bfff3aecba79027486428a9fc6d412081fc46a4f45fbe8b5",
+          "gitBlob": "d3b389d74e5d0c757f90eb655a4709631dfc6048"
+        },
+        "provider-contract/provider-catalog-v4.fixture.json": {
+          "sha256": "75e0c6e18f75307f189566a09cf08e3ae834f4b2649e91684ab74d3512c23888",
+          "gitBlob": "88a8d5cd4f1dead76145b33c1b30efc2268f12c2",
+          "commit": "a495ae3d4f3abbcf8c05116ec49fa5d9dfa5bf1c"
+        },
+        "provider-contract/gateway.reference-object.v1.schema.json": {
+          "sha256": "993596e64994f116ef049f7543d895fab487cdacbb4c46f637879d04d3530832",
+          "gitBlob": "aa40f0c1b70ed892101004734bf3d5c6dd8d2e05",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/encrypted-reference-delivery.md": {
+          "sha256": "20c7ff890e29ea8f234b66cc7710a637fceaa176141acba680177b8eac657ec4",
+          "gitBlob": "a12dbb2fcd47ae71a471e3dbc094998fdbb19865",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        }
+      }
+    },
+    {
+      "version": "0.9.0",
+      "fixtureCommit": "9868e4e2b6eec0c7e98aa4674b997fe6bd8677d4",
+      "sourceFiles": {
+        "provider-contract/forbidden.fixture.json": {
+          "sha256": "cb4716842de6214cbeff3cf195ebc6fe36d6a76143718323c3d8f701039ea85d",
+          "gitBlob": "cadb9389515e5595236c8406063ba6fadfce416b"
+        },
+        "provider-contract/provider-catalog-v3.fixture.json": {
+          "sha256": "7bf7d8d2d9d8b94f7c052b771b123e59559fe7b8da7e1d25add4b388bd07eb66",
+          "gitBlob": "aa614dd27033b34c9a2288d4bbd8de9ca4d35886"
+        },
+        "provider-contract/provider-catalog-v2.fixture.json": {
+          "sha256": "9aa5c7630e0c7db745534b72e32e23e58c4e7356301caaba93e67c1b578975dc",
+          "gitBlob": "2033c4f608bd22bfdc340a613d874dbe8bb2cc0f"
+        },
+        "provider-contract/intake-pending.fixture.json": {
+          "sha256": "5db8ba5577f2b18bfcbbb8cebc836c89679193967ccd48877422a1fb2eb4638a",
+          "gitBlob": "56b639efa44702fdc6a92b2c1f46073c2ec75d32"
+        },
+        "provider-contract/README.md": {
+          "sha256": "c51ac6f0d5a48a094c3a7e8a835fa01bbfb9285a4317d800c01f72b87112b3c6",
+          "gitBlob": "09370d5303bfe635fb69ed1cf71e30a0455d4bba",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/intake-request.fixture.json": {
+          "sha256": "dbc6d1d0b062aab9dadcae44b7fb337eb8ed57964f54d513b7b9c46e0542ec33",
+          "gitBlob": "c3ae6a6d1f916aa1f6d426add3775d10de5ba4ac"
+        },
+        "provider-contract/service.client.v4.schema.json": {
+          "sha256": "72291fd95a214970729f21e779421312e739c1eef61f99f1a59e19fb884c40c9",
+          "gitBlob": "f9a541ed1adab03da74780f28a8d4ec8a03c0804",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/provider-catalog.fixture.json": {
+          "sha256": "f33ee46c48a65e0ce494b8e81ed72ae32de5244ee31a6626e11457d359565f7a",
+          "gitBlob": "c6508cb7011747386fcbf8a5408a83da6f630c41"
+        },
+        "provider-contract/request-delivered.fixture.json": {
+          "sha256": "145796e86295ee94bfff3aecba79027486428a9fc6d412081fc46a4f45fbe8b5",
+          "gitBlob": "d3b389d74e5d0c757f90eb655a4709631dfc6048"
+        },
+        "provider-contract/provider-catalog-v4.fixture.json": {
+          "sha256": "18037eccf81aefa978925cddc592c200e0c5e9154c8fbc3b781485a80f30da22",
+          "gitBlob": "129c3018db87e6e6856a1af2d600b05e64720497",
+          "commit": "9868e4e2b6eec0c7e98aa4674b997fe6bd8677d4"
+        },
+        "provider-contract/gateway.reference-object.v1.schema.json": {
+          "sha256": "993596e64994f116ef049f7543d895fab487cdacbb4c46f637879d04d3530832",
+          "gitBlob": "aa40f0c1b70ed892101004734bf3d5c6dd8d2e05",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/encrypted-reference-delivery.md": {
+          "sha256": "20c7ff890e29ea8f234b66cc7710a637fceaa176141acba680177b8eac657ec4",
+          "gitBlob": "a12dbb2fcd47ae71a471e3dbc094998fdbb19865",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        }
+      },
+      "note": "Previous seven-day example retained for historical decoding and outbox compatibility; not the current released provider profile."
+    },
+    {
+      "version": "0.9.0",
+      "fixtureCommit": "360e8f40f69a015f1cf8e02f3e845eca4c1a8a88",
+      "sourceFiles": {
+        "provider-contract/forbidden.fixture.json": {
+          "sha256": "cb4716842de6214cbeff3cf195ebc6fe36d6a76143718323c3d8f701039ea85d",
+          "gitBlob": "cadb9389515e5595236c8406063ba6fadfce416b"
+        },
+        "provider-contract/provider-catalog-v3.fixture.json": {
+          "sha256": "7bf7d8d2d9d8b94f7c052b771b123e59559fe7b8da7e1d25add4b388bd07eb66",
+          "gitBlob": "aa614dd27033b34c9a2288d4bbd8de9ca4d35886"
+        },
+        "provider-contract/provider-catalog-v2.fixture.json": {
+          "sha256": "9aa5c7630e0c7db745534b72e32e23e58c4e7356301caaba93e67c1b578975dc",
+          "gitBlob": "2033c4f608bd22bfdc340a613d874dbe8bb2cc0f"
+        },
+        "provider-contract/intake-pending.fixture.json": {
+          "sha256": "5db8ba5577f2b18bfcbbb8cebc836c89679193967ccd48877422a1fb2eb4638a",
+          "gitBlob": "56b639efa44702fdc6a92b2c1f46073c2ec75d32"
+        },
+        "provider-contract/README.md": {
+          "sha256": "c51ac6f0d5a48a094c3a7e8a835fa01bbfb9285a4317d800c01f72b87112b3c6",
+          "gitBlob": "09370d5303bfe635fb69ed1cf71e30a0455d4bba",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/intake-request.fixture.json": {
+          "sha256": "dbc6d1d0b062aab9dadcae44b7fb337eb8ed57964f54d513b7b9c46e0542ec33",
+          "gitBlob": "c3ae6a6d1f916aa1f6d426add3775d10de5ba4ac"
+        },
+        "provider-contract/service.client.v4.schema.json": {
+          "sha256": "72291fd95a214970729f21e779421312e739c1eef61f99f1a59e19fb884c40c9",
+          "gitBlob": "f9a541ed1adab03da74780f28a8d4ec8a03c0804",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/provider-catalog.fixture.json": {
+          "sha256": "f33ee46c48a65e0ce494b8e81ed72ae32de5244ee31a6626e11457d359565f7a",
+          "gitBlob": "c6508cb7011747386fcbf8a5408a83da6f630c41"
+        },
+        "provider-contract/request-delivered.fixture.json": {
+          "sha256": "145796e86295ee94bfff3aecba79027486428a9fc6d412081fc46a4f45fbe8b5",
+          "gitBlob": "d3b389d74e5d0c757f90eb655a4709631dfc6048"
+        },
+        "provider-contract/provider-catalog-v4.fixture.json": {
+          "sha256": "75e0c6e18f75307f189566a09cf08e3ae834f4b2649e91684ab74d3512c23888",
+          "gitBlob": "88a8d5cd4f1dead76145b33c1b30efc2268f12c2",
+          "commit": "360e8f40f69a015f1cf8e02f3e845eca4c1a8a88"
+        },
+        "provider-contract/gateway.reference-object.v1.schema.json": {
+          "sha256": "993596e64994f116ef049f7543d895fab487cdacbb4c46f637879d04d3530832",
+          "gitBlob": "aa40f0c1b70ed892101004734bf3d5c6dd8d2e05",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/encrypted-reference-delivery.md": {
+          "sha256": "20c7ff890e29ea8f234b66cc7710a637fceaa176141acba680177b8eac657ec4",
+          "gitBlob": "a12dbb2fcd47ae71a471e3dbc094998fdbb19865",
+          "commit": "7bbb0ef6a5f3e14070f74873873a212bfb57072f"
+        },
+        "provider-contract/history/provider-catalog-v4.retention-604800.fixture.json": {
+          "sha256": "18037eccf81aefa978925cddc592c200e0c5e9154c8fbc3b781485a80f30da22",
+          "gitBlob": "129c3018db87e6e6856a1af2d600b05e64720497",
+          "commit": "9868e4e2b6eec0c7e98aa4674b997fe6bd8677d4"
+        }
+      },
+      "note": "Intermediate24h example superseded by corrected producer a3d6031; retain only as historical evidence. No saved state or SDK decoder changed."
+    }
+  ],
+  "latestProducerCheckedCommit": "a3d6031f9f4abf412523ed30fe2e1bbca0590f85",
+  "primarySources": [
+    "https://vercel.com/docs/queues/api",
+    "https://vercel.com/changelog/queues-now-supports-7-day-ttl"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "product": "Castalia Wallet",
+  "scope": "Local embedded custody candidate only; no Service consent facade",
+  "revision": "d6f5b6ddc0f7cb7a892c65bc9d51a7973b498ef9",
+  "repository": "https://github.com/ZenithResearch/castalia-wallet",
+  "format": "castalia.wallet-local.v1 (unchanged Rust-produced encrypted snapshot)",
+  "recovery": "castalia.wallet-custody.v1 in .castalia-recovery; signing identity only",
+  "build": "wasm-pack build crates/castalia-wallet-core --target web --release --no-opt --out-dir ../../wallet-sdk --out-name castalia_wallet_core -- --locked",
+  "qualification": "Local consumer tests and browser review required. Not a signed release or custody security qualification.",
+  "sources": [
+    {
+      "name": "Cargo.lock",
+      "sha256": "7f5b976bf78a15870e698c0dab8dae608274dfcc02b4f233558e634143f7424f"
+    },
+    {
+      "name": "crates/castalia-wallet-core/src/lib.rs",
+      "sha256": "f7312def7cd95140fb0ca54a1fe7e0d844b0686ef12bb676be76f87bfc6bcfbc"
+    },
+    {
+      "name": "crates/castalia-wallet-core/src/recovery_session.rs",
+      "sha256": "5ee4c1ce474cc56e39eaeb00eeb88864b476b2b04bf122277c72e16f7fc9d160"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "castalia_wallet_core.js",
+      "sha256": "fa372a1d2f984537778b022672f7ab26ddc49671ddc66e83141c968ec2d06668"
+    },
+    {
+      "name": "castalia_wallet_core.d.ts",
+      "sha256": "2db1077375c205a1deb79c5a5af5b01dc82ffcc6d173956f698b07ca08cb726a"
+    },
+    {
+      "name": "castalia_wallet_core_bg.wasm",
+      "sha256": "2b91c9a90dbd9edda08f684e4626b767eabfa8f2f03bbb39eeed078d3d194260"
+    },
+    {
+      "name": "LICENSE",
+      "sha256": "20f4d915bd7924e095ee0c532941c5362828c4049371e0efa5b8ab597c9fa2c2"
+    }
+  ]
+}

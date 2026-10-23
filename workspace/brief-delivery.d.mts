@@ -1,0 +1,10 @@
+export type BriefReference={id:string;name:string;kind:'file'|'link';url?:string;type?:string;size?:number;sha256?:string};
+export type BriefDocument={schema:'anima.brand-brief.v1'|'anima.brand-brief.v2';peopleEntries?:string[];id:string;createdAt:string;brand:{name?:string;description?:string;website?:string};answers:Record<string,string>;foundations:{id:string;notes:string;referenceIds:string[]}[];references:BriefReference[]};
+export type BriefFile={id:string;blob:Blob};
+export const BRIEF_SCHEMA:'anima.brand-brief.v1';
+export const BRIEF_SCHEMA_V2:'anima.brand-brief.v2';
+export const LIMITS:Readonly<{files:number;each:number;total:number;references:number}>;
+export function validateBrief(packet:unknown):BriefDocument;
+export function sha256(bytes:BufferSource):Promise<string>;
+export function verifyBriefFiles(packet:BriefDocument,files:BriefFile[]):Promise<BriefDocument>;
+export function assertPrivateRoom(input:{roomId:string;expectedRoomId:string;sender:string;recipient:string;members:string[];encryption:string;joined:boolean}):void;

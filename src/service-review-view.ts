@@ -1,0 +1,12 @@
+import {escape as e} from './page.js';
+import type {AccessState} from './service-adapter.js';
+import {displayState,type SavedReview} from './service-review-model.js';
+export function accessView(access:AccessState,matrix=false,custodyConnected=false):string{
+ const rows=[['Local identity',access.identity],['Enrollment',access.enrollment.replaceAll('_',' ')],['Membership',access.membership],['Web session',access.session],['Workspace access',access.workspace],['Matrix',matrix?'Connected separately':'Separate connection']];
+ return `<details class="service-access"><summary>Identity & connections <span aria-hidden="true">＋</span></summary><dl>${rows.map(([label,value])=>`<div><dt>${e(label)}</dt><dd>${e(value)}</dd></div>`).join('')}</dl><p class="form-note">Local identity and messaging do not grant service access. ${custodyConnected?'The candidate Wallet owns consent and signing. Membership and authority must still be verified by the receiver.':'The shared custody adapter is not connected here; no keys are created.'}</p></details>`;
+}
+export function requestSummary(review:SavedReview):string{
+ const service=review.catalog.services.find(s=>s.id===review.request.service.service_id);
+ return `<a class="service-request-row" href="service.html?draft=${encodeURIComponent(review.draftId)}&request=${encodeURIComponent(review.request.request_id)}"><span><strong>${e(service?.name||review.request.service.service_id)}</strong><small>${e(review.catalog.provider.name)}</small></span><span>${e(displayState(review))} <span aria-hidden="true">↗</span></span></a>`;
+}
+export const sourceOverview=(review:SavedReview)=>`<details class="service-source"><summary>Reviewed material <span>${review.brief.references.length} references</span></summary><dl>${Object.entries(review.brief.answers).map(([key,value])=>`<div><dt>${e(key)}</dt><dd>${e(value)}</dd></div>`).join('')}</dl><ul>${review.brief.references.map(r=>`<li>${r.kind==='link'?`<a href="${e(r.url!)}" target="_blank" rel="noopener noreferrer">${e(r.name)} ↗</a>`:e(r.name)} <small>${r.kind==='file'?`${Math.ceil(r.size!/1024)} KB · original file`:'Link'}</small></li>`).join('')}</ul>${review.brief.foundations.length?`<h3>Foundation direction</h3>${review.brief.foundations.map(f=>`<h4>${e(f.id)}</h4><p>${e(f.notes||'No additional direction.')}</p><ul>${f.referenceIds.map(id=>`<li>${e(review.brief.references.find(r=>r.id===id)?.name||id)}</li>`).join('')}</ul>`).join('')}`:''}<p class="form-note">This snapshot is fixed. Later edits remain in your workspace and need a new review.</p></details>`;

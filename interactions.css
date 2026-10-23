@@ -1,0 +1,87 @@
+/* Recovered from the endorsed Inner-water atoms, scoped to the native library. */
+:root{--anima-ease:var(--anima-semantic-motion-ease);--anima-focus:var(--anima-semantic-color-focus-ring);--anima-pearl:var(--anima-semantic-color-status-success)}
+anima-surface{display:inline-block;max-width:100%;--glint-x:55%;--glint-y:20%}anima-orbs{display:block;min-width:0}
+.anima-arrow{display:block;width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+.surface-action{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-width:216px;min-height:58px;max-width:100%;padding:10px 12px 10px 24px;border:1px solid #e6dcee70;border-radius:5px 30px 30px 5px;background:linear-gradient(130deg,var(--anima-semantic-color-action-light),var(--anima-semantic-color-action-light-shade) 58%,#dde5e7);color:var(--anima-component-action-foreground);font:500 14px/1.4 manrope,sans-serif;letter-spacing:-.025em;text-decoration:none;box-shadow:inset 0 1px 0 #fff9,inset 0 -2px 4px #67527a30,0 9px 22px #08050e40;transition:box-shadow var(--anima-semantic-motion-response),transform var(--anima-semantic-motion-response) var(--anima-ease);overflow:hidden;touch-action:manipulation}
+.surface-action::before{content:'';position:absolute;z-index:-1;inset:-50%;background:radial-gradient(ellipse at var(--glint-x) var(--glint-y),#eeffffd0,transparent 27%);opacity:.3;transition:opacity var(--anima-semantic-motion-response)}
+.surface-action:not(:disabled):hover::before,.surface-action:focus-visible::before{opacity:1}.surface-action:not(:disabled):hover{box-shadow:inset 0 1px 0 #fff,0 0 28px #bca5de28,0 12px 25px #08050e40}.surface-action:not(:disabled):active{transform:translateY(1px)}
+.surface-action[data-tone=depth]{background:linear-gradient(145deg,var(--anima-semantic-color-action-depth),#2c1d35 60%,#392941);color:var(--ink);border-color:#cfbbe560;box-shadow:inset 0 1px 0 #dfd1f136,0 9px 22px #08050e50}
+.arrow-lens{width:36px;height:36px;position:relative;display:grid;place-items:center;flex:none;border-radius:50%;background:radial-gradient(ellipse at 35% 20%,#faf7ff,#bfb6cd 30%,#53445f 61%,#d9d2e4 74%,#7b6b8c);box-shadow:inset 0 0 1px 1px #f9f2ff80,0 3px 6px #3827433d;color:#f9f4fc;transition:transform var(--anima-semantic-motion-float) var(--anima-ease)}
+.surface-action:not(:disabled):hover .arrow-lens,.surface-action:focus-visible .arrow-lens{transform:rotate(12deg)}
+.surface-action:disabled,.orb-button:disabled{opacity:.4;cursor:default}.surface-action:focus-visible,.orb-button:focus-visible{outline:2px solid var(--anima-focus);outline-offset:6px}
+/* Shared liquid action: a stable glass capsule, recovered lens and glint. */
+anima-surface>.liquid-button{position:relative;isolation:isolate;overflow:hidden;gap:24px;padding:10px 12px 10px 24px}anima-surface>.liquid-button::before{content:'';position:absolute;z-index:-1;inset:-50%;background:radial-gradient(ellipse at var(--glint-x) var(--glint-y),#cfc1e126,transparent 35%);opacity:.2;transition:opacity var(--anima-semantic-motion-response)}anima-surface>.liquid-button:not(:disabled):hover::before,anima-surface>.liquid-button:focus-visible::before{opacity:1}anima-surface>.liquid-button:not(:disabled):hover .arrow-lens,anima-surface>.liquid-button:focus-visible .arrow-lens{transform:rotate(12deg)}
+.surface-link{position:relative;display:inline-flex;align-items:center;gap:24px;min-height:44px;padding:8px 0 12px;color:var(--ink);font-size:13px;text-decoration:none;touch-action:manipulation}
+.arrow-flight{display:inline-flex;color:var(--anima-pearl);transition:transform var(--anima-semantic-motion-float) var(--anima-ease)}.arrow-waterline{position:absolute;bottom:0;left:0;width:100%;height:9px;fill:none;stroke:#baafcd8c;stroke-width:1;pointer-events:none;transition:stroke var(--anima-semantic-motion-response),filter var(--anima-semantic-motion-response)}
+.surface-link:hover .arrow-flight,.surface-link:focus-visible .arrow-flight{transform:translate(3px,-3px)}.surface-link:hover .arrow-waterline,.surface-link:focus-visible .arrow-waterline{stroke:var(--anima-pearl);filter:drop-shadow(0 0 4px #c6e8e666)}.surface-link:focus-visible{outline:2px solid var(--anima-focus);outline-offset:5px}
+anima-surface>.text-link{position:relative;overflow:visible}anima-surface>.text-link .arrow-waterline{bottom:-2px}anima-surface>.text-link:hover .arrow-flight,anima-surface>.text-link:focus-visible .arrow-flight{transform:translate(3px,-3px)}anima-surface>.text-link:hover .arrow-waterline,anima-surface>.text-link:focus-visible .arrow-waterline{stroke:var(--anima-pearl);filter:drop-shadow(0 0 4px #c6e8e666)}
+.orb-options{display:flex;gap:24px 36px;flex-wrap:wrap}.orb-choice{display:flex!important;align-items:center;gap:14px;position:relative;cursor:pointer;min-height:64px;margin:0!important}.orb-choice input,.orb-switch input{position:absolute;width:1px;height:1px;opacity:0;clip-path:inset(50%)}
+.orb-bulb{display:block;flex:none;width:48px;height:48px;border-radius:49% 51% 45% 55%;background:radial-gradient(ellipse at 30% 20%,#f0f6fc,#b2a7c4 35%,#4a3a55 60%,#dcd5eb 84%,#796a8b);box-shadow:inset 0 0 1px 1px #e2d5ee6e,0 5px 12px #0d081940;transition:transform var(--anima-semantic-motion-response) var(--anima-ease),box-shadow var(--anima-semantic-motion-response)}
+.orb-bulb[data-material=glass]{background:radial-gradient(ellipse at 30% 20%,#e0fafa6e,#cebee218 40%,#b9d6e005 60%,#e0f2fa44 91%);border:1px solid #e8e2ff50;box-shadow:inset 0 2px 8px #dbe8ff2e,inset 0 -2px 7px #c6e8e640,0 5px 20px #08050e50}.orb-bulb[data-material=ink]{background:radial-gradient(ellipse at 30% 20%,#82688d,#38213e 45%,#160f1c 75%,#5d446a 92%)}
+.orb-choice strong{display:block;font-size:13px;font-weight:400;color:var(--ink)}.orb-choice small{display:block;font-size:10px;color:var(--dim);margin-top:3px}
+.orb-choice input:checked+.orb-bulb{transform:translateY(-3px);box-shadow:inset 0 0 0 1px #f0fcffa0,0 0 25px #d1bad834,0 5px 12px #0d081940}.orb-choice:has(:disabled){opacity:.4;cursor:default}.orb-choice input:focus-visible+.orb-bulb{outline:2px solid var(--anima-focus);outline-offset:6px}
+.orb-switch{display:inline-flex!important;align-items:center;gap:14px;position:relative;min-height:44px;margin:0!important;cursor:pointer;font-size:12px;color:var(--muted)}.orb-switch-track{position:relative;flex:none;width:48px;height:28px;border:1px solid #c5b5d859;border-radius:60% 50% 55% 50%;background:linear-gradient(160deg,#58426040,#100c1740);box-shadow:inset 0 2px 6px #0a071b80,0 1px 0 #d4c3e01a}.orb-switch-pearl{position:absolute;left:4px;top:4px;width:18px;height:18px;border-radius:50%;background:radial-gradient(ellipse at 38% 25%,#eee8f6,#8c7f9e 40%,#51435d 66%,#d2c8dc);box-shadow:0 2px 4px #0005;transition:transform var(--anima-semantic-motion-float) var(--anima-ease),box-shadow var(--anima-semantic-motion-float)}
+.orb-switch input:checked+.orb-switch-track .orb-switch-pearl{transform:translateX(20px);background:radial-gradient(ellipse at 38% 25%,#f2ffff,#c1e6e3 25%,#8d8bb0 60%,#ece6f5);box-shadow:0 0 14px #beddda55,0 2px 4px #0005}.orb-switch:has(:checked){color:var(--ink)}.orb-switch:has(:disabled){opacity:.4;cursor:default}.orb-switch input:focus-visible+.orb-switch-track{outline:2px solid var(--anima-focus);outline-offset:6px}
+.orb-button{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:transparent;border:0;padding:0}.orb-button .arrow-lens{width:44px;height:44px}.orb-button:not(:disabled):hover .arrow-lens,.orb-button:focus-visible .arrow-lens{transform:rotate(12deg);box-shadow:inset 0 0 1px 1px #f9f2ff80,0 0 24px #bca5de30}
+.orb-disclosure summary{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:76px;list-style:none}.orb-disclosure summary::-webkit-details-marker{display:none}.orb-disclosure .arrow-lens{width:32px;height:32px;font-size:22px}.orb-disclosure[open] .arrow-lens{transform:rotate(45deg)}
+.audience-paths article>anima-surface{margin-top:auto}.specimen-surface-row{display:flex;align-items:center;flex-wrap:wrap;gap:22px 32px;margin:30px 0}.specimen-orb-panel{padding:26px 0;border-top:1px solid var(--line)}
+@media(max-width:700px){.orb-options{gap:20px 26px}.orb-choice{gap:10px}.orb-bulb{width:40px;height:40px}.surface-action{min-width:190px}}
+@media(prefers-reduced-motion:reduce){.surface-action,.surface-action::before,.arrow-lens,.arrow-flight,.arrow-waterline,.orb-bulb,.orb-switch-pearl,anima-surface>.liquid-button::before{transition:none!important}.surface-action:not(:disabled):active{transform:none}.surface-action:hover .arrow-lens,.surface-action:focus-visible .arrow-lens,anima-surface>.liquid-button:hover .arrow-lens,anima-surface>.liquid-button:focus-visible .arrow-lens,.surface-link:hover .arrow-flight,.surface-link:focus-visible .arrow-flight,anima-surface>.text-link:hover .arrow-flight,anima-surface>.text-link:focus-visible .arrow-flight,.orb-button:hover .arrow-lens{transform:none}}
+@media(prefers-reduced-motion:reduce){anima-surface .arrow-lens,anima-surface .arrow-flight{transform:none!important}}
+.capture-intro>anima-surface{margin-top:10px}#project-review>anima-surface{margin-top:16px}
+
+/* Content-safe optical atoms: the glint may be clipped to its material, but
+   the real label always gets a growing track and clearance from the curve. */
+anima-surface{min-width:0}
+:is(.surface-action,anima-surface>.liquid-button){max-width:100%;min-width:0;min-height:var(--anima-component-action-height);height:auto;padding:var(--anima-component-action-inset-block) var(--anima-component-action-inset-inline);gap:var(--anima-component-action-content-gap);white-space:normal;text-align:left}
+.action-label{display:block;flex:1 1 auto;min-width:0;line-height:1.5;overflow-wrap:anywhere}
+anima-surface .action-label{font-size:inherit;line-height:1.5;color:inherit}
+anima-surface>:is(.text-link,.surface-link){max-width:100%;min-width:0;white-space:normal}
+.arrow-flight{flex:none}
+.orb-choice>span:last-child,.orb-switch>span:last-child{min-width:0;overflow-wrap:anywhere}
+.orb-choice,.orb-switch{max-width:100%}
+.orb-disclosure summary>span:not(.arrow-lens){min-width:0;overflow-wrap:anywhere}
+
+/* Curvature follows the material, not the width of the label. */
+anima-surface>.liquid-button{border-radius:var(--anima-component-liquid-action-radius);border-color:var(--anima-component-liquid-action-border);background:linear-gradient(135deg,#d8c9e40e,transparent 72%),var(--anima-component-liquid-action-background);color:var(--anima-component-liquid-action-foreground);font-size:var(--anima-component-liquid-action-label-size);padding-inline:var(--anima-component-action-inset-inline) var(--anima-component-liquid-action-end-inset);box-shadow:inset 0 1px 0 #f0e4ff14,0 4px 14px #0a061620;transition:border-color var(--anima-semantic-motion-response),background var(--anima-semantic-motion-response),box-shadow var(--anima-semantic-motion-response)}
+anima-surface>.liquid-button .arrow-lens{width:var(--anima-component-liquid-action-lens-size);height:var(--anima-component-liquid-action-lens-size)}
+anima-surface>.liquid-button:not(:disabled):hover,anima-surface>.liquid-button:focus-visible{border-color:var(--anima-semantic-color-text-secondary);background:linear-gradient(135deg,#d8c9e418,transparent 72%),var(--anima-semantic-color-surface-control-hover);box-shadow:inset 0 1px 0 #f0e4ff26,0 4px 18px #0a061630}
+anima-surface>.liquid-button:focus-visible{outline:2px solid var(--anima-focus);outline-offset:4px}
+anima-surface>.liquid-button:disabled{opacity:var(--anima-semantic-state-disabled-opacity);cursor:default}
+@media(prefers-reduced-motion:reduce){anima-surface>.liquid-button{transition:none}}
+@media(forced-colors:active){anima-surface>.liquid-button,anima-surface>.liquid-button:hover,anima-surface>.liquid-button:focus-visible{background:Canvas;color:CanvasText;border-color:ButtonText;box-shadow:none}}
+
+/* Recovered tab and folded-corner dialect from Inner-water atoms / controls. */
+.surface-action[data-shape=silver-tab]{border-radius:6px 32px 32px 6px}
+.surface-action[data-shape=fold]{border-radius:24px 6px 24px 6px}
+.surface-action[data-shape=fold] .arrow-flight{color:var(--anima-semantic-color-status-success)}
+.surface-action[data-shape=fold]:hover .arrow-flight,.surface-action[data-shape=fold]:focus-visible .arrow-flight{transform:translate(3px,-3px)}
+@media(prefers-reduced-motion:reduce){.surface-action[data-shape=fold] .arrow-flight{transform:none!important}}
+
+.shape-study-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-block:32px}
+.shape-study-grid article{min-width:0;border-top:1px solid var(--line);padding-top:24px}
+.shape-study-grid article>anima-surface{display:block;width:100%;margin:24px 0}
+.shape-study-grid :is(.surface-action,.liquid-button){width:100%;min-width:0;font-size:13px;gap:12px}
+.shape-study-grid article>p:last-child{font-size:12px;line-height:1.8}
+@media(max-width:900px){.shape-study-grid{grid-template-columns:minmax(0,1fr);max-width:500px}}
+
+.action-usage{margin-top:40px;border-top:1px solid var(--line);padding-top:32px}
+.action-usage h3{font:400 22px/1.3 var(--anima-semantic-font-display);margin:28px 0 16px}
+.action-usage p,.action-usage li{font-size:12px;color:var(--muted);line-height:1.85;max-width:80ch}
+.action-usage ul{padding-left:20px}
+.action-usage a{text-decoration:underline;text-underline-offset:4px}
+.action-usage-table{overflow-x:auto;max-width:100%;margin-block:24px}
+.action-usage-table table{border-collapse:collapse;width:100%;font-size:12px;text-align:left}
+.action-usage-table th,.action-usage-table td{vertical-align:top;padding:16px 16px 16px 0;border-block:1px solid var(--line);line-height:1.7;min-width:130px}
+.action-usage-table thead{color:var(--muted)}
+@media(max-width:600px){.action-usage-table table{min-width:540px}}
+
+/* Peer hero entries: balance optical weight without changing geometry or shape.
+   Recipes use the existing semantic material roles; labels keep opaque contrast. */
+.hero-cta-pair .surface-action[data-shape=silver-tab]{background:linear-gradient(135deg,color-mix(in srgb,var(--anima-semantic-color-action-light-shade) 78%,var(--anima-semantic-color-action-depth)),var(--anima-semantic-color-action-light-shade) 58%,color-mix(in srgb,var(--anima-semantic-color-action-light-shade) 90%,var(--anima-semantic-color-action-depth)));box-shadow:inset 0 1px 0 #eee1f54d,0 5px 16px #08050e40}
+.hero-cta-pair .surface-action[data-shape=fold]{background:linear-gradient(145deg,color-mix(in srgb,var(--anima-semantic-color-action-depth) 76%,var(--anima-semantic-color-action-light-shade)),color-mix(in srgb,var(--anima-semantic-color-action-depth) 90%,var(--anima-semantic-color-action-light-shade)) 60%,var(--anima-semantic-color-action-depth));border-color:var(--anima-semantic-color-text-secondary);box-shadow:inset 0 1px 0 #e4d3f04d,0 5px 16px #08050e40}
+.hero-cta-pair .surface-action::before{opacity:.08}
+.hero-cta-pair .surface-action:hover::before,.hero-cta-pair .surface-action:focus-visible::before{opacity:.2}
+.hero-cta-pair .surface-action[data-shape=fold]:hover::before,.hero-cta-pair .surface-action[data-shape=fold]:focus-visible::before{opacity:.1}
+.hero-cta-pair .surface-action:hover,.hero-cta-pair .surface-action:focus-visible{border-color:var(--anima-semantic-color-text-primary);box-shadow:inset 0 1px 0 #f0e3ff70,0 0 18px #bca5de20,0 5px 16px #08050e40}
+@media(forced-colors:active){.surface-action,.hero-cta-pair .surface-action[data-shape]{background:Canvas;color:CanvasText;border-color:ButtonText;box-shadow:none}.surface-action::before{display:none}.surface-action .arrow-lens{background:ButtonFace;color:ButtonText;box-shadow:none}.surface-action:focus-visible{outline-color:Highlight}.hero-cta-pair .surface-action:hover,.hero-cta-pair .surface-action:focus-visible{border-color:ButtonText;box-shadow:none}}

@@ -1,0 +1,9 @@
+import type {LocalWalletState,WalletPreview} from './embedded-wallet-host.js';
+export function createEmbeddedWalletClient(){
+ const worker=new Worker(new URL('./embedded-wallet-worker.js',import.meta.url),{type:'module',name:'anima-castalia-custody'});
+ let sequence=0,stopped=false;const pending=new Map<number,{resolve:(value:unknown)=>void;reject:(error:Error)=>void}>();
+ const stop=()=>{stopped=true;worker.terminate();for(const item of pending.values())item.reject(Error('Wallet closed. Reload to unlock the saved identity.'));pending.clear();};
+ worker.onerror=()=>stop();worker.onmessage=event=>{const data=event.data,item=pending.get(data.id);if(!item)return;pending.delete(data.id);if(data.ok)item.resolve(data.value);else item.reject(Error(data.error));};
+ const call=<T>(operation:string,...args:string[])=>new Promise<T>((resolve,reject)=>{if(stopped){reject(Error('Wallet closed. Reload to unlock the saved identity.'));return;}const id=++sequence;pending.set(id,{resolve:value=>resolve(value as T),reject});worker.postMessage({id,operation,args});});
+ return {state:()=>call<LocalWalletState>('state'),create:(password:string)=>call<WalletPreview>('create',password),restore:(file:string,oldPassword:string,password:string)=>call<WalletPreview>('restore',file,oldPassword,password),confirm:()=>call<LocalWalletState>('confirm'),cancel:()=>call<LocalWalletState>('cancel'),unlock:(password:string)=>call<LocalWalletState>('unlock',password),lock:()=>call<LocalWalletState>('lock'),export:(password:string)=>call<{file:string;extension:'castalia-recovery'}>('export',password),verify:(file:string,password:string)=>call<LocalWalletState>('verify',file,password),destroy:stop};
+}

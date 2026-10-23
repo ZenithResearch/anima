@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "date": "2026-10-20",
+  "status": "Anima design convention; placement migration remains explicit",
+  "principle": "Shape reinforces the action promise. Audience, visual prominence and native HTML behavior are separate decisions.",
+  "rules": [
+    {
+      "id": "enter",
+      "shape": "silver-tab",
+      "name": "Silver tab",
+      "meaning": "Enter a defined task or workspace.",
+      "examples": [
+        "Start a project",
+        "Build an audience character",
+        "Open your character workspace"
+      ],
+      "avoid": [
+        "Assigning it permanently to businesses",
+        "Routine movement through every question",
+        "Passive navigation dressed as a major task"
+      ]
+    },
+    {
+      "id": "work",
+      "shape": "fold",
+      "name": "Depth fold",
+      "meaning": "Advance, review or resolve work already underway.",
+      "examples": [
+        "Continue",
+        "Review your outline",
+        "Save changes",
+        "Prepare roster request"
+      ],
+      "avoid": [
+        "Treating it as the creative-audience identity",
+        "Using its dark material to imply a less important audience",
+        "Claiming Prepare has sent or enrolled anything"
+      ]
+    },
+    {
+      "id": "invite",
+      "shape": "capsule",
+      "name": "Liquid capsule",
+      "meaning": "Offer a personal connection or considered handoff.",
+      "examples": [
+        "Introduce your practice",
+        "Begin a conversation",
+        "Request an introduction"
+      ],
+      "avoid": [
+        "A repeated menu of capsules",
+        "Routine Continue / Review / Prepare controls",
+        "Using the orb to imply a completed match or submission"
+      ]
+    }
+  ],
+  "selectionOrder": [
+    "State the actual consequence in the label and choose the native link/button/form behavior.",
+    "Choose intent: entering a task, working inside it, or seeking a human connection.",
+    "Choose prominence independently: featured, peer or supporting. Supporting actions can use the waterline link regardless of their intent.",
+    "Apply material and decorative detail deliberately; do not derive appearance from array position or audience category."
+  ],
+  "composition": [
+    "One featured capsule per visual region; the orb is a point of attention within one target.",
+    "Peer audience choices deserve balanced footprint, label weight, placement and interaction strength. A lighter fill must not accidentally make one audience preferred.",
+    "Waterline links handle supporting exploration and utility: Our approach, See an example, Back, Edit, Copy and Download.",
+    "A family can be the primary action in its own context. Fold does not mean secondary; silver does not mean business.",
+    "No shape is permission to send, publish, delete, pay or contact an agent. Explicit labels and the real review/confirmation flow communicate those consequences."
+  ],
+  "nativeSemantics": [
+    "Use a native anchor for a destination and a native button for local actions; form progression/submission retains type=submit.",
+    "Keep the orb and arrow decorative inside the same control, not separate focus stops.",
+    "Loading, disabled, invalid and completed are states of the same family; retain the label context and expose state explicitly.",
+    "The label remains sufficient when gradients, motion or decorative shapes are absent."
+  ],
+  "roundtable": {
+    "creativeDirection": "Shapes can express threshold, agency and personal invitation, but those metaphors must survive actual user journeys.",
+    "interactionDesign": "Separate action mode, prominence and HTML behavior; index-based or audience-based styling is not a stable contract.",
+    "accessibleSystem": "Labels state consequences; native semantics and one clear target carry behavior. Peer routes must not imply unequal audience importance.",
+    "disagreement": "The fold was proposed both for exploration and for work in progress. The final lead recommendation assigns it to work; supporting exploration already has a waterline link.",
+    "decision": "Threshold → tab; working step → fold; personal invitation → capsule. These are local design conventions, not assumed universal meanings."
+  },
+  "migration": [
+    {
+      "location": "Upper hero businesses / creatives & studios",
+      "intent": "enter / enter",
+      "current": "Approved silver tab / fold trial retained; peer material emphasis refined without geometry changes.",
+      "next": "Keep the reviewed layout and geometry trial visible. Compare peer entry treatments deliberately; neither audience owns a shape. Explicit metadata now replaces array-index styling."
+    },
+    {
+      "location": "Character Continue / Review your character",
+      "intent": "work",
+      "current": "Capsule in the local template.",
+      "next": "Use folded working-action treatment in the subsequent placement pass."
+    },
+    {
+      "location": "Project Review your outline; roster Prepare roster request",
+      "intent": "work",
+      "current": "Capsule submits in existing local forms.",
+      "next": "Use folded working-action treatment; keep exact native validation and preparation behavior."
+    },
+    {
+      "location": "Build audience / Define character entry screens",
+      "intent": "enter",
+      "current": "Capsule entry action.",
+      "next": "Use a task-entry tab when applying the grammar."
+    },
+    {
+      "location": "Define your practice worksheet / character conversation handoff",
+      "intent": "enter / invite",
+      "current": "Both remain capsules in this bounded visual pass; worksheet label now states its actual purpose.",
+      "next": "Migrate task-entry styling separately. Retain invitation treatment for the later personal handoff, with truthful local preparation copy."
+    },
+    {
+      "location": "Secondary Join our talent roster; Our approach; Back / Copy / Download",
+      "intent": "supporting invitation / navigation / utility",
+      "current": "Quiet links or native utility controls.",
+      "next": "Retain supporting treatment and direct roster access."
+    }
+  ]
+}

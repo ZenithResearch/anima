@@ -1,0 +1,7 @@
+/* Shared landing/application identity. Scope leaves specimen and footer wordmarks intact. */
+.brand-lockup{display:flex;flex-direction:column;align-items:flex-start;gap:4px;flex:0 0 auto}
+.brand-name-line{display:flex;align-items:baseline;gap:10px}
+.brand-lockup .wordmark{font:500 44px/1 var(--anima-semantic-font-display,bricolage);font-variation-settings:"opsz" 72,"wdth" 100;letter-spacing:-.055em;white-space:nowrap}
+.brand-endorsement{font:400 9px/1.4 var(--anima-semantic-font-body,manrope);color:var(--anima-semantic-color-text-secondary);white-space:nowrap}
+.brand-context{font:400 10px/1.2 var(--anima-semantic-font-body,manrope);color:var(--anima-semantic-color-text-secondary)}
+@media(max-width:450px){.brand-lockup{gap:3px}.brand-name-line{gap:8px}.brand-lockup .wordmark{font-size:32px}.brand-endorsement{font-size:8px}.brand-context{font-size:9px}}

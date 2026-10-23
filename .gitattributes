@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.wasm binary
+*.ttf binary
+# Preserve source-qualified upstream bytes and license notices verbatim.
+assets/fonts/*-OFL.txt -text -whitespace
+provider-contract/** -text -whitespace
+src/vendor/** -text -whitespace
+wallet-sdk/** -text -whitespace
+workspace/domain.mjs -text -whitespace

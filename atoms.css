@@ -1,0 +1,109 @@
+/* Functional atom contracts. Decorative optical materials live in interactions.css. */
+:root{
+ --ink:var(--anima-semantic-color-text-primary);--muted:var(--anima-semantic-color-text-secondary);--dim:var(--anima-semantic-color-text-quiet);--paper:var(--anima-semantic-color-surface-control);
+ --anima-ease:var(--anima-semantic-motion-ease);--anima-focus:var(--anima-semantic-color-focus-ring);--anima-pearl:var(--anima-semantic-color-status-success);
+}
+:is(button,a,input,textarea,select,summary,[tabindex="0"]):focus-visible{outline:var(--anima-semantic-detail-focus-width) solid var(--anima-semantic-color-focus-ring);outline-offset:var(--anima-semantic-detail-focus-offset)}
+/* Raised opaque fields let real text remain readable over a moving scene. */
+.intro-form :is(input:not([type=checkbox]):not([type=radio]),textarea,select),#project-form :is(input:not([type=checkbox]):not([type=radio]),textarea,select){
+ background:var(--anima-component-field-background);color:var(--anima-component-field-foreground);border:var(--anima-semantic-detail-border-width) solid var(--anima-component-field-border);border-radius:var(--anima-semantic-detail-field-radius);padding:var(--anima-semantic-space-inline);min-height:var(--anima-component-field-height);font-family:var(--anima-semantic-font-body);font-size:var(--anima-semantic-type-body);line-height:var(--anima-semantic-leading-body);
+}
+.intro-form :is(input,textarea)::placeholder,#project-form :is(input,textarea)::placeholder{color:var(--anima-semantic-color-text-quiet);font-size:inherit;opacity:1}
+.intro-form label:not(.orb-choice):not(.orb-switch):not(.check),#project-form label:not(.check){font-size:var(--anima-semantic-type-label);line-height:var(--anima-semantic-leading-label)}
+.intro-form :is(input,textarea,select):disabled,#project-form :is(input,textarea,select):disabled{opacity:var(--anima-semantic-state-disabled-opacity);cursor:not-allowed}
+.intro-form :is(input:not([type=checkbox]):not([type=radio]),textarea)[readonly]{border-style:dashed;color:var(--anima-semantic-color-text-secondary)}
+.intro-form :is(input:not([type=checkbox]):not([type=radio]),textarea,select)[aria-invalid=true],#project-form :is(input:not([type=checkbox]):not([type=radio]),textarea,select)[aria-invalid=true]{border-color:var(--anima-component-field-error)}
+.field-error{color:var(--anima-component-field-error);font-size:var(--anima-semantic-type-caption);line-height:var(--anima-semantic-leading-body)}
+.review .form-note,.intro-form .check small{font-size:var(--anima-semantic-type-caption)!important}
+.surface-action{min-height:var(--anima-component-action-height);gap:var(--anima-component-action-gap);font-family:var(--anima-semantic-font-body);font-size:var(--anima-semantic-type-label);color:var(--anima-component-action-foreground);border-color:var(--anima-component-action-border)}
+.surface-action[data-tone=depth]{color:var(--anima-component-action-depth-foreground);border-color:var(--anima-component-action-border)}
+.surface-action:disabled,.orb-button:disabled{opacity:var(--anima-semantic-state-disabled-opacity)}
+.surface-link{font-size:var(--anima-semantic-type-label);min-height:var(--anima-semantic-size-target)}
+.arrow-lens{width:var(--anima-semantic-size-lens);height:var(--anima-semantic-size-lens)}
+.anima-arrow{width:var(--anima-semantic-size-icon);height:var(--anima-semantic-size-icon)}
+.orb-bulb{position:relative;width:var(--anima-component-orb-size);height:var(--anima-component-orb-size)}
+/* Selection has a shape as well as a change in light. No reliance on colour alone. */
+.orb-choice input:checked+.orb-bulb::after{content:'✓';position:absolute;right:-3px;bottom:-3px;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--anima-semantic-color-surface-control);color:var(--anima-component-orb-selected-mark);border:1px solid currentColor;font:600 13px/1 var(--anima-semantic-font-body)}
+.orb-choice strong,.orb-switch{font-size:var(--anima-semantic-type-label)}.orb-choice small{font-size:var(--anima-semantic-type-caption)}
+.orb-switch{min-height:var(--anima-component-switch-target)}.orb-switch-track{border-color:var(--anima-semantic-color-border-control)}
+.orb-disclosure summary:focus-visible{outline:var(--anima-semantic-detail-focus-width) solid var(--anima-semantic-color-focus-ring);outline-offset:var(--anima-semantic-detail-focus-offset)}
+@media(prefers-reduced-motion:reduce){.orb-choice input:checked+.orb-bulb{transform:none}}
+/* Preserve recognisable states in Windows High Contrast; optical fills are expendable. */
+@media(forced-colors:active){
+ .surface-action,.surface-action[data-tone=depth],.liquid-button,.orb-switch-track,.orb-bulb,.arrow-lens{background:Canvas;color:CanvasText;border:1px solid ButtonText;box-shadow:none}
+ .orb-choice input:checked+.orb-bulb,.orb-switch input:checked+.orb-switch-track{outline:2px solid Highlight;outline-offset:2px}
+ .orb-choice input:checked+.orb-bulb::after{background:Highlight;color:HighlightText;border-color:Highlight}
+ :where(button,a,input,textarea,select,summary):focus-visible,.orb-choice input:focus-visible+.orb-bulb,.orb-switch input:focus-visible+.orb-switch-track{outline-color:Highlight}
+}
+
+
+/* Bridge the historical backdrop's !important error underline until its extraction. */
+.intro-form [aria-invalid=true],#project-form [aria-invalid=true]{border-bottom-color:var(--anima-component-field-error)!important}
+
+/* Input refinement: labels stay outside the focus ring, which stays inside the field. */
+:is(.intro-form,#project-form) label:not(.orb-choice):not(.orb-switch):not(.check){display:grid;row-gap:var(--anima-semantic-space-label-gap);margin-block-end:var(--anima-semantic-space-group)}
+:is(.intro-form,#project-form) label[for]{display:block;margin-block-end:var(--anima-semantic-space-label-gap)}
+:is(.intro-form,#project-form) :is(input:not([type=checkbox]):not([type=radio]),textarea,select){margin-block-start:0;transition:border-color var(--anima-semantic-motion-quick) var(--anima-semantic-motion-ease),background-color var(--anima-semantic-motion-quick) var(--anima-semantic-motion-ease);scroll-margin-block:var(--anima-semantic-space-group)}
+@media(hover:hover){
+ :is(.intro-form,#project-form) :is(input:not([type=checkbox]):not([type=radio]),textarea,select):hover:not(:disabled):not([readonly]):not([aria-invalid=true]){background:var(--anima-component-field-hover-background);border-color:var(--anima-component-field-hover-border)}
+ .orb-choice:has(input:not(:disabled)):not(:has(input:focus-visible)):hover .orb-bulb,.orb-switch:has(input:not(:disabled)):not(:has(input:focus-visible)):hover .orb-switch-track{outline:1px solid var(--anima-semantic-color-border-hover);outline-offset:2px}
+}
+:is(.intro-form,#project-form) :is(input:not([type=checkbox]):not([type=radio]),textarea,select):focus-visible{outline:var(--anima-semantic-detail-focus-width) solid var(--anima-semantic-color-focus-ring);outline-offset:var(--anima-semantic-detail-field-focus-offset)}
+:is(.intro-form,#project-form) :is(input,textarea,select)[aria-invalid=true]{border-color:var(--anima-component-field-error)}
+:is(.intro-form,#project-form) .field-error{margin-block-start:0}
+.orb-choice input:focus-visible+.orb-bulb,.orb-switch input:focus-visible+.orb-switch-track{outline:var(--anima-semantic-detail-focus-width) solid var(--anima-semantic-color-focus-ring);outline-offset:var(--anima-semantic-detail-focus-offset)}
+@media(prefers-reduced-motion:reduce){:is(.intro-form,#project-form) :is(input,textarea,select){transition:none}}
+/* System colours must override the hover recipes as well as the default material. */
+@media(forced-colors:active){
+ :is(.intro-form,#project-form) :is(input,textarea,select){background:Canvas!important;color:CanvasText!important;border-color:ButtonText!important}
+ :is(.intro-form,#project-form) :is(input,textarea,select):disabled{color:GrayText!important;border-color:GrayText!important;opacity:1}
+ :is(.intro-form,#project-form) :is(input,textarea,select):focus-visible,.orb-choice input:focus-visible+.orb-bulb,.orb-switch input:focus-visible+.orb-switch-track{outline-color:Highlight!important}
+ .orb-choice:has(input:not(:disabled)):not(:has(input:focus-visible)):hover .orb-bulb,.orb-switch:has(input:not(:disabled)):not(:has(input:focus-visible)):hover .orb-switch-track{outline-color:ButtonText}
+}
+/* A gradient-only pearl disappears when forced colours remove image fills. */
+@media(forced-colors:active){
+ .orb-switch-pearl{forced-color-adjust:none;background:ButtonText;border:1px solid ButtonText;box-shadow:none}
+ .orb-switch input:checked+.orb-switch-track .orb-switch-pearl{background:Highlight;border-color:Highlight;box-shadow:none}
+ .orb-choice input:checked+.orb-bulb::after{font-family:system-ui,sans-serif;forced-color-adjust:none;background:Highlight;color:HighlightText}
+ .presence,.pool-rim{visibility:hidden}
+}
+/* The label is the hit target for native choice inputs, including wrapped notes. */
+.check{min-height:var(--anima-semantic-size-target);padding-block:var(--anima-primitive-space-2)}
+.scope-options label,.scope-options span{min-height:var(--anima-semantic-size-target);display:inline-flex;align-items:center}
+/* Keep autofilled text readable on the same opaque surface. Native autocomplete remains enabled. */
+:is(.intro-form,#project-form) input:autofill{box-shadow:inset 0 0 0 1000px var(--anima-component-field-background);-webkit-text-fill-color:var(--anima-component-field-foreground);caret-color:var(--anima-component-field-foreground)}
+@media(forced-colors:active){:is(.intro-form,#project-form) input:autofill{box-shadow:none;-webkit-text-fill-color:CanvasText;caret-color:CanvasText}}
+
+/* Compact density reuses the field's semantic colors and interaction states. */
+.intro-form[data-density=compact] label:not(.check){row-gap:var(--anima-component-field-compact-label-gap);margin-block-end:0;font-size:var(--anima-semantic-type-caption)}
+.intro-form[data-density=compact] input:not([type=checkbox]):not([type=radio]){min-height:var(--anima-component-field-compact-height);height:var(--anima-component-field-compact-height);padding:8px 12px;margin:0;font-size:var(--anima-semantic-type-label);box-sizing:border-box}
+
+/* Portable native atoms. New flows use these directly rather than depending on
+   a particular questionnaire or page wrapper. Labels remain outside the ring. */
+.anima-field.anima-field{display:grid;gap:var(--anima-semantic-space-label-gap);margin:0;color:var(--anima-component-field-foreground);font:400 var(--anima-semantic-type-label)/var(--anima-semantic-leading-label) var(--anima-semantic-font-body)}
+.anima-field>.anima-control.anima-control{display:block;width:100%;box-sizing:border-box;margin:0;min-width:0;min-height:var(--anima-component-field-height);padding:var(--anima-semantic-space-inline);border:var(--anima-semantic-detail-border-width) solid var(--anima-component-field-border);border-radius:var(--anima-semantic-detail-field-radius);background:var(--anima-component-field-background);color:var(--anima-component-field-foreground);font:400 var(--anima-semantic-type-body)/var(--anima-semantic-leading-body) var(--anima-semantic-font-body);transition:border-color var(--anima-semantic-motion-quick) var(--anima-semantic-motion-ease),background-color var(--anima-semantic-motion-quick) var(--anima-semantic-motion-ease)}
+.anima-field[data-density=compact]{gap:var(--anima-component-field-compact-label-gap)}
+.anima-field[data-density=compact]>.anima-control.anima-control{min-height:var(--anima-component-field-compact-height);font-size:var(--anima-semantic-type-label);padding:var(--anima-primitive-space-2) var(--anima-semantic-space-inline)}
+.anima-control::placeholder{color:var(--anima-semantic-color-text-quiet);opacity:1}
+.anima-field>.anima-control[readonly]{border-style:dashed;color:var(--anima-semantic-color-text-secondary)}
+.anima-field>.anima-control:disabled{opacity:var(--anima-semantic-state-disabled-opacity);cursor:not-allowed}
+.anima-field>.anima-control[aria-invalid=true]{border-color:var(--anima-component-field-error)}
+.anima-field>.anima-control:focus-visible{outline:var(--anima-semantic-detail-focus-width) solid var(--anima-semantic-color-focus-ring);outline-offset:var(--anima-semantic-detail-field-focus-offset)}
+.anima-field>.anima-control:autofill{box-shadow:inset 0 0 0 1000px var(--anima-component-field-background);-webkit-text-fill-color:var(--anima-component-field-foreground);caret-color:var(--anima-component-field-foreground)}
+.anima-control[type=file]::file-selector-button{margin-inline-end:var(--anima-semantic-space-inline);padding:var(--anima-primitive-space-2);border:var(--anima-semantic-detail-border-width) solid var(--anima-component-field-border);border-radius:var(--anima-semantic-detail-field-radius);background:var(--anima-semantic-color-surface-raised);color:var(--anima-component-field-foreground);font:inherit;cursor:pointer}
+.anima-button.anima-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--anima-semantic-space-inline);box-sizing:border-box;max-width:100%;min-height:var(--anima-semantic-size-target);padding:var(--anima-primitive-space-2) var(--anima-semantic-space-control);border:var(--anima-semantic-detail-border-width) solid var(--anima-component-action-border);border-radius:var(--anima-semantic-detail-field-radius);background:var(--anima-semantic-color-surface-control);color:var(--anima-component-action-depth-foreground);font:400 var(--anima-semantic-type-label)/var(--anima-semantic-leading-label) var(--anima-semantic-font-body);text-align:center;white-space:normal;overflow-wrap:anywhere;cursor:pointer;transition:background-color var(--anima-semantic-motion-quick) var(--anima-semantic-motion-ease),border-color var(--anima-semantic-motion-quick) var(--anima-semantic-motion-ease)}
+.anima-button.anima-button[data-tone=light]{background:linear-gradient(145deg,var(--anima-semantic-color-action-light),var(--anima-semantic-color-action-light-shade));color:var(--anima-component-action-foreground)}
+.anima-button.anima-button[aria-pressed=true]{background:var(--anima-semantic-color-surface-raised);border-color:var(--anima-semantic-color-border-hover)}
+.anima-button.anima-button:disabled{opacity:var(--anima-semantic-state-disabled-opacity);cursor:not-allowed}
+.anima-button.anima-button:focus-visible{outline:var(--anima-semantic-detail-focus-width) solid var(--anima-semantic-color-focus-ring);outline-offset:var(--anima-semantic-detail-focus-offset)}
+@media(hover:hover){
+ .anima-field>.anima-control:hover:not(:disabled):not([readonly]):not([aria-invalid=true]){background:var(--anima-component-field-hover-background);border-color:var(--anima-component-field-hover-border)}
+ .anima-button.anima-button:hover:not(:disabled){border-color:var(--anima-semantic-color-border-hover);background-color:var(--anima-semantic-color-surface-control-hover)}
+}
+@media(prefers-reduced-motion:reduce){.anima-field>.anima-control,.anima-button.anima-button{transition:none}}
+@media(forced-colors:active){
+ .anima-field>.anima-control.anima-control,.anima-control[type=file]::file-selector-button,.anima-button.anima-button,.anima-button.anima-button[data-tone=light],.anima-button.anima-button[aria-pressed=true]{background:Canvas!important;color:CanvasText!important;border-color:ButtonText!important;box-shadow:none!important;-webkit-text-fill-color:CanvasText!important}
+ .anima-field>.anima-control[aria-invalid=true]{border-color:LinkText!important}
+ .anima-field>.anima-control:disabled,.anima-button.anima-button:disabled{color:GrayText!important;border-color:GrayText!important;opacity:1}
+ .anima-field>.anima-control:focus-visible,.anima-button.anima-button:focus-visible{outline-color:Highlight}
+}

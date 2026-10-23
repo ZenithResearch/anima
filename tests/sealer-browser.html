@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Anima — Candidate sealer acceptance</title><link rel="stylesheet" href="assets/fonts.css"><link rel="stylesheet" href="../tokens.css"><link rel="stylesheet" href="../workspace.css"><link rel="stylesheet" href="../service.css"><body class="brand-workspace service-page"><main class="service-panel" style="max-width:56rem;margin:2rem auto;padding:2rem"><h1>Candidate sealer acceptance</h1><p>Real secS WASM with public disposable vectors. No Wallet identity, consent, provider submission or owner material.</p><p>This page loads only the separately staged loopback QA package. It does not install a production loader.</p><button type="button" class="workspace-quiet" id="run">Run candidate checks</button><ol id="checks" aria-live="polite"></ol><p id="result" role="status">Not run.</p></main><script type="module">
+import {candidateIntakeSealer} from '../runtime/service-sealer.js';
+const checks=document.querySelector('#checks'),result=document.querySelector('#result'),button=document.querySelector('#run'),enc=new TextEncoder();
+const hex=value=>Uint8Array.from(value.match(/../g),x=>parseInt(x,16));
+const sha=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),x=>x.toString(16).padStart(2,'0')).join('');
+function check(label,condition){if(!condition)throw Error(label);const li=document.createElement('li');li.textContent=label+' — passed';checks.append(li);}
+button.addEventListener('click',async()=>{
+ button.disabled=true;checks.replaceChildren();result.textContent='Running real WASM…';delete document.documentElement.dataset.qualified;
+ try{
+  if(location.hostname!=='127.0.0.1'&&location.hostname!=='localhost')throw Error('Loopback candidate only');
+  const producer=await import('./local-secs-candidate/index.js'),raw=await import('./local-secs-candidate/libsec_core.js');
+  const wasm=await fetch('./local-secs-candidate/libsec_core_bg.wasm',{credentials:'omit',redirect:'error'});if(!wasm.ok)throw Error('Stage the reviewed QA package first');
+  const module=new Uint8Array(await wasm.arrayBuffer());
+  check('Staged WASM matches the recorded candidate hash',await sha(module)==='f565ef42d3dd28511cbcbfd1bce2c2cd35a4b2e1b653a48c9866c8e05b4038df');
+  await producer.initializeIntakeEnvelopeSealer(module);
+  const key='13be4feaeaf204c7fd3358fc9c00721881d174278128227ec674f37f7fe97b6d',keyId='tunnel:x25519:0f6d2553ff0c0f447ae202edd84383e1';
+  // Fixed ephemeral material is exclusively the producer's public test vector.
+  const vector=raw.wasm_seal_intake_envelope_v1(hex(key),new Uint8Array(32).fill(8),new Uint8Array(12).fill(9),enc.encode('{"schema":"service.intake.v1"}'),enc.encode('signed-membership-proof'),2000n);
+  check('Producer deterministic intake vector',await sha(vector)==='51e76c5367fb192e9ae967c910dce2dd739797253d34bf762b53f1ad287219e4');
+  const object=enc.encode('original visual reference'),contentHash=await sha(object);
+  const referenceVector=raw.wasm_seal_reference_object_envelope_v1(hex(key),new Uint8Array(32).fill(8),new Uint8Array(12).fill(9),'request-1','submit-1','reference-1',hex(contentHash),object,enc.encode('signed-requester-evidence'),2000n);
+  check('Producer deterministic reference vector',await sha(referenceVector)==='bb7e6b159d244cffee2f15005cd880d53aa05acf3780bfdc03548cf27253157c');
+  const sealer=candidateIntakeSealer(async()=>producer),now=Date.now(),profile={schema:'service.intake-envelope.v1',algorithm:'x25519-hkdf-sha256-chacha20poly1305',recipient_key_id:keyId,recipient_public_key_hex:key,not_before:new Date(now-1000).toISOString(),not_after:new Date(now+120000).toISOString()};
+  const input={intake:enc.encode('{"schema":"service.intake.v1"}'),requester_evidence:enc.encode('example-only evidence'),profile,expires_at_ms:now+60000};
+  const first=await sealer.seal(input),second=await sealer.seal(input),decode=new TextDecoder();
+  check('Anima adapter invokes actual intake producer',decode.decode(first.subarray(0,7))==='SECSI01');
+  check('Production wrapper uses fresh randomness for preparation',await sha(first)!==await sha(second));
+  check('Envelope retains the exact recipient and expiry',decode.decode(first.subarray(17,17+first[16]))===keyId&&Number(new DataView(first.buffer,first.byteOffset,first.byteLength).getBigUint64(8,false))===input.expires_at_ms);
+  const reference={request_id:'request-1',idempotency_key:'submit-1',artifact_id:'reference-1',content_hash:contentHash,object,requester_evidence:input.requester_evidence,profile:{...profile,schema:'service.reference-object-envelope.v1'},expires_at_ms:input.expires_at_ms};
+  const sealed=await sealer.sealReferenceObject(reference);
+  check('Anima adapter invokes actual original-reference producer',decode.decode(sealed.subarray(0,7))==='SECSR01');
+  let rejected=false;try{await sealer.seal({...input,expires_at_ms:now-1});}catch{rejected=true;}check('Expired envelope fails closed',rejected);
+  rejected=false;try{await sealer.sealReferenceObject({...reference,object:new Uint8Array(524289)});}catch{rejected=true;}check('Oversized original fails closed',rejected);
+  document.documentElement.dataset.qualified='candidate-sealer-only';result.textContent='9 candidate sealer checks passed. Wallet consent, valid membership evidence, transport and provider processing remain unqualified.';
+ }catch(error){result.textContent='Not qualified: '+(error instanceof Error?error.message:'Candidate unavailable');document.documentElement.dataset.qualified='failed';}finally{button.disabled=false;}
+});
+</script></body></html>

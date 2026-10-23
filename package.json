@@ -1,0 +1,15 @@
+{
+  "name": "@zenith-research/anima",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Anima client: native HTML, TypeScript and Rust/WebAssembly",
+  "engines": { "node": ">=20.20" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/test.mjs",
+    "dev": "node scripts/dev.mjs",
+    "check:profile": "node dist/check-provider-profile.mjs"
+  },
+  "devDependencies": { "typescript": "5.9.3" }
+}

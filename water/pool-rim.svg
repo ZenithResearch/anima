@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 210" preserveAspectRatio="none">
+  <defs>
+    <!-- The original Juiced mirror's silver/plum metal, extended into a near edge. -->
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2=".5">
+      <stop stop-color="#f2f0eb"/><stop offset=".24" stop-color="#6e647b"/>
+      <stop offset=".42" stop-color="#ebe8ee"/><stop offset=".72" stop-color="#45404f"/>
+      <stop offset="1" stop-color="#cac2d5"/>
+    </linearGradient>
+    <linearGradient id="lip" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#cabdd2"/><stop offset=".5" stop-color="#665069"/>
+      <stop offset="1" stop-color="#28162f"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#120c18" stop-opacity="0"/>
+      <stop offset="1" stop-color="#120c18" stop-opacity=".8"/>
+    </linearGradient>
+  </defs>
+  <path d="M-80 6C300 190 1140 190 1520 6V210H-80Z" fill="url(#shadow)"/>
+  <path d="M-80 16C300 213 1140 213 1520 16L1520 34C1140 239 300 239-80 34Z" fill="#100a16" opacity=".7"/>
+  <path d="M-80 6C300 190 1140 190 1520 6L1520 23C1140 222 300 222-80 23Z" fill="url(#silver)" opacity=".64"/>
+  <path d="M-80 6C300 190 1140 190 1520 6" fill="none" stroke="#e8e1ee" stroke-width="1.4" opacity=".8"/>
+  <path d="M-80 10C300 199 1140 199 1520 10" fill="none" stroke="#302237" stroke-width="3" opacity=".65"/>
+  <path d="M-80 15C300 204 1140 204 1520 15" fill="none" stroke="url(#lip)" stroke-width="3" opacity=".7"/>
+  <path d="M-80 23C300 222 1140 222 1520 23" fill="none" stroke="#b6a6c2" stroke-width=".8" opacity=".4"/>
+</svg>

@@ -1,0 +1,44 @@
+/* Reference-import molecule: native files, typed links and a paged local library. */
+anima-brand-references{display:grid;gap:10px;min-width:0}
+.reference-imports{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:12px;align-items:start}
+.reference-drop{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:62px;box-sizing:border-box;border:1px dashed var(--anima-component-field-border);border-radius:8px;background:var(--anima-component-field-background);padding:10px 14px;cursor:pointer;color:var(--ink);font-size:13px;gap:3px}
+.reference-drop>span{display:flex;justify-content:space-between;gap:12px}.reference-drop small{font-size:10px;line-height:1.4;color:var(--muted)}
+.reference-drop input{position:absolute;width:1px;height:1px;opacity:0;clip-path:inset(50%)}
+.reference-drop:hover,.reference-drop[data-drag=true]{background:var(--anima-component-field-hover-background);border-color:var(--anima-component-field-hover-border)}
+.reference-drop:focus-within{outline:2px solid var(--anima-semantic-color-focus-ring);outline-offset:-3px}
+.reference-link-form{display:flex;gap:8px;align-items:center;margin:0!important;min-width:0}
+.reference-link-form .reference-url{min-width:0;width:100%;font-size:13px!important;margin:0!important;height:var(--anima-component-field-compact-height)!important;padding:8px 10px!important}
+.reference-link-form .reference-add{min-height:44px;padding:8px 12px;flex:none;border:1px solid var(--anima-component-field-border);border-radius:6px;color:var(--ink);font-size:12px;background:var(--anima-semantic-color-surface-control)}
+.reference-add:hover{background:var(--anima-semantic-color-surface-control-hover)}
+.reference-link-form .sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.reference-library{border-block:1px solid var(--line);padding-block:6px}
+.reference-items{display:grid;gap:6px;min-width:0}
+.reference-item{display:flex;align-items:center;gap:10px;min-width:0;min-height:48px}
+.reference-item>div{min-width:0;flex:1}.reference-item img{width:40px;height:40px;object-fit:cover;border-radius:5px;flex:none}
+.reference-name{display:block;font-size:12px;line-height:1.5;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:var(--ink);text-underline-offset:3px}
+.reference-item small{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:100%;font-size:10px;line-height:1.5;color:var(--muted)}
+.reference-item button{flex:none;min-width:44px;min-height:44px;font-size:20px;color:var(--muted);border-radius:6px}
+.reference-item button:hover{color:var(--ink);background:var(--anima-semantic-color-surface-control-hover)}
+.reference-empty{font-size:12px;line-height:1.6;color:var(--muted);margin:8px 0}
+.reference-pager{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:10px;color:var(--muted)}
+.reference-pager>div{display:flex;gap:4px;align-items:center}.reference-pager button{min-height:32px;min-width:32px;padding:4px;font-size:11px;color:var(--ink)}
+.reference-pager button:disabled{opacity:var(--anima-semantic-state-disabled-opacity);cursor:default}
+.reference-feedback{margin:0;font-size:10px;line-height:1.55;color:var(--muted)}
+.reference-connections summary,[data-reference-legacy] summary{font-size:11px;line-height:1.5;min-height:28px;cursor:pointer;color:var(--muted)}
+.reference-connections p,[data-reference-legacy] p{margin:6px 0 0;font-size:11px;line-height:1.6;color:var(--muted);max-height:12dvh;overflow:auto;overflow-wrap:anywhere}
+.business-references-stage .business-small{font-size:10px}
+@media(max-width:620px){.reference-imports{grid-template-columns:minmax(0,1fr);gap:8px}.reference-drop{min-height:44px;flex-direction:row;justify-content:space-between;align-items:center;padding:8px 10px;gap:10px}.reference-drop>span{font-size:12px;gap:10px}.reference-drop small{font-size:9px}.reference-link-form .reference-url{font-size:16px!important}.reference-name{font-size:11px}.reference-pager{gap:4px}}
+@media(max-height:640px){anima-brand-references{gap:6px}.business-references-stage{gap:10px}.reference-drop{min-height:44px;padding:6px 10px}.reference-drop small{font-size:9px}.reference-item{min-height:40px}.reference-item img{width:32px;height:32px}.reference-pager button{min-height:28px;min-width:28px}.reference-feedback{font-size:9px;line-height:1.4}.reference-connections summary{min-height:22px;font-size:10px}.reference-empty{margin:4px 0;font-size:11px}.business-references-stage>.business-small{display:none}}
+@media(min-width:621px) and (max-height:500px){.reference-imports{grid-template-columns:minmax(0,1fr);gap:6px}.reference-drop{flex-direction:row;align-items:center;justify-content:space-between}.business-references-stage>.business-heading{grid-column:1}.business-references-stage>anima-brand-references{grid-column:2;grid-row:1/span 2}.business-references-stage>.business-stage-actions{grid-column:1!important;align-self:end}.business-references-stage .reference-name{font-size:10px}.business-references-stage .reference-pager button{min-height:24px;min-width:24px}}
+@media(forced-colors:active){.reference-drop,.reference-add{background:Canvas;color:CanvasText;border-color:ButtonText}.reference-drop:focus-within{outline-color:Highlight}}
+
+/* Contain the inherited disclosure spacing within the import molecule. */
+anima-brand-references details{margin:0!important;padding:0!important;border:0!important}
+anima-brand-references summary{padding:0!important;margin:0!important}
+
+@media(max-height:640px){
+ .intake-panel:has(.business-references-stage:not([hidden])) .intake-content{padding-block:12px}
+ anima-brand-references:has(.reference-connections[open]){gap:4px}
+ anima-brand-references:has(.reference-connections[open])>.reference-feedback{display:none}
+ .reference-connections[open] p{margin-top:4px;max-height:none}
+}

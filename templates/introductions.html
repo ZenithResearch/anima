@@ -1,0 +1,50 @@
+      <section class="introduction" id="introduction" data-client-title="Introduce your brand." data-client-copy="Tell us what your brand stands for, who it serves and where you want to take it. Bring existing material if you have it; we’ll shape the work together." aria-labelledby="introduction-title" tabindex="-1"><div><p class="eyebrow">A first introduction</p><h3 id="introduction-title">Show us your work.</h3><p id="introduction-copy">Creators and studios: show us the work you want to make more of, and how you like to collaborate. Every proposed project comes with a brief and terms to consider.</p><div class="intro-role-buttons" role="group" aria-label="Introduction type"><button type="button" data-intro-role="creator" data-js disabled aria-pressed="true">Creative / studio</button><button type="button" data-intro-role="talent" data-js disabled aria-pressed="false">Talent roster</button><button type="button" data-intro-role="client" data-js disabled aria-pressed="false">Business</button></div></div>
+        <div>
+          <form id="creator-introduction" class="intro-form" data-intro-form="creator"><label>Your name or working name<input name="name" autocomplete="name" required maxlength="100"></label><label>Email<input name="email" type="email" autocomplete="email" required maxlength="200"></label><label>Where does your work live?<input name="portfolio" type="url" autocomplete="url" required placeholder="https://" maxlength="1500"></label><label>What do you make, and where do you like to work?<textarea name="context" rows="3" required maxlength="2000"></textarea></label><label class="check"><input name="acknowledgement" type="checkbox" required><span>I understand that introductions are reviewed for relevant opportunities. This does not guarantee membership or paid work.</span></label><anima-surface><button class="liquid-button" type="submit" data-js disabled><span class="action-label">Prepare an introduction</span> {{lens}}</button></anima-surface></form>
+          <form id="client-introduction" class="intro-form" data-intro-form="client" hidden><label>Your name<input name="name" autocomplete="name" required maxlength="100"></label><label>Work email<input name="email" type="email" autocomplete="email" required maxlength="200"></label><label>Your brand or organization<input name="organization" autocomplete="organization" required maxlength="100"></label><label>What does your brand stand for, and where do you want to take it?<textarea name="context" rows="3" required maxlength="2000"></textarea></label><anima-surface><button class="liquid-button" type="submit" data-js disabled><span class="action-label">Prepare a brand introduction</span> {{lens}}</button></anima-surface></form>
+          <form id="talent-introduction" class="intro-form" data-intro-form="talent" hidden>
+            <label>Your name or professional name<input name="name" autocomplete="name" required maxlength="100"></label>
+            <label>Email<input name="email" type="email" autocomplete="email" required maxlength="200"></label>
+            <label>Based in<input name="location" autocomplete="address-level2" required maxlength="150" placeholder="City / region"></label>
+            <anima-opportunities><fieldset class="talent-opportunities"><legend>Consider me for</legend>
+              <p id="opportunity-note" class="form-note">Choose every type of work you’d like to be considered for. Select at least one; these are interests, not booking permissions.</p>
+              {{talentOpportunities}}
+              <p class="opportunity-selection" data-opportunity-selection role="status" aria-live="polite">No work types selected yet.</p>
+            </fieldset>
+            </anima-opportunities>
+            <anima-talent-portfolio>
+              <section class="talent-portfolio" aria-labelledby="talent-portfolio-title">
+                <h4 id="talent-portfolio-title">Your work &amp; profiles</h4>
+                <p class="form-note">Add a portfolio, showreel, voice demo or social profile for each side of your work. Each link can support several work types and characters. Up to twelve links; nothing is fetched or published.</p>
+                <details class="talent-character-references"><summary>Add or review characters</summary>
+                  <p class="form-note">Use your existing talent drafts, or name a character here and refine it later. Only characters you attach to a link are included in this roster request.</p>
+                  <ul class="talent-character-list" data-media-characters></ul><p class="form-note" data-media-no-characters>No talent characters added yet. You can also keep a link as a general work sample.</p>
+                  <label>Character name<input name="characterReferenceName" data-character-add-name maxlength="80" placeholder="e.g. The storyteller"></label>
+                  <label>A short description <small>Optional</small><textarea name="characterReferenceDescription" data-character-add-description maxlength="400" rows="2" placeholder="The presence, voice or side of you this character expresses."></textarea></label>
+                  <button class="text-link" type="button" data-character-add>Add character</button><p class="form-note" data-character-add-status role="status"></p>
+                </details>
+                <div data-media-list></div>
+                <div class="talent-media-add"><button type="button" class="text-link" data-media-add>Add another link <span aria-hidden="true">+</span></button><span data-media-limit></span></div>
+                <div class="talent-media-undo" data-media-undo hidden><span role="status">Link removed.</span><button type="button" class="text-link" data-media-restore>Undo removal</button></div>
+                <input type="hidden" name="talentPortfolio"><input type="hidden" name="portfolio">
+              </section>
+            </anima-talent-portfolio>
+            <label><span id="talent-representation-label">Representation</span><select aria-labelledby="talent-representation-label" name="representation" required aria-controls="talent-agent-fields"><option value="">Select your representation</option><option value="represented">Represented by an agent / manager</option><option value="self">Self-represented</option></select></label>
+            <fieldset id="talent-agent-fields" hidden disabled><legend>Agent / manager booking contact</legend>
+              <label>Agent / manager name<input name="agentName" required maxlength="100"></label>
+              <label>Agency / management <small>Optional</small><input name="agency" maxlength="150"></label>
+              <label>Agent / manager email<input name="agentEmail" type="email" required maxlength="200"></label>
+              <label>Booking phone <small>Optional</small><input name="agentPhone" type="tel" maxlength="60"></label>
+              <p class="form-note">We’ll coordinate booking enquiries through your representative.</p>
+            </fieldset>
+            <fieldset class="talent-visibility"><legend>Roster visibility</legend>
+              <label class="check"><input type="radio" name="visibility" value="private" checked><span>Private roster only <small>Consider me for opportunities without listing my profile publicly.</small></span></label>
+              <label class="check"><input type="radio" name="visibility" value="approval"><span>Open to a public profile <small>Ask for my approval before publishing.</small></span></label>
+            </fieldset>
+            <label>Disciplines, experience &amp; availability <small>Optional</small><textarea name="context" rows="3" maxlength="2000" placeholder="What you do, the work you want, and where you’re available."></textarea></label>
+            <label class="check"><input name="acknowledgement" type="checkbox" required><span>I’d like to be considered for relevant opportunities. This request does not guarantee roster acceptance or bookings.</span></label>
+            <anima-surface><button class="liquid-button" type="submit" data-js disabled><span class="action-label">Prepare roster request</span> {{lens}}</button></anima-surface>
+          </form>
+          <p class="form-note">Prepare a note, then open it in your email app to review and send. Nothing is sent or stored by this page.</p><div id="introduction-receipt" class="receipt" role="status" tabindex="-1" hidden></div>
+        </div>
+      </section>

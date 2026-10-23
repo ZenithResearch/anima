@@ -1,0 +1,61 @@
+{
+  "status": "Embedded local custody candidate; supported embedded Service consent and live acceptance pending",
+  "wallet": {
+    "repository": "ZenithResearch/castalia-wallet",
+    "commit": "d6f5b6ddc0f7cb7a892c65bc9d51a7973b498ef9",
+    "path": "packages/provider-types/src/credential-presentation.ts",
+    "gitBlob": "601250195ac57ad32fafd4a3a4ac0518f31afbc3",
+    "local": "src/vendor/wallet-credential-presentation.ts",
+    "patch": "Two TypeScript-only non-null assertions on validated base64 character indexes for noUncheckedIndexedAccess. No runtime behavior change. Attribution header corrected to the public source repository and pinned path; tests reconstruct upstream bytes including the historical header before verifying the original Git blob.",
+    "publicSurface": {
+      "global": "window.castaliaWallet",
+      "methods": [
+        "getStatus",
+        "getMembership",
+        "getCapabilities",
+        "presentCredential"
+      ],
+      "inspectedSource": "packages/provider-types/src/index.ts",
+      "gitBlob": "fd5e8be0e4855b74ff542a0b6a41713e9d30ca8a"
+    }
+  },
+  "service": {
+    "commit": "434f3cb04f8e494fb87317647fe5f2a6e5e41515",
+    "clientQualifiedCommit": "838520dd679394157ae21517d654cde2124b6b0c",
+    "schemas": [
+      {
+        "path": "contracts/requester.evidence.v1.schema.json",
+        "gitBlob": "19a8ee114ccf3b6cdd1b4f35e814e61ca369c759"
+      },
+      {
+        "path": "contracts/gateway.requester.v1.schema.json",
+        "gitBlob": "e7630b7257aa3063ec85bf877e049893467022f2"
+      }
+    ],
+    "readWrapper": "service.castalia-gateway-presentation.v1"
+  },
+  "security": [
+    "Wallet owns private keys, issuer signature verification, replay protection and explicit origin-bound consent.",
+    "Anima checks returned field bindings and account continuity; it does not declare membership verified or workspace authority from these claims.",
+    "Receiver key roots, exact origin and endpoint are reviewed configuration. Discovery cannot install trust.",
+    "No default provider, silent identity creation, fallback signer, plaintext private-key persistence, or automatic enrollment. User-reviewed local identity creation is implemented through Castalia RecoverySession."
+  ],
+  "qualification": {
+    "scope": "Pinned source/type compatibility and explicit callback/signature fixtures. Historical consumer counts are not a standalone release qualification.",
+    "realConsent": "not exercised",
+    "productionSubmission": "disabled",
+    "embeddedLocalCustody": "Implemented candidate; standalone create/restore, recovery download and verification require browser regression review.",
+    "consentGate": "Producer-supported embedded Service consent adapter sharing the existing RecoverySession is required. No extension fallback or second signer.",
+    "sealerRuntime": "Not included or configured; see SEALER-SOURCE.json."
+  },
+  "embedded": {
+    "source": "wallet-sdk/SOURCE.json",
+    "entry": "wallet.html",
+    "worker": "src/embedded-wallet-worker.ts",
+    "host": "src/embedded-wallet-host.ts",
+    "format": "castalia.wallet-local.v1",
+    "scope": "User-reviewed local create/restore, unlock/lock, encrypted recovery export and exact-identity backup verification. No membership, enrollment, authenticated session or provider authority is inferred.",
+    "compatibility": "Additive origin-local store; existing drafts, references, extension custody and older Castalia web storage are untouched. Portable .castalia-recovery format is produced and validated by shared Rust.",
+    "missing": "Producer-supported credential_presentation_v2 facade sharing RecoverySession custody, backup verification, approved trust and epoch. No speculative second signer."
+  }
+}

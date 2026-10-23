@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-20",
+  "scope": "Business discovery only; original production repository unchanged. No browser data copied.",
+  "files": [
+    {
+      "source": "src/brand-pieces.js",
+      "target": "brand-pieces.mjs",
+      "sourceSha256": "cce566ffb0962432d664bc882f6da7c617e6051fb7343a9d4a2ca3b9b8dfecf2"
+    },
+    {
+      "source": "src/questionnaire-legacy.js",
+      "target": "questionnaire-legacy.mjs",
+      "sourceSha256": "579472d5198d5194467f39bea761a4a1672917f4ed97146d692035550bdc2426"
+    },
+    {
+      "source": "src/questionnaire-view.js",
+      "target": "questionnaire-view.mjs",
+      "sourceSha256": "5c21e41adc345e1bba0a33fcd557bb6fd4dab966d650b3a817bebaab645990ad"
+    },
+    {
+      "source": "src/model.js",
+      "target": "domain.mjs",
+      "scope": "Business domain before Voices v1; import extensions adapted; no question or evidence schema rewrite.",
+      "sourceSha256": "5f123fc26b34605436e92e2b192f08100734ceabd6c6e4409ee2700aac705dd8"
+    }
+  ],
+  "sourceRepository": "juiced",
+  "adaptations": [
+    "Native TypeScript orchestration and Anima presentation; original question/hint/subject/output definitions unchanged.",
+    "Anima-specific per-draft IndexedDB namespace; no implicit original-origin data migration.",
+    "Additive reconcileBrandHandoff checks brand-detail edits made outside the discovery dialog."
+  ]
+}

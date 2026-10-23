@@ -1,0 +1,28 @@
+{
+  "schema": "anima.frontend-readiness.v1",
+  "components": [
+    {
+      "name": "Local Wallet custody",
+      "status": "Implemented; manual recovery review required",
+      "target": "wallet.html",
+      "remaining": "Provider consent facade and security qualification remain separate."
+    },
+    {
+      "name": "Provider submission",
+      "status": "Not integrated",
+      "target": "service.html",
+      "remaining": "Reviewed deployment, embedded Wallet consent and receiver acceptance are required."
+    },
+    {
+      "name": "Business questions",
+      "status": "Implemented",
+      "target": "index.html#business-start",
+      "remaining": "Content and live integration review."
+    }
+  ],
+  "cutoverGates": [
+    "Review embedded provider consent and approved endpoint configuration before enabling live submission.",
+    "Explicitly migrate drafts, originals and recovery when changing browser origin.",
+    "Qualify responsive layout and failure recovery in supported browsers."
+  ]
+}

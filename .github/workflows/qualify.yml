@@ -1,0 +1,20 @@
+name: Qualify frontend
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  native-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.20.0'
+          cache: npm
+      - run: rustup update stable --no-self-update
+      - run: rustup target add wasm32-unknown-unknown --toolchain stable
+      - run: npm ci
+      - run: npm run build
+        env:
+          RUSTUP_TOOLCHAIN: stable
+      - run: npm test
