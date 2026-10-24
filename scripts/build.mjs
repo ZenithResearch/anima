@@ -3,7 +3,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 const root=fileURLToPath(new URL('../',import.meta.url)),dist=path.join(root,'dist');
-const files=['package.json','tsconfig.json','build.mjs','build-foundations.mjs','build-workspace.mjs','components.mjs','copy.mjs','token-tools.mjs','check-provider-profile.mjs','tokens.json','atomic.json','ACTION-USAGE.json','PROVIDER-CLIENT-SOURCE.json','WALLET-SOURCE.json','SEALER-SOURCE.json','readiness.json'];
+const files=['package.json','tsconfig.json','build.mjs','build-foundations.mjs','build-workspace.mjs','components.mjs','copy.mjs','token-tools.mjs','check-provider-profile.mjs','tokens.json','atomic.json','ACTION-USAGE.json','PROVIDER-CLIENT-SOURCE.json','MATRIX-COMPANION-SOURCE.json','WALLET-SOURCE.json','SEALER-SOURCE.json','readiness.json'];
 const directories=['src','templates','workspace','water','scene','assets','wallet-sdk','provider-contract','tests','integrations'];
 const styles=['production.css','atoms.css','interactions.css','brand-lockup.css','workspace.css','service.css','wallet.css','environment.css','reference-import.css','question-fields.css','trail-picker.css','review.css','foundations.css','workspace-demo.css'];
 function run(command,args,cwd=root){const result=spawnSync(command,args,{cwd,stdio:'inherit'});if(result.error)throw result.error;if(result.status!==0)throw Error(`${command} exited with ${result.status}`);}
