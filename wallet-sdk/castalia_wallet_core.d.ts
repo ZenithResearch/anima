@@ -45,21 +45,28 @@ export class WasmWallet {
     approveReadAccess(access: WasmReadAccess, now: string): string;
     chainAccounts(): string;
     create(passphrase: string, created_at: bigint): string;
+    exportCastaway(value: string, password: string, now: bigint): string;
     exportRandomized(passphrase: string): string;
+    importCastaway(value: Uint8Array, password: string): string;
     lock(): void;
+    mergeWalletIdentities(current: string, incoming: string): string;
     mlDsaPublicKey(): string;
     mlDsaPublicKeyCommitment(): string;
     constructor();
+    openIdentitySection(value: Uint8Array): string;
     prepareAccessRequest(raw: string, installation: string, pins: string, caller: string, now: string): WasmAccessRequest;
     prepareCredentialPresentation(raw: Uint8Array, trusted_pins_json: string, expected_caller_json: string, now_seconds: string): WasmCredentialPresentation;
     prepareReadAccess(raw: string, installation: string, pins_json: string, caller_json: string, now: string): WasmReadAccess;
     presentReadCall(access: WasmReadAccess, call_json: string, origin: string, now: string): string;
     publicKey(): string;
+    sealIdentitySection(value: string): string;
     sign(message: Uint8Array): Uint8Array;
     signDreggPq(message: Uint8Array): Uint8Array;
     signFilesServiceAuthentication(challenge: string, origin: string, kind: string, service_id: string, now_ms: bigint): Uint8Array;
     unlock(encoded: Uint8Array, passphrase: string): string;
     unwrapFilesKey(binding: string, envelope: string): Uint8Array;
+    validateCastawayDescriptors(value: string): string;
+    validateWalletIdentities(value: string): string;
     wrapFilesKey(binding: string, key: Uint8Array): string;
 }
 
@@ -72,6 +79,7 @@ export class WebWalletCustody {
     exportRandomized(password: string): string;
     importCastaway(value: Uint8Array, password: string): string;
     lock(): void;
+    mergeWalletIdentities(current: string, incoming: string): string;
     mlDsaPublicKey(): string;
     mlDsaPublicKeyCommitment(): string;
     constructor();
@@ -86,6 +94,7 @@ export class WebWalletCustody {
     signScopedMembershipJoin(scope: string): Uint8Array;
     signZenithMembershipJoin(): Uint8Array;
     unlock(file: Uint8Array, password: string): string;
+    validateWalletIdentities(value: string): string;
 }
 
 export function wallet_core_version(): string;
@@ -101,18 +110,36 @@ export interface InitOutput {
     readonly wasmrecoverysession_new: () => number;
     readonly wasmwallet_chainAccounts: (a: number) => [number, number, number, number];
     readonly wasmwallet_create: (a: number, b: number, c: number, d: bigint) => [number, number, number, number];
+    readonly wasmwallet_exportCastaway: (a: number, b: number, c: number, d: number, e: number, f: bigint) => [number, number, number, number];
     readonly wasmwallet_exportRandomized: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly wasmwallet_importCastaway: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
     readonly wasmwallet_lock: (a: number) => void;
+    readonly wasmwallet_mergeWalletIdentities: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
     readonly wasmwallet_mlDsaPublicKey: (a: number) => [number, number, number, number];
     readonly wasmwallet_mlDsaPublicKeyCommitment: (a: number) => [number, number, number, number];
     readonly wasmwallet_new: () => number;
+    readonly wasmwallet_openIdentitySection: (a: number, b: number, c: number) => [number, number, number, number];
     readonly wasmwallet_publicKey: (a: number) => [number, number, number, number];
+    readonly wasmwallet_sealIdentitySection: (a: number, b: number, c: number) => [number, number, number, number];
     readonly wasmwallet_sign: (a: number, b: number, c: number) => [number, number, number, number];
     readonly wasmwallet_signDreggPq: (a: number, b: number, c: number) => [number, number, number, number];
     readonly wasmwallet_signFilesServiceAuthentication: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: bigint) => [number, number, number, number];
     readonly wasmwallet_unlock: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
     readonly wasmwallet_unwrapFilesKey: (a: number, b: number, c: number, d: number, e: number) => [number, number, number];
+    readonly wasmwallet_validateCastawayDescriptors: (a: number, b: number, c: number) => [number, number, number, number];
+    readonly wasmwallet_validateWalletIdentities: (a: number, b: number, c: number) => [number, number, number, number];
     readonly wasmwallet_wrapFilesKey: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
+    readonly __wbg_wasmaccessrequest_free: (a: number, b: number) => void;
+    readonly wasmaccessrequest_dispose: (a: number) => void;
+    readonly wasmaccessrequest_summary: (a: number) => [number, number, number, number];
+    readonly wasmwallet_approveAccessRequest: (a: number, b: number, c: number, d: number) => [number, number, number, number];
+    readonly wasmwallet_prepareAccessRequest: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number) => [number, number, number];
+    readonly __wbg_wasmcredentialpresentation_free: (a: number, b: number) => void;
+    readonly wasmcredentialpresentation_canonicalRequest: (a: number) => [number, number, number, number];
+    readonly wasmcredentialpresentation_dispose: (a: number) => void;
+    readonly wasmcredentialpresentation_summary: (a: number) => [number, number, number, number];
+    readonly wasmwallet_approveCredentialPresentation: (a: number, b: number, c: number, d: number) => [number, number, number, number];
+    readonly wasmwallet_prepareCredentialPresentation: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number) => [number, number, number];
     readonly __wbg_webwalletcustody_free: (a: number, b: number) => void;
     readonly webwalletcustody_chainAccounts: (a: number) => [number, number, number, number];
     readonly webwalletcustody_create: (a: number, b: number, c: number, d: bigint) => [number, number, number, number];
@@ -120,6 +147,7 @@ export interface InitOutput {
     readonly webwalletcustody_exportRandomized: (a: number, b: number, c: number) => [number, number, number, number];
     readonly webwalletcustody_importCastaway: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
     readonly webwalletcustody_lock: (a: number) => void;
+    readonly webwalletcustody_mergeWalletIdentities: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
     readonly webwalletcustody_mlDsaPublicKey: (a: number) => [number, number, number, number];
     readonly webwalletcustody_mlDsaPublicKeyCommitment: (a: number) => [number, number, number, number];
     readonly webwalletcustody_new: () => number;
@@ -134,17 +162,7 @@ export interface InitOutput {
     readonly webwalletcustody_signScopedMembershipJoin: (a: number, b: number, c: number) => [number, number, number, number];
     readonly webwalletcustody_signZenithMembershipJoin: (a: number) => [number, number, number, number];
     readonly webwalletcustody_unlock: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
-    readonly __wbg_wasmaccessrequest_free: (a: number, b: number) => void;
-    readonly __wbg_wasmcredentialpresentation_free: (a: number, b: number) => void;
-    readonly wasmaccessrequest_dispose: (a: number) => void;
-    readonly wasmaccessrequest_summary: (a: number) => [number, number, number, number];
-    readonly wasmcredentialpresentation_canonicalRequest: (a: number) => [number, number, number, number];
-    readonly wasmcredentialpresentation_dispose: (a: number) => void;
-    readonly wasmcredentialpresentation_summary: (a: number) => [number, number, number, number];
-    readonly wasmwallet_approveAccessRequest: (a: number, b: number, c: number, d: number) => [number, number, number, number];
-    readonly wasmwallet_approveCredentialPresentation: (a: number, b: number, c: number, d: number) => [number, number, number, number];
-    readonly wasmwallet_prepareAccessRequest: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number) => [number, number, number];
-    readonly wasmwallet_prepareCredentialPresentation: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number) => [number, number, number];
+    readonly webwalletcustody_validateWalletIdentities: (a: number, b: number, c: number) => [number, number, number, number];
     readonly __wbg_wasmreadaccess_free: (a: number, b: number) => void;
     readonly wasmreadaccess_dispose: (a: number) => void;
     readonly wasmreadaccess_summary: (a: number) => [number, number, number, number];

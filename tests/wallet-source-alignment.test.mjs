@@ -8,5 +8,5 @@ test('embedded core, presentation helper and companion use one public Wallet rev
  assert.equal(core.repository,'https://github.com/ZenithResearch/castalia-wallet');
  assert.equal(core.revision,presentation.wallet.commit);assert.equal(core.revision,matrix.revision);
  initSync({module:await readFile(new URL('../wallet-sdk/castalia_wallet_core_bg.wasm',import.meta.url))});
- assert.equal(wallet_core_version(),core.core_version);assert.equal(core.core_version,'0.2.0');
+ assert.equal(wallet_core_version(),core.core_version);assert.equal(core.core_version,'0.3.0');
 });

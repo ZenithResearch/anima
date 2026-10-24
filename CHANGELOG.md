@@ -17,3 +17,9 @@
 - Add hash-pinned public Zenith catalog discovery, restricted to the reviewed 4337 origin; unauthorized previews do not contact the provider.
 - Preserve the producer's preview-only service state and refuse every submission, signing and progress operation in the discovery adapter.
 - Surface the availability/SDK gate and missing consent, encryption and projection integrations without changing shared schemas or stored request identities.
+
+## [Unreleased]
+
+### Changed
+
+- Pin embedded Wallet core0.3.0 to the common public revision — preserves existing custody/consent while supporting versioned portable identities.

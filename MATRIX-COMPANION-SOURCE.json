@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/ZenithResearch/castalia-wallet",
-  "revision": "575895f70e4cbdc982b7c9271b468470271dbb0b",
+  "revision": "054b372d686e2f8dba0ad8bbd166adbde9ebab38",
   "branch": "main",
   "package": "@castalia-wallet/matrix-companion",
   "version": "0.2.0",
@@ -14,7 +14,7 @@
     {
       "upstream": "packages/matrix-companion/src/index.ts",
       "local": "src/vendor/matrix-companion.ts",
-      "sha256": "9b41bcbfccbece42a1639a237a4c8a92a0112898892809426a51973556ed2f52"
+      "sha256": "d1fe61898193c706eb57d0a1d8714a46790c6e99850d869481fd6e0e3b69495f"
     },
     {
       "upstream": "packages/matrix-companion/fixtures/matrix-companion-v1.fixture.json",
@@ -29,7 +29,7 @@
   },
   "patch": {
     "scope": "TypeScript-only compatibility; no runtime behavior changes.",
-    "attributionHeader": "// Vendored from ZenithResearch/castalia-wallet packages/matrix-companion/src/index.ts.\n// Revision 575895f70e4cbdc982b7c9271b468470271dbb0b; see MATRIX-COMPANION-SOURCE.json.\n",
+    "attributionHeader": "// Vendored from ZenithResearch/castalia-wallet packages/matrix-companion/src/index.ts.\n// Revision 054b372d686e2f8dba0ad8bbd166adbde9ebab38; see MATRIX-COMPANION-SOURCE.json.\n",
     "nonNullAssertions": 0,
     "description": "Attribution header only; authoring source bytes unchanged. Strict assertions now belong to the public producer."
   }
