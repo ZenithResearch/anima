@@ -1,0 +1,36 @@
+{
+  "repository": "https://github.com/ZenithResearch/castalia-wallet",
+  "revision": "575895f70e4cbdc982b7c9271b468470271dbb0b",
+  "branch": "main",
+  "package": "@castalia-wallet/matrix-companion",
+  "version": "0.2.0",
+  "capability": "matrix_companion_v1",
+  "status": "Public pinned producer source. App-safe read fixture only; no live Wallet or Matrix transport connected.",
+  "source": {
+    "path": "packages/matrix-companion/src/index.ts",
+    "sha256": "cf7639e6d1b30536e0c382813155e0de63b49ccddf1a8bb7f8f27fffe44b3694"
+  },
+  "files": [
+    {
+      "upstream": "packages/matrix-companion/src/index.ts",
+      "local": "src/vendor/matrix-companion.ts",
+      "sha256": "9b41bcbfccbece42a1639a237a4c8a92a0112898892809426a51973556ed2f52"
+    },
+    {
+      "upstream": "packages/matrix-companion/fixtures/matrix-companion-v1.fixture.json",
+      "local": "provider-contract/matrix-companion-v1.fixture.json",
+      "sha256": "55ffd5afa6fced12dc42b2f7e5689d255fbd2e3058e7cd98ecf57b929a852ae7"
+    }
+  ],
+  "qualification": {
+    "producer": "Full public Wallet workspace tests, typecheck and shared core tests passed. Fixture qualification only.",
+    "live": false,
+    "scope": "Fixture wire-shape mapping only; no runtime crypto, encrypted storage, auth, E2EE, delivery or service acceptance."
+  },
+  "patch": {
+    "scope": "TypeScript-only compatibility; no runtime behavior changes.",
+    "attributionHeader": "// Vendored from ZenithResearch/castalia-wallet packages/matrix-companion/src/index.ts.\n// Revision 575895f70e4cbdc982b7c9271b468470271dbb0b; see MATRIX-COMPANION-SOURCE.json.\n",
+    "nonNullAssertions": 0,
+    "description": "Attribution header only; authoring source bytes unchanged. Strict assertions now belong to the public producer."
+  }
+}

@@ -2,7 +2,7 @@
   "status": "Source-built embedded same-session consent candidate; manual UI consent and live acceptance pending",
   "wallet": {
     "repository": "ZenithResearch/castalia-wallet",
-    "commit": "d6f5b6ddc0f7cb7a892c65bc9d51a7973b498ef9",
+    "commit": "575895f70e4cbdc982b7c9271b468470271dbb0b",
     "path": "packages/provider-types/src/credential-presentation.ts",
     "gitBlob": "601250195ac57ad32fafd4a3a4ac0518f31afbc3",
     "local": "src/vendor/wallet-credential-presentation.ts",
@@ -16,7 +16,7 @@
         "presentCredential"
       ],
       "inspectedSource": "packages/provider-types/src/index.ts",
-      "gitBlob": "fd5e8be0e4855b74ff542a0b6a41713e9d30ca8a"
+      "gitBlob": "b76651a85d92b25d3791a0a2f8eeac6b6888f1e1"
     }
   },
   "service": {
