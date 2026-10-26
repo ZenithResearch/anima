@@ -29,7 +29,13 @@ test('downloaded encrypted recovery restores same identity and tested-backup sta
   await f.host.initialize();const preview=await f.host.previewCreate(password);await f.host.confirm();
   const backup=await f.host.exportRecovery(backupPassword);assert.equal(backup.extension,'castalia-recovery');assert.equal(JSON.parse(backup.file).schema,'castalia.wallet-custody.v1');assert.ok(!backup.file.includes(password));assert.ok(!backup.file.includes(backupPassword));
   assert.equal((await f.host.verifyBackup(backup.file,backupPassword)).backup_verified,true);
-  await target.host.initialize();assert.equal((await target.host.previewRestore(backup.file,backupPassword,'Different local password 123')).publicKey,preview.publicKey);
+  await target.host.initialize();
+  const recoveredPreview=await target.host.previewRestore(backup.file,backupPassword,'Different local password 123');
+  assert.equal(recoveredPreview.publicKey,preview.publicKey);
+  assert.equal(preview.chainAccounts.length,4);
+  assert.deepEqual(recoveredPreview.chainAccounts,preview.chainAccounts,'The same recovered root must derive the same public accounts');
+  assert.deepEqual(Object.keys(recoveredPreview).sort(),['chainAccounts','publicKey','restoring'],'Only reviewed public fields cross the worker boundary');
+  assert.deepEqual(recoveredPreview.chainAccounts.map(a=>a.networkId),['cardano:mainnet','eip155:1','eip155:4663','solana:mainnet-beta']);
   assert.equal(target.record(),null);const restored=await target.host.confirm();assert.equal(restored.public_key,preview.publicKey);assert.equal(restored.backup_verified,true);assert.equal(restored.membership_active,false);
   assert.notEqual(target.record(),f.record());target.host.lock();await assert.rejects(target.host.unlock(password));
   assert.equal((await target.host.unlock('Different local password 123')).public_key,preview.publicKey);
