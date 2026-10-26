@@ -1,5 +1,5 @@
 // Vendored shared contract from ZenithResearch/castalia-wallet (MIT).
-// Source: 054b372d686e2f8dba0ad8bbd166adbde9ebab38 packages/provider-types/src/credential-presentation.ts.
+// Source: 19ec02f0000f7c59f7341f87ad4c04fd54784fe1 packages/provider-types/src/credential-presentation.ts.
 /** Application-neutral credential-bound presentations. Signatures require custody/issuer verification. */
 export const CREDENTIAL_SIGNATURE_DOMAIN = 'castalia.request-credential.v1/signature\0'
 export const PRESENTATION_SIGNATURE_DOMAIN = 'castalia.credential-presentation.v2/signature\0'

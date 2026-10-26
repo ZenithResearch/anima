@@ -1,5 +1,5 @@
 // Vendored from ZenithResearch/castalia-wallet packages/matrix-companion/src/index.ts.
-// Revision 054b372d686e2f8dba0ad8bbd166adbde9ebab38; see MATRIX-COMPANION-SOURCE.json.
+// Revision 19ec02f0000f7c59f7341f87ad4c04fd54784fe1; see MATRIX-COMPANION-SOURCE.json.
 export const MATRIX_COMPANION_CAPABILITY = 'matrix_companion_v1' as const
 export const MATRIX_COMPANION_APPROVAL_WINDOW_MS = 120_000
 

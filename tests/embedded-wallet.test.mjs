@@ -86,3 +86,20 @@ test('same embedded host persists verified membership and signs only under expli
   const stale=await f.host.prepareCredentialPresentation(request);f.set('changed encrypted record');await assert.rejects(f.host.approveCredentialPresentation(stale.token),/another tab/);assert.equal(f.record(),'changed encrypted record');
  }finally{f.core.free();}
 });
+
+test('core 0.4.1 opens an actual 0.3.0 snapshot without rewriting it and restores its recovery identity',async()=>{
+ const legacy=JSON.parse(await readFile(new URL('../tests/fixtures/wallet-core-030.json',import.meta.url),'utf8'));
+ const existing=fixture(),restored=fixture();try{
+  existing.set(legacy.snapshot);assert.equal((await existing.host.initialize()).configured,true);
+  await assert.rejects(existing.host.unlock('wrong password'));
+  assert.equal(existing.record(),legacy.snapshot);
+  assert.equal((await existing.host.unlock(legacy.password)).public_key,legacy.owner);
+  assert.equal(existing.record(),legacy.snapshot);
+  existing.host.lock();assert.equal((await existing.host.unlock(legacy.password)).public_key,legacy.owner);
+  await restored.host.initialize();
+  assert.equal((await restored.host.previewRestore(legacy.recovery,legacy.password,'New public fixture password 123')).publicKey,legacy.owner);
+  assert.equal(restored.record(),null);
+  assert.equal((await restored.host.confirm()).public_key,legacy.owner);
+  assert.equal(existing.record(),legacy.snapshot);
+ }finally{existing.core.free();restored.core.free();}
+});

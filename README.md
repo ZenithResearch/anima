@@ -45,3 +45,5 @@ Browser storage is scoped to the exact origin: scheme, hostname, and port. Exist
 Requests preserve reviewed material, reference associations, and stable request identity through retries. The checked-in provider examples are fixtures, not active destinations or authority. Live delivery requires separately reviewed endpoint configuration, the supported same-custody Wallet consent adapter, and an end-to-end acceptance test. No deployment is configured by this repository.
 
 See [direction](docs/direction.md), [migration](docs/migration.md), [readiness](docs/readiness.md), and [design-system review](docs/design-system-review.md). Third-party sources and terms are recorded in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). No project-wide license grant is currently declared.
+
+Wallet core source and upgrade compatibility: [public core 0.4.1](docs/wallet-core-041.md).
