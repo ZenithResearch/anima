@@ -79,3 +79,9 @@ test('Queue reconciliation uses the pinned response mount even when acknowledgem
  assert.notEqual(reads[0].init.headers.Authorization,reads[1].init.headers.Authorization);
  state.locked=true;await assert.rejects(connection.provider.statusForRequest('example-request'),/Unlock/);assert.equal(state.calls.length,4);
 });
+
+test('a changed published service version or immutable process cannot replace the reviewed candidate catalog',async()=>{
+ for(const change of [c=>c.services[0].version='replacement',c=>c.services[0].process.compilation_hash='f'.repeat(64),c=>c.services[0].availability='preview']){
+  const {profile,state,connection}=await queueSetup();change(profile.catalog);await assert.rejects(connection.provider.catalog(),/pins changed/);assert.equal(state.approvals,0);assert.equal(state.calls.length,1);
+ }
+});

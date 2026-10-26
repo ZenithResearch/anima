@@ -38,7 +38,8 @@ test('working specimens have a local script and links to complete organisms',asy
 test('readiness data exposes integration gaps and actual candidate anchors',async()=>{
  const r=JSON.parse(await readFile(new URL('readiness.json',base),'utf8'));
  for(const item of r.components){assert.ok(item.remaining);if(item.target.startsWith('index.html#'))assert.ok(ids.includes(item.target.split('#')[1]),item.name);}
- assert.ok(r.components.some(c=>c.status==='Not integrated'));
+ const provider=r.components.find(c=>c.name==='Provider submission');
+ assert.match(provider.status,/pending|blocked|not integrated/i);assert.match(provider.remaining,/response/i);assert.match(provider.remaining,/consent/i);await access(new URL(provider.target,base));
  assert.ok(r.cutoverGates.some(g=>g.includes('provider consent')));
 });
 
