@@ -10,8 +10,11 @@ export interface WalletSnapshotStore {
 export type LocalWalletState={configured:boolean;unlocked:boolean;revision:number;public_key:string|null;backup_verified:boolean;backup_eligible:boolean;membership_active:boolean};
 export type PresentationPreview={token:string;summary:{disclosure:PresentationDisclosure;holder_public_key:string;caller:{kind:string;id:string};audience:string;issuer:string;key_id:string;request_digest_sha256:string;policy_digest_sha256:string;expires_at:number;confirm_by:number}};
 export type PresentationIdentity={public_key:string;membership:ZenithMembershipCredentialV3};
-export type WalletPreview={publicKey:string;restoring:boolean};
-type Prepared={token:string;expected_revision:number;public_key:string};
+export type DerivedWalletAccount={accountId:string;networkId:string;address:string};
+export type WalletPreview={publicKey:string;restoring:boolean;chainAccounts?:readonly DerivedWalletAccount[]};
+type Prepared={token:string;expected_revision:number;public_key:string;chain_accounts?:{accounts:DerivedWalletAccount[]}};
+const publicPreview=(prepared:Prepared,restoring:boolean):WalletPreview=>({publicKey:prepared.public_key,restoring,
+ chainAccounts:prepared.chain_accounts?.accounts.map(({accountId,networkId,address})=>({accountId,networkId,address}))});
 export class EmbeddedWalletHost {
  private stored:string|null=null;
  private pending:Prepared|null=null;
@@ -23,12 +26,12 @@ export class EmbeddedWalletHost {
  async previewCreate(password:string):Promise<WalletPreview>{
   await this.assertCurrent();this.pending=null;
   this.pending=this.call<Prepared>({operation:'prepare_create',password,created_at:Date.now(),expected_revision:this.state().revision});
-  return {publicKey:this.pending.public_key,restoring:false};
+  return publicPreview(this.pending,false);
  }
  async previewRestore(file:string,filePassword:string,password:string):Promise<WalletPreview>{
   await this.assertCurrent();this.pending=null;
   this.pending=this.call<Prepared>({operation:'prepare_restore',file,file_password:filePassword,password,expected_revision:this.state().revision});
-  return {publicKey:this.pending.public_key,restoring:true};
+  return publicPreview(this.pending,true);
  }
  async confirm():Promise<LocalWalletState>{
   const pending=this.pending;if(!pending)throw Error('Review the identity before saving it.');

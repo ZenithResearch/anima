@@ -1,5 +1,14 @@
 # Changelog
 
+## Recovery and Castaway review alignment — 2026-10-26
+
+- Review the Wallet public key and derived blockchain accounts before recovery
+  confirmation, using the prepared public core result and one existing consent.
+- Explain that saved account identities, profile and proofs belong to Castaway
+  data; preserve existing snapshots, recovery files and the exact core 0.4.1 pin.
+- Add real-core derived-account continuity and escaped review coverage. See
+  `docs/wallet-recovery-review.md` for scope and the existing data-file UI limit.
+
 ## Unreleased
 
 - Extract the Anima production client into a standalone native web repository.

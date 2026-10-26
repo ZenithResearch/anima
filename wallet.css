@@ -6,6 +6,9 @@
 .wallet-page form{display:grid;gap:var(--anima-semantic-space-control);max-width:34rem;margin-block:var(--anima-semantic-space-group)}
 .wallet-heading{display:flex;justify-content:space-between;align-items:center;gap:var(--anima-semantic-space-control)}
 .wallet-key{overflow-wrap:anywhere;font-size:var(--anima-semantic-type-caption)}
+.wallet-account-list{display:grid;gap:var(--anima-semantic-space-control)}
+.wallet-account-list dt{font-weight:600}
+.wallet-account-list dd{margin-inline-start:0;overflow-wrap:anywhere;font-size:var(--anima-semantic-type-caption)}
 .wallet-page .service-actions{flex-wrap:wrap}
 .wallet-page details{margin-top:var(--anima-semantic-space-group)}
 .wallet-page summary{cursor:pointer;min-height:var(--anima-semantic-size-target)}
