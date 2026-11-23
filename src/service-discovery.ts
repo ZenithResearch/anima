@@ -8,10 +8,10 @@ import {sha256} from '../workspace/brief-delivery.mjs';
 export const zenithPilotDiscovery=Object.freeze({
  origin:'http://127.0.0.1:4337',
  baseUrl:'https://zenith-provider-intake.vercel.app',
- catalogSha256:'d65d9c5347ab6404fd8bdc30774563cd556a4d1f27534dd2f6bd518f5ef7ff2f'
+ catalogSha256:'80b67e2d0c19d334a6227b4a0b42640989d16b71fd66e1a58331e41f6d3cedde'
 });
 type DiscoveryPin=Readonly<{origin:string;baseUrl:string;catalogSha256:string}>;
-const pending='Provider discovery only. Encrypted submission requires the supported Wallet consent adapter and reviewed sealer. Provider progress has no configured projection address.';
+const pending='Provider discovery only. This adapter cannot submit or read progress. Choose an explicitly supported Wallet approval surface to connect a locally configured transport test. Wallet consent does not itself submit a request.';
 export function providerDiscovery(options:{currentOrigin:()=>string;fetch?:typeof fetch;pin?:DiscoveryPin}):{provider:ProviderAdapter|null;detail:string}{
  const pin=options.pin??zenithPilotDiscovery;
  if(options.currentOrigin()!==pin.origin)return {provider:null,detail:`The Zenith pilot allows ${pin.origin}. This preview origin is not authorized; no provider connection is attempted. Your material stays local.`};

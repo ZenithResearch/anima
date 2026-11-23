@@ -3,21 +3,33 @@
   "components": [
     {
       "name": "Local Wallet custody",
-      "status": "Implemented; manual recovery review required",
+      "status": "Core 0.4.1; disposable create/backup/restore verified",
       "target": "wallet.html",
-      "remaining": "Producer draft PR 3 and owner consent review; encrypted custody/recovery remains unchanged."
+      "remaining": "Pinned shared core 0.4.1; owner consent and live receiver acceptance remain separate. No owner custody was opened or migrated."
+    },
+    {
+      "name": "Approval surface",
+      "status": "Browser fallback candidate; Transfer adapter unavailable",
+      "target": "service.html",
+      "remaining": "Versioned external browser-to-Transfer consent/result bridge and installed qualification. Browser Wallet is used only by explicit selection; no automatic signer switch or backup import."
     },
     {
       "name": "Provider submission",
-      "status": "Not integrated",
+      "status": "Owner consent and end-to-end test pending",
       "target": "service.html",
-      "remaining": "Active available catalog, reviewed projection endpoint and exact browser origin, producer release review, owner consent and real receiver acceptance."
+      "remaining": "Explicit local test configuration; owner Wallet consent; transport receipt, Service acceptance, exact-Run mock execution and response/artifact/receipt verification."
     },
     {
       "name": "Business questions",
       "status": "Implemented",
       "target": "index.html#business-start",
       "remaining": "Content and live integration review."
+    },
+    {
+      "name": "Onboarding & Matrix fixture",
+      "status": "Shared Matrix 0.2.0 read fixture integrated; live operations pending",
+      "target": "connections-fixture.html",
+      "remaining": "Live Wallet Matrix SDK/protected storage and approval boundary; timeline/E2EE/device projections; onboarding authority, provider intake and route reconciliation. Real actions remain disabled."
     }
   ],
   "cutoverGates": [

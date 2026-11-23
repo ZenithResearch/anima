@@ -2,7 +2,7 @@
   "status": "Source-built embedded same-session consent candidate; manual UI consent and live acceptance pending",
   "wallet": {
     "repository": "ZenithResearch/castalia-wallet",
-    "commit": "054b372d686e2f8dba0ad8bbd166adbde9ebab38",
+    "commit": "06f827483d5637bc29266ac893cf6ac13531d38b",
     "path": "packages/provider-types/src/credential-presentation.ts",
     "gitBlob": "601250195ac57ad32fafd4a3a4ac0518f31afbc3",
     "local": "src/vendor/wallet-credential-presentation.ts",
@@ -44,7 +44,7 @@
     "scope": "Pinned source/type compatibility and explicit callback/signature fixtures. Historical consumer counts are not a standalone release qualification.",
     "realConsent": "not exercised",
     "productionSubmission": "disabled",
-    "embeddedLocalCustody": "Implemented candidate; standalone create/restore, recovery download and verification require browser regression review.",
+    "embeddedLocalCustody": "Core 0.4.1 create, encrypted recovery download, verification, restore to a separate origin, same-public-key check, reload and wrong/correct unlock verified with disposable data. Existing Core 0.3 snapshots and recovery covered by regression fixtures. Owner custody not accessed.",
     "consentGate": "Closed same-RecoverySession candidate implemented at Wallet PR 3; user approval, producer release review and live receiver acceptance remain required.",
     "sealerRuntime": "Included source-qualified secS MIT runtime; see SEALER-SOURCE.json."
   },
@@ -54,8 +54,8 @@
     "worker": "src/embedded-wallet-worker.ts",
     "host": "src/embedded-wallet-host.ts",
     "format": "castalia.wallet-local.v1",
-    "scope": "Local custody/recovery plus explicitly reviewed membership, receiver policy and one-shot v2 presentation through the same worker/session. No extension or second signer.",
+    "scope": "Core 0.4.1 local custody/recovery and existing explicit membership, receiver policy and one-shot v2 presentation through the same worker/session. No extension, second signer or reusable-grant UI.",
     "compatibility": "Additive origin-local store; existing drafts, references, extension custody and older Castalia web storage are untouched. Portable .castalia-recovery format is produced and validated by shared Rust.",
-    "missing": "Producer draft PR review, exact-artifact user consent and active provider release/projection handoff."
+    "missing": "Owner provider consent and an active provider release/projection for end-to-end Queue acceptance. New reusable-grant features are not exposed by Anima."
   }
 }

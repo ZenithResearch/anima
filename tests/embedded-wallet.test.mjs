@@ -86,3 +86,37 @@ test('same embedded host persists verified membership and signs only under expli
   const stale=await f.host.prepareCredentialPresentation(request);f.set('changed encrypted record');await assert.rejects(f.host.approveCredentialPresentation(stale.token),/another tab/);assert.equal(f.record(),'changed encrypted record');
  }finally{f.core.free();}
 });
+
+test('Core 0.4.1 opens the exact Core 0.3 encrypted snapshot without replacing or rewriting custody',async()=>{
+ const legacy=JSON.parse(await readFile(new URL('fixtures/wallet-core03-disposable.json',import.meta.url),'utf8'));
+ const f=fixture();try{
+  f.set(legacy.snapshot);const state=await f.host.initialize();assert.equal(state.configured,true);assert.equal(state.unlocked,false);
+  await assert.rejects(f.host.unlock('incorrect upgrade password'));assert.equal(f.record(),legacy.snapshot);
+  const opened=await f.host.unlock(legacy.password);assert.equal(opened.public_key,legacy.public_key);assert.equal(opened.membership_active,false);assert.equal(f.record(),legacy.snapshot);
+  f.host.lock();assert.equal((await f.host.unlock(legacy.password)).public_key,legacy.public_key);
+  const backup=await f.host.exportRecovery(backupPassword);await f.host.verifyBackup(backup.file,backupPassword);
+  assert.equal((await f.host.inspect()).backup_verified,true);f.host.lock();assert.equal((await f.host.unlock(legacy.password)).public_key,legacy.public_key);
+ }finally{f.core.free();}
+});
+test('Core 0.3 recovery restores the same identity through the upgraded host; errors and cancellation leave storage empty',async()=>{
+ const legacy=JSON.parse(await readFile(new URL('fixtures/wallet-core03-disposable.json',import.meta.url),'utf8'));
+ const target=fixture();try{
+  await target.host.initialize();
+  await assert.rejects(target.host.previewRestore(legacy.recovery,'incorrect recovery password',password));assert.equal(target.record(),null);
+  await assert.rejects(target.host.previewRestore('{"schema":"invalid"}',legacy.recoveryPassword,password));assert.equal(target.record(),null);
+  assert.equal((await target.host.previewRestore(legacy.recovery,legacy.recoveryPassword,password)).publicKey,legacy.public_key);
+  target.host.cancel();await assert.rejects(target.host.confirm());assert.equal(target.record(),null);
+  await target.host.previewRestore(legacy.recovery,legacy.recoveryPassword,password);const restored=await target.host.confirm();
+  assert.equal(restored.public_key,legacy.public_key);assert.equal(restored.backup_verified,true);assert.equal(restored.membership_active,false);
+  const saved=target.record();await assert.rejects(target.host.previewRestore(legacy.recovery,legacy.recoveryPassword,password));assert.equal(target.record(),saved);
+ }finally{target.core.free();}
+});
+test('tampered recovery fails closed without changing the upgraded Wallet or its backup status',async()=>{
+ const f=fixture();try{
+  await f.host.initialize();await f.host.previewCreate(password);const before=await f.host.confirm();
+  const backup=await f.host.exportRecovery(backupPassword),record=f.record();
+  const malformed=JSON.parse(backup.file);malformed.ciphertext=(malformed.ciphertext[0]==='A'?'B':'A')+malformed.ciphertext.slice(1);
+  await assert.rejects(f.host.verifyBackup(JSON.stringify(malformed),backupPassword));
+  assert.equal(f.record(),record);const after=await f.host.inspect();assert.equal(after.public_key,before.public_key);assert.equal(after.backup_verified,false);
+ }finally{f.core.free();}
+});

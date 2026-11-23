@@ -1,24 +1,28 @@
 {
   "product": "Castalia Wallet",
-  "scope": "Pinned shared core with portable Wallet identities; same-session custody/consent retained",
-  "revision": "054b372d686e2f8dba0ad8bbd166adbde9ebab38",
+  "scope": "Pinned shared core 0.4.1; embedded same-session custody/consent retained; new grant interfaces not exposed by Anima",
+  "revision": "06f827483d5637bc29266ac893cf6ac13531d38b",
   "repository": "https://github.com/ZenithResearch/castalia-wallet",
   "format": "castalia.wallet-local.v1 (unchanged Rust-produced encrypted snapshot)",
   "recovery": "castalia.wallet-custody.v1 in .castalia-recovery; signing identity only",
-  "build": "wasm-pack build crates/castalia-wallet-core --target web --release --no-opt --out-dir ../../wallet-sdk --out-name castalia_wallet_core -- --locked",
-  "qualification": "Local consumer tests and browser review required. Not a signed release or custody security qualification.",
+  "build": "wasm-pack build crates/castalia-wallet-core --target web --release --no-opt --out-name castalia_wallet_core -- --locked; producer localBuildEnvironment remaps builder paths; output copied from isolated temporary SDK directory",
+  "qualification": "Source-built pinned WASM; see docs/readiness.md for consumer recovery and Queue regression coverage. Not a signed producer release or custody security audit.",
   "sources": [
     {
       "name": "Cargo.lock",
-      "sha256": "566f5c755c2ad42b97a7dfa3a361a12ca646ad16fa399e1ba1efc5db5dd7ee32"
+      "sha256": "d49dd46cabe9d5afd00f2bbed3a8e297eb2b6d8c330ed05f0e905ae265e9d762"
+    },
+    {
+      "name": "Cargo.toml",
+      "sha256": "4347d4ee5723fab595fac76301d19404b3e3bb91e0a71acae9242c5606492b06"
     },
     {
       "name": "crates/castalia-wallet-core/Cargo.toml",
-      "sha256": "385d11230103c9c58c9355f3447e0176755c6e8e80c6f4adb331c4fa28bee832"
+      "sha256": "1bd406c5e8e5860ef87f587fb62538c6ebbab5c57b8c685b66bfa27b65168325"
     },
     {
       "name": "crates/castalia-wallet-core/src/access_request.rs",
-      "sha256": "618f4a3437416dd2e93799d095517e7585e36054b71797c55fa238169bc91ba4"
+      "sha256": "ba97bf804caae4a22047c44af79b5f5af23af29220edbc05c21c5429f2e73487"
     },
     {
       "name": "crates/castalia-wallet-core/src/browser_read.rs",
@@ -37,8 +41,12 @@
       "sha256": "53f10fb2659ab1165052fcdbd2d08b2f867c7c319cc6229ad87ff462b2c6f9e0"
     },
     {
+      "name": "crates/castalia-wallet-core/src/holder_grants.rs",
+      "sha256": "33be75e1b90a76eaa5b716966d0dcfd00cdb956f8dcab2dc4bf8bb50b1288f47"
+    },
+    {
       "name": "crates/castalia-wallet-core/src/lib.rs",
-      "sha256": "e06502262efb00bf26405ca379b1c683971f15b12c2a5a7ea99bb6a67f96a3b7"
+      "sha256": "f4095638752c5c12af74719b26cb2facfabfd970004ae944c7c67d8bcc6c474a"
     },
     {
       "name": "crates/castalia-wallet-core/src/membership_presentation_v2.rs",
@@ -54,11 +62,15 @@
     },
     {
       "name": "crates/castalia-wallet-core/src/recovery_session.rs",
-      "sha256": "7b846de64bb1ad502f1c0c1439ca82e67f0560e5f99db3d30811ea007c3a2de0"
+      "sha256": "112451b6bdd19f2499d2cb9bfad0b3c3209d90ee2ab8a8cec8f20e38e60f5dbc"
     },
     {
       "name": "crates/castalia-wallet-core/src/resource_owner.rs",
       "sha256": "660d27054acdb5dd7c27cb6ea130cd0063cdb54fa8613d1e853c42f70db07124"
+    },
+    {
+      "name": "crates/castalia-wallet-core/src/service_access_point.rs",
+      "sha256": "f6a9a6f1d7bc663f18057c6e263fc87e34dfcf99f894dbf5b76810fdc61fc300"
     },
     {
       "name": "crates/castalia-wallet-core/src/wallet_identities.rs",
@@ -69,8 +81,32 @@
       "sha256": "9fe0c46263ede6e67732ee1c5e3fad658979d1a8fa690f3c9391a9cac8f67323"
     },
     {
+      "name": "crates/castalia-wallet-presentation/src/grant_validity.rs",
+      "sha256": "07b7454deca3a0fbd8eedf561cfedd1e312a184f6331d7921e408177c70c97d7"
+    },
+    {
       "name": "crates/castalia-wallet-presentation/src/lib.rs",
       "sha256": "af69411d7c13b63073084ee0973c1bc28055c23b0a5646b15cc936620e6cc0c7"
+    },
+    {
+      "name": "crates/castalia-wallet-presentation/src/read_authority.rs",
+      "sha256": "19d5b5bafe61061726599d8f47b03f6f7c9268a92f22d25c0148e94e9141fe3d"
+    },
+    {
+      "name": "vendor/secs-grant-contract/Cargo.toml",
+      "sha256": "3899f6185d4efee1facb791a6b9fa2de0d206c2209b0bc27833ec2b2e4af9f16"
+    },
+    {
+      "name": "vendor/secs-grant-contract/LICENSE",
+      "sha256": "697fe1dafccdf093fc093a8fc3e321f642500d33b757c1796b0ca0648f6adbc2"
+    },
+    {
+      "name": "vendor/secs-grant-contract/SOURCE.json",
+      "sha256": "cfd1be6f578454b6da989b6eca3de711b1f526c46be1e11dc9599476ac7f808c"
+    },
+    {
+      "name": "vendor/secs-grant-contract/src/lib.rs",
+      "sha256": "9d1bf36602a97f27b80b2cace052566a6906737b8eb8435894ef3b2f54b0d3a9"
     }
   ],
   "artifacts": [
@@ -79,16 +115,16 @@
       "sha256": "20f4d915bd7924e095ee0c532941c5362828c4049371e0efa5b8ab597c9fa2c2"
     },
     {
-      "name": "castalia_wallet_core.d.ts",
-      "sha256": "f43a68734eae078f2dd9e0d02cbe95941c84626c5a95fc01cbce8e08098ed748"
+      "name": "castalia_wallet_core.js",
+      "sha256": "8da2ed7c73c28eab6c8aff854308826099714adb5f0e0991c7b32cc957523069"
     },
     {
-      "name": "castalia_wallet_core.js",
-      "sha256": "69a954804850741fd56aee9eea1a5938e42e08b981a364a43147d740d101fa5c"
+      "name": "castalia_wallet_core.d.ts",
+      "sha256": "57c399730bb2c488b55d2a89a74c1f2f6732a77e7b854588e2e0e986ab5af88f"
     },
     {
       "name": "castalia_wallet_core_bg.wasm",
-      "sha256": "dc1aa5aeaff9d84eb7f4b6bee01846681bc5c5fd9b9e0ed5847c1630dedd5349"
+      "sha256": "ab36f7e5bc38fdca15ab134ab02de18ff07fe3b9f2d1e56387c4030a52609cc2"
     }
   ],
   "history": [
@@ -157,9 +193,38 @@
           "sha256": "20f4d915bd7924e095ee0c532941c5362828c4049371e0efa5b8ab597c9fa2c2"
         }
       ]
+    },
+    {
+      "revision": "054b372d686e2f8dba0ad8bbd166adbde9ebab38",
+      "core_version": "0.3.0",
+      "scope": "Pinned shared core with portable Wallet identities; same-session custody/consent retained",
+      "artifacts": [
+        {
+          "name": "LICENSE",
+          "sha256": "20f4d915bd7924e095ee0c532941c5362828c4049371e0efa5b8ab597c9fa2c2"
+        },
+        {
+          "name": "castalia_wallet_core.d.ts",
+          "sha256": "f43a68734eae078f2dd9e0d02cbe95941c84626c5a95fc01cbce8e08098ed748"
+        },
+        {
+          "name": "castalia_wallet_core.js",
+          "sha256": "69a954804850741fd56aee9eea1a5938e42e08b981a364a43147d740d101fa5c"
+        },
+        {
+          "name": "castalia_wallet_core_bg.wasm",
+          "sha256": "dc1aa5aeaff9d84eb7f4b6bee01846681bc5c5fd9b9e0ed5847c1630dedd5349"
+        }
+      ]
     }
   ],
   "producerPR": "https://github.com/ZenithResearch/castalia-wallet/pull/3",
-  "core_version": "0.3.0",
-  "portable_identities": "Shared descriptor-only Castaway v2 core support; legacy v1 compatibility retained. No account migration or provider session restoration is automatic."
+  "core_version": "0.4.1",
+  "portable_identities": "Shared descriptor-only Castaway v2 core support; legacy v1 compatibility retained. No account migration or provider session restoration is automatic.",
+  "compatibility": "Core 0.3 encrypted snapshots and signing-identity recovery remain readable. Grant data is not exposed or written through Anima; a populated new grant snapshot cannot be opened by an older core. Preserve encrypted state before any future downgrade.",
+  "coreProducerPR": "https://github.com/ZenithResearch/castalia-wallet/pull/8",
+  "bundledLicense": {
+    "path": "assets/licenses/secs-grant-contract-LICENSE.txt",
+    "sha256": "697fe1dafccdf093fc093a8fc3e321f642500d33b757c1796b0ca0648f6adbc2"
+  }
 }
