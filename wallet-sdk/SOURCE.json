@@ -307,5 +307,9 @@
   ],
   "producerPR": "https://github.com/ZenithResearch/castalia-wallet/pull/3",
   "core_version": "0.4.1",
-  "portable_identities": "Shared descriptor-only Castaway v2 core support; legacy v1 compatibility retained. No account migration or provider session restoration is automatic."
+  "portable_identities": "Shared descriptor-only Castaway v2 core support; legacy v1 compatibility retained. No account migration or provider session restoration is automatic.",
+  "bundledLicense": {
+    "path": "assets/licenses/secs-grant-contract-LICENSE.txt",
+    "sha256": "697fe1dafccdf093fc093a8fc3e321f642500d33b757c1796b0ca0648f6adbc2"
+  }
 }

@@ -1,6 +1,8 @@
-import {reviewedProviderConnection} from './service-connection-config.js';
+import {createServiceSignerSelection,serviceSignerChoiceView,type ServiceSignerKind} from './service-signer-selection.js';
+import type {ServiceWallet} from './service-wallet.js';
+import {reviewedProviderConnection,validateReviewedProviderConnection} from './service-connection-config.js';
 import {configuredProviders} from './service-adapter.js';
-import {providerDiscovery,zenithPilotDiscovery} from './service-discovery.js';
+import {providerDiscovery} from './service-discovery.js';
 import {queueCandidateProvider} from './service-candidate-provider.js';
 import {createEmbeddedWalletClient} from './embedded-wallet-client.js';
 import {connectEmbeddedWallet} from './embedded-wallet-connection.js';
@@ -11,17 +13,32 @@ import {escape as e} from './page.js';
 const root=document.querySelector<HTMLElement>('#service-content')!;
 const mode=document.querySelector('#service-mode')!;
 let walletClient:ReturnType<typeof createEmbeddedWalletClient>|undefined;
-function notice(title:string,detail:string){
- root.innerHTML=`<section class="service-panel"><h1>${e(title)}</h1><p>${e(detail)}</p><p class="form-note">No brand material is sent from setup. Membership, receiver approval, transport receipt and service admission are separate.</p><div class="service-actions"><a class="workspace-quiet" href="wallet.html">Open local Wallet</a><button class="workspace-quiet" id="review-embedded-wallet" type="button">Review Wallet connection</button><button class="workspace-quiet" id="candidate-continue" type="button">Check provider again</button></div><p id="connection-state" role="status" aria-live="polite">Provider not connected.</p></section>`;
+// Transfer is preferred, but no browser/native bridge is installed in this
+// candidate. Do not guess a URL scheme or silently use the browser signer.
+const signers=createServiceSignerSelection({browser:async()=>{
+ walletClient??=createEmbeddedWalletClient();return connectEmbeddedWallet(walletClient);
+}});
+function notice(title:string,detail:string,onConnected?:(wallet:ServiceWallet)=>Promise<void>){
+ root.innerHTML=`<section class="service-panel"><h1>${e(title)}</h1><p>${e(detail)}</p><p class="form-note">No brand material is sent from setup. Membership, receiver approval, transport receipt and service admission are separate.</p>${serviceSignerChoiceView(signers.choices())}<div class="service-actions"><a class="workspace-quiet" href="wallet.html">Open local Wallet</a><button class="workspace-quiet" id="candidate-continue" type="button">Check provider again</button></div><p id="connection-state" role="status" aria-live="polite">Provider not connected.</p></section>`;
  root.setAttribute('aria-busy','false');
  document.querySelector('#candidate-continue')!.addEventListener('click',()=>location.reload(),{once:true});
- document.querySelector('#review-embedded-wallet')!.addEventListener('click',async()=>{
-  walletClient??=createEmbeddedWalletClient();const wallet=await connectEmbeddedWallet(walletClient);
-  document.querySelector('#connection-state')!.textContent=wallet?'Wallet policy approved for this session. Provider submission is still blocked by the setup requirements above.':'Wallet not connected. No service request sent.';
- });
+ root.querySelectorAll<HTMLButtonElement>('[data-service-signer]').forEach(button=>button.addEventListener('click',async()=>{
+  if(button.disabled)return;button.disabled=true;
+  try{
+   const selection=await signers.connect(button.dataset.serviceSigner as ServiceSignerKind);
+   const status=root.querySelector<HTMLElement>('#connection-state');
+   if(selection.state==='connected'){
+    if(onConnected)await onConnected(selection.wallet);
+    else if(status)status.textContent='Wallet policy approved for this session. Provider submission is still blocked by the setup requirements above.';
+   }else if(status)status.textContent=selection.state==='busy'?'Finish the current Wallet review first.':'Wallet not connected. No other signer was selected and no service request was sent.';
+  }catch{notice('Provider not connected','The connection could not be confirmed. Your reviewed material stays local. Check setup before trying again.');root.querySelector<HTMLButtonElement>('#review-embedded-wallet')?.focus();}
+  finally{if(button.isConnected){button.disabled=false;button.focus();}}
+ }));
 }
 async function start(){
  mode.textContent='Provider setup · nothing sent';
+ const url=new URL(location.href),id=url.searchParams.get('draft');
+ if(validDraftId(id)){const back='workspace.html?draft='+encodeURIComponent(id)+'#workspace-requests';document.querySelectorAll<HTMLAnchorElement>('[data-workspace-return],.workspace-home').forEach(a=>a.href=back);}
  const discovery=providerDiscovery({currentOrigin:()=>location.origin});
  if(!discovery.provider)throw Error(discovery.detail);
  const catalog=await discovery.provider.catalog();
@@ -31,25 +48,19 @@ async function start(){
  }
  // Source-reviewed app deployment only; discovery/storage cannot install a route.
  const deployment=reviewedProviderConnection;
- if(!deployment)throw Error('The separately reviewed response projection address is not configured. Keep the current draft local until the provider handoff is complete.');
- if(Object.keys(deployment).sort().join(',')!=='baseUrl,catalogSha256,origin,responseBaseUrl'||deployment.origin!==location.origin||deployment.baseUrl!==zenithPilotDiscovery.baseUrl||deployment.catalogSha256!==zenithPilotDiscovery.catalogSha256)throw Error('The staged connection does not match this reviewed provider release.');
- const url=new URL(location.href),id=url.searchParams.get('draft');
+ if(!deployment){
+  notice('Service published · test connection pending','The provider publishes Brand package 1.0.0. This build has no reviewed local test connection. Submission stays disabled. Your brief and references remain local.');return;
+ }
+ validateReviewedProviderConnection(deployment,location.origin);
  if(!validDraftId(id)||!await workspaceStore.load(id)){
   notice('Choose your reviewed brief','Open your workspace, complete the shared brand questions and choose the material to review. No example brief is created by this live connection.');return;
  }
- notice('Connect your Wallet','Unlock your saved identity, review membership if needed, and approve the receiver policy. You will review the brief before signing or sending it.');
- const old=document.querySelector<HTMLButtonElement>('#review-embedded-wallet')!,button=old.cloneNode(true) as HTMLButtonElement;old.replaceWith(button);
- button.addEventListener('click',async()=>{
-  button.disabled=true;
-  try{
-   walletClient??=createEmbeddedWalletClient();const wallet=await connectEmbeddedWallet(walletClient);if(!wallet)return;
-   const membership=await wallet.getMembership();
-   const connection=queueCandidateProvider({purpose:'reviewed-pilot',profile:{origin:deployment.origin,baseUrl:deployment.baseUrl,responseBaseUrl:deployment.responseBaseUrl,member:{publicKey:membership.ownerPublicKey,membershipId:membership.membershipId},catalog},currentOrigin:()=>location.origin,wallet:()=>wallet,loadSealer:()=>{const path='../integrations/reviewed-sealer.js';return import(path) as Promise<BrowserSealerModule>;}});
-   await connection.connect();configuredProviders.push(connection.provider);url.searchParams.delete('preview');history.replaceState(null,'',url);
-   mode.textContent='Reviewed pilot · review before sending';await import('./service-review.js');
-  }catch(error){notice('Provider not connected',error instanceof Error?error.message:'Connection unavailable. No request sent.');}
-  finally{button.disabled=false;}
+ notice('Choose your approval surface','You will review the brief before signing or sending it. The browser Wallet can use your saved identity; it does not import a Transfer backup. This is a transport test; returned mock output is not brand work.',async wallet=>{
+  const membership=await wallet.getMembership();
+  const connection=queueCandidateProvider({purpose:'mock-test',profile:{origin:deployment.origin,baseUrl:deployment.baseUrl,responseBaseUrl:deployment.responseBaseUrl,member:{publicKey:membership.ownerPublicKey,membershipId:membership.membershipId},catalog},currentOrigin:()=>location.origin,wallet:()=>wallet,loadSealer:()=>{const path='../integrations/reviewed-sealer.js';return import(path) as Promise<BrowserSealerModule>;}});
+  await connection.connect();configuredProviders.push(connection.provider);url.searchParams.delete('preview');history.replaceState(null,'',url);
+  mode.textContent='Transport test · review before sending';await import('./service-review.js');
  });
 }
-window.addEventListener('pagehide',()=>walletClient?.destroy(),{once:true});
+window.addEventListener('pagehide',()=>{signers.dispose();walletClient?.destroy();},{once:true});
 void start().catch(error=>{notice('Provider connection is unavailable here',error instanceof Error?error.message:'Provider unavailable.');document.documentElement.dataset.candidateConfig='unavailable';});

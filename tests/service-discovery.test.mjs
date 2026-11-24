@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {providerDiscovery,zenithPilotDiscovery} from '../runtime/service-discovery.js';
 import {providerActionsEnabled} from '../runtime/service-adapter.js';
-import {validateIntake} from '../runtime/vendor/service-client.js';
+import {parseProviderCatalog,validateIntake} from '../runtime/vendor/service-client.js';
 const bytes=await readFile(new URL('fixtures/public-zenith-pilot-catalog.json',import.meta.url));
 function setup(){let origin=zenithPilotDiscovery.origin;const calls=[];const network=async(url,options)=>{calls.push({url,options});return new Response(bytes);};return {calls,setOrigin(value){origin=value;},options:{currentOrigin:()=>origin,fetch:network}};}
 test('only exact reviewed origin can compose public discovery; other previews never fetch',()=>{
@@ -11,9 +11,9 @@ test('only exact reviewed origin can compose public discovery; other previews ne
   const h=setup();h.setOrigin(origin);const result=providerDiscovery(h.options);assert.equal(result.provider,null);assert.match(result.detail,/not authorized/);assert.equal(h.calls.length,0);
  }
 });
-test('public release bytes parse through the unchanged canonical SDK without implying service availability or authority',async()=>{
+test('public release bytes parse through the unchanged canonical SDK without implying connected submission or authority',async()=>{
  const h=setup(),{provider}=providerDiscovery(h.options),catalog=await provider.catalog();
- assert.equal(catalog.schema,'service.provider-catalog.v4');assert.equal(catalog.services[0].id,'zenith.anima.brand-package');assert.equal(catalog.services[0].availability,'preview');assert.equal(catalog.services[0].process,null);assert.deepEqual(catalog.services[0].communication,[]);
+ assert.equal(catalog.schema,'service.provider-catalog.v4');assert.equal(catalog.services[0].id,'zenith.anima.brand-package');assert.equal(catalog.services[0].availability,'available');assert.equal(catalog.services[0].version,'1.0.0');assert.deepEqual(catalog.services[0].process,{process_id:'zenith.anima.brand-package',process_version:'zenith.anima.brand-package-v1',compilation_hash:'1b4848c714775871a7b1cee4b04d73e43994e30838ec5a312ea10993d0b07ee2'});assert.deepEqual(catalog.services[0].communication,['provider-status']);
  assert.equal(catalog.requester.membership.roots[0].key_id,'zenith-membership-pilot-2026-10-22');
  assert.equal(catalog.requester.credential.policy_digest_sha256,'6b2ac2672b0c58452e24e5cd4568c312fff43efab5a1b6c801e842adcd066dad');
  assert.equal(providerActionsEnabled(provider),false);assert.equal(provider.access().membership,'unavailable');assert.equal(provider.access().binding,null);
@@ -30,9 +30,18 @@ test('changed catalog, unavailable provider and changed caller fail closed witho
  const {provider}=providerDiscovery(h.options);h.setOrigin('http://127.0.0.1:4340');await assert.rejects(()=>provider.catalog(),/origin/);assert.equal(h.calls.length,0);
 });
 
-test('canonical SDK refuses the published preview service before any submission can be prepared',async()=>{
- const h=setup(),catalog=await providerDiscovery(h.options).provider.catalog(),service=catalog.services[0];
+test('canonical SDK still refuses the historical preview service without upgrading a saved request',async()=>{
+ const historical=JSON.parse(await readFile(new URL('fixtures/public-zenith-preview-catalog.json',import.meta.url),'utf8')),before=structuredClone(historical),catalog=parseProviderCatalog(historical),service=catalog.services[0];
  const request={schema:'service.intake.v1',request_id:'example-request',idempotency_key:'example-key',service:{provider_id:catalog.provider.id,service_id:service.id,service_version:service.version},brief:{schema:'service.reviewed-brief.v1',revision:1,content_hash:'a'.repeat(64),values:{organization_name:'Example',brand_brief:'Example reviewed material'}},references:[],submitted_at:new Date().toISOString()};
  assert.throws(()=>validateIntake(request,catalog),/selected service version is unavailable/);
- assert.equal(h.calls.length,1);
+ assert.deepEqual(historical,before);
+});
+
+test('available catalog leaves writes blocked and preserves the existing Wallet issuer and receiver pins',async()=>{
+ const {embeddedWalletProfile:p}=await import('../runtime/embedded-wallet-profile.js'),{reviewedProviderConnection,validateReviewedProviderConnection}=await import('../runtime/service-connection-config.js');
+ const h=setup(),provider=providerDiscovery(h.options).provider,catalog=await provider.catalog(),r=catalog.requester;
+ if(reviewedProviderConnection!==null)validateReviewedProviderConnection(reviewedProviderConnection);assert.equal(providerActionsEnabled(provider),false);
+ assert.equal(new URL(r.membership.issuer_origin).origin,p.issuerOrigin);assert.deepEqual(r.membership.roots,[{issuer_id:p.issuerId,key_id:p.membershipKeyId,public_key_hex:p.membershipPublicKey}]);
+ assert.equal(r.credential.issuer,p.receiverIssuer);assert.equal(r.credential.key_id,p.receiverKeyId);assert.equal(r.credential.public_key_hex,p.receiverPublicKey);assert.equal(r.credential.audience,p.audience);assert.deepEqual(r.credential.callers,[{kind:'browser',id:p.origin}]);
+ await assert.rejects(provider.submit(),/discovery only/i);assert.equal(h.calls.length,1);
 });

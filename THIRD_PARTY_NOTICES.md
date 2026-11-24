@@ -4,7 +4,9 @@ This file records provenance and included terms. It does not grant a project-wid
 
 ## Castalia Wallet
 
-The embedded runtime in `wallet-sdk/` is built from [ZenithResearch/castalia-wallet](https://github.com/ZenithResearch/castalia-wallet), revision `d6f5b6ddc0f7cb7a892c65bc9d51a7973b498ef9`. Its MIT license is included at `wallet-sdk/LICENSE`. Source and artifact hashes, build instructions, and qualification limits are recorded in `wallet-sdk/SOURCE.json`.
+The embedded runtime in `wallet-sdk/` is built from [ZenithResearch/castalia-wallet](https://github.com/ZenithResearch/castalia-wallet), revision `19ec02f0000f7c59f7341f87ad4c04fd54784fe1` (Core 0.4.1). Its MIT license is included at `wallet-sdk/LICENSE`. Source and artifact hashes, build instructions, and qualification limits are recorded in `wallet-sdk/SOURCE.json`.
+
+Core 0.4.1 also compiles the shared `secs-grant-contract` verifier. Its MIT notice is included at `assets/licenses/secs-grant-contract-LICENSE.txt`; exact source provenance is recorded with the core.
 
 The vendored credential-presentation helper follows the public Castalia source pin and recorded adaptation in `WALLET-SOURCE.json`. Preserve its attribution and patch record when updating it. Local custody support does not imply a released service-consent facade or a security audit.
 

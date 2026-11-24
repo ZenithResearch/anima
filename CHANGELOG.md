@@ -32,3 +32,11 @@
 ### Changed
 
 - Pin embedded Wallet core0.3.0 to the common public revision — preserves existing custody/consent while supporting versioned portable identities.
+
+- Upgrade the embedded Wallet to pinned Core 0.4.1; retain the same custody and Queue consent interface, verify legacy snapshot/recovery compatibility, and keep reusable grants outside Anima’s current UI.
+
+- Preserve Matrix read fixtures, bounded approval observation, and explicit signer selection — makes integration progress reviewable while live operations remain gated.
+- Add reviewed Queue test configuration and full catalog matching — keeps mock execution explicit and prevents changed provider policy from being accepted silently.
+- Record the coordinated Wallet/Matrix plan and remaining acceptance gates — preserves the outstanding implementation handoff alongside its source.
+
+- Consolidate both Anima feature branches while retaining main’s Wallet source pin and recovery review — preserves existing recovery behavior and adds both sets of legacy-custody regression tests.
